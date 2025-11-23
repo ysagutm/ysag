@@ -1,0 +1,42 @@
+{
+  "proTip": "YSAG is a non-profit organization entirely run by students for students.",
+  "missionVision": [
+    {
+      "icon": "fas fa-eye",
+      "title": "Our Vision",
+      "description": "To establish a new generation of highly skilled students who are able to compete with future industry and life requirements."
+    },
+    {
+      "icon": "fas fa-bullseye",
+      "title": "Our Mission",
+      "description": "Prepare students for industry, provide huge information resources, and connect students to research fields."
+    },
+    {
+      "icon": "fas fa-users",
+      "title": "What is YSAG?",
+      "description": "We provide high-quality explained videos, remedial classes, and comprehensive E-learning libraries."
+    }
+  ],
+  "team": [
+    {
+      "name": "Ahmed Al-Yemeni",
+      "role": "President",
+      "image": "content/images/team-member-1.svg"
+    },
+    {
+      "name": "Sara Hassan",
+      "role": "Academic Head",
+      "image": "content/images/team-member-2.svg"
+    },
+    {
+      "name": "Omar Ali",
+      "role": "IT Lead",
+      "image": "content/images/team-member-3.svg"
+    },
+    {
+      "name": "Fatima Noor",
+      "role": "Content Manager",
+      "image": "content/images/team-member-4.svg"
+    }
+  ]
+}

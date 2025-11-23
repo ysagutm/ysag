@@ -1,0 +1,14 @@
+{
+  "title": "Dr. Recommendations",
+  "subtitle": "Advice for the upcoming semesters.",
+  "recommendations": [
+    {
+      "text": "For Soil Mechanics, ensure you review the lab manuals before the session. It makes a huge difference.",
+      "author": "Dr. Mahmoud Karamaney"
+    },
+    {
+      "text": "Focus on Data Structures in your second year, it is the backbone of all interviews.",
+      "author": "Computer Science Dept."
+    }
+  ]
+}
