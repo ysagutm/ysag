@@ -1,0 +1,87 @@
+{
+  "title": "Academic Resources",
+  "subtitle": "One stop for Files, Books, and Video Lectures.",
+  "searchPlaceholder": "Search courses (e.g., Civil, CS)...",
+  "courses": [
+    {
+      "title": "Foundation Year",
+      "description": "General materials for first-year students.",
+      "category": "foundation",
+      "icon": "fas fa-shapes",
+      "color": "#3498db",
+      "filesLink": "https://drive.google.com/drive/folders/1kv8bCvHo_J0-eFpjl6YKSOTW0ff1-7Yl",
+      "videosLink": "",
+      "videosMessage": "YouTube Playlist coming soon!"
+    },
+    {
+      "title": "Civil Engineering",
+      "description": "Structures, Soil Mechanics, and Materials.",
+      "category": "civil engineering",
+      "icon": "fas fa-hard-hat",
+      "color": "#e67e22",
+      "filesLink": "https://drive.google.com/drive/folders/1Z0km9lZoT84DTGiMEjwvuZRA4f0SaXxJ?usp=sharing",
+      "videosLink": "",
+      "videosMessage": "Check Dr. Mahmoud Karamaney channel"
+    },
+    {
+      "title": "Computer Science",
+      "description": "Programming, Algorithms, and Data Structures. (Renamed from Comp Eng)",
+      "category": "computer science engineering",
+      "icon": "fas fa-laptop-code",
+      "color": "#9b59b6",
+      "filesLink": "https://drive.google.com/drive/folders/12RsF6SFoXfkuURC6xszaJUdJecWkWv1R",
+      "videosLink": "",
+      "videosMessage": ""
+    },
+    {
+      "title": "Electrical Engineering",
+      "description": "Circuits, Systems, and Power.",
+      "category": "electrical engineering",
+      "icon": "fas fa-bolt",
+      "color": "#f1c40f",
+      "filesLink": "https://drive.google.com/drive/folders/1EcPzK0iiME7xpzVKF7v2lTEDlnsvR2pb",
+      "videosLink": "",
+      "videosMessage": ""
+    },
+    {
+      "title": "Mechanical Engineering",
+      "description": "Thermodynamics, Mechanics, and Design.",
+      "category": "mechanical engineering",
+      "icon": "fas fa-cogs",
+      "color": "#7f8c8d",
+      "filesLink": "https://drive.google.com/drive/folders/11v9rVOlA9FFBGsq_4kSqKtcrn-N66c9T",
+      "videosLink": "",
+      "videosMessage": ""
+    },
+    {
+      "title": "Petroleum Engineering",
+      "description": "Drilling, Reservoir, and Production.",
+      "category": "petroleum engineering",
+      "icon": "fas fa-oil-can",
+      "color": "#2c3e50",
+      "filesLink": "https://drive.google.com/drive/folders/1iu0_KgxelnLp_CCvkuINic4cvYrloUOU",
+      "videosLink": "",
+      "videosMessage": ""
+    },
+    {
+      "title": "Chemical Engineering",
+      "description": "Processes, Materials, and Labs.",
+      "category": "chemical engineering",
+      "icon": "fas fa-flask",
+      "color": "#27ae60",
+      "filesLink": "https://drive.google.com/drive/folders/12951KIo2WRGJuJvoMzBopk1cSuCfoNP3",
+      "videosLink": "",
+      "videosMessage": ""
+    },
+    {
+      "title": "Biomedical Engineering",
+      "description": "Medical instrumentation and biology.",
+      "category": "biomedical engineering",
+      "icon": "fas fa-heartbeat",
+      "color": "#e84393",
+      "filesLink": "https://drive.google.com/drive/folders/1o4-jPfZ7-VeE3PhEgH3Lcmfk4njYVtun",
+      "videosLink": "",
+      "videosMessage": ""
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "organizationName": "YSAG",
+  "fullName": "Yemeni Student Academic Group - UTM ISS",
+  "location": "Johor Bahru, Johor, Malaysia",
+  "socialLinks": [
+    {
+      "platform": "YouTube",
+      "icon": "fab fa-youtube",
+      "url": "#"
+    },
+    {
+      "platform": "Instagram",
+      "icon": "fab fa-instagram",
+      "url": "#"
+    },
+    {
+      "platform": "Facebook",
+      "icon": "fab fa-facebook",
+      "url": "#"
+    },
+    {
+      "platform": "Telegram",
+      "icon": "fab fa-telegram",
+      "url": "#"
+    }
+  ],
+  "copyright": "2025 YSAG. Non-profit Educational Organization."
+}
