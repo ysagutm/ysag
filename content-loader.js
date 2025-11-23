@@ -8,6 +8,17 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// Helper function to validate URL safety
+function isSafeUrl(url) {
+    // Allow relative URLs starting with # or /
+    // Allow http and https protocols
+    // Allow google drive links
+    return url.startsWith('#') || 
+           url.startsWith('/') || 
+           url.startsWith('https://') || 
+           url.startsWith('http://');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     loadHeroContent();
     loadAboutContent();
@@ -67,9 +78,9 @@ async function loadAboutContent() {
             const cardDiv = document.createElement('div');
             cardDiv.className = 'mv-card';
             cardDiv.innerHTML = `
-                <i class="${card.icon}"></i>
-                <h3>${card.title}</h3>
-                <p>${card.description}</p>
+                <i class="${escapeHtml(card.icon)}"></i>
+                <h3>${escapeHtml(card.title)}</h3>
+                <p>${escapeHtml(card.description)}</p>
             `;
             mvGrid.appendChild(cardDiv);
         });
@@ -81,9 +92,9 @@ async function loadAboutContent() {
             const memberDiv = document.createElement('div');
             memberDiv.className = 'team-member';
             memberDiv.innerHTML = `
-                <img src="${member.image}" alt="${member.name}" class="team-img">
-                <h4>${member.name}</h4>
-                <p>${member.role}</p>
+                <img src="${escapeHtml(member.image)}" alt="${escapeHtml(member.name)}" class="team-img">
+                <h4>${escapeHtml(member.name)}</h4>
+                <p>${escapeHtml(member.role)}</p>
             `;
             teamGrid.appendChild(memberDiv);
         });
@@ -133,14 +144,14 @@ async function loadResourcesContent() {
             
             // Files link
             const filesLink = document.createElement('a');
-            filesLink.href = course.filesLink;
+            filesLink.href = isSafeUrl(course.filesLink) ? course.filesLink : '#';
             filesLink.target = '_blank';
             filesLink.className = 'action-btn';
             filesLink.innerHTML = '<i class="fab fa-google-drive"></i> Files';
             cardActions.appendChild(filesLink);
             
             // Videos link/button
-            if (course.videosLink) {
+            if (course.videosLink && isSafeUrl(course.videosLink)) {
                 const videosLink = document.createElement('a');
                 videosLink.href = course.videosLink;
                 videosLink.target = '_blank';
@@ -190,8 +201,8 @@ async function loadRecommendationsContent() {
             const cardDiv = document.createElement('div');
             cardDiv.className = 'rec-card';
             cardDiv.innerHTML = `
-                <p>"${rec.text}"</p>
-                <div style="margin-top:10px; font-weight:bold;">- ${rec.author}</div>
+                <p>"${escapeHtml(rec.text)}"</p>
+                <div style="margin-top:10px; font-weight:bold;">- ${escapeHtml(rec.author)}</div>
             `;
             recGrid.appendChild(cardDiv);
         });
@@ -218,13 +229,13 @@ async function loadReportsContent() {
             reportDiv.className = 'report-item';
             reportDiv.innerHTML = `
                 <div class="report-date">
-                    <div style="font-size: 1.5rem; font-weight: bold;">${report.day}</div>
-                    <div>${report.month}</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${escapeHtml(report.day)}</div>
+                    <div>${escapeHtml(report.month)}</div>
                 </div>
                 <div>
-                    <h3>${report.title}</h3>
-                    <p>${report.description}</p>
-                    <a href="${report.link}" style="color: var(--primary); font-size: 0.9rem;">Read more &rarr;</a>
+                    <h3>${escapeHtml(report.title)}</h3>
+                    <p>${escapeHtml(report.description)}</p>
+                    <a href="${escapeHtml(report.link)}" style="color: var(--primary); font-size: 0.9rem;">Read more &rarr;</a>
                 </div>
             `;
             reportList.appendChild(reportDiv);
@@ -251,9 +262,9 @@ async function loadFooterContent() {
         socialLinks.innerHTML = '';
         data.socialLinks.forEach(link => {
             const a = document.createElement('a');
-            a.href = link.url;
-            a.title = link.platform;
-            a.innerHTML = `<i class="${link.icon}"></i>`;
+            a.href = isSafeUrl(link.url) ? link.url : '#';
+            a.title = escapeHtml(link.platform);
+            a.innerHTML = `<i class="${escapeHtml(link.icon)}"></i>`;
             socialLinks.appendChild(a);
         });
         
