@@ -1,6 +1,13 @@
 // Content Loader for YSAG Website
 // This script loads content from JSON files and populates the HTML dynamically
 
+// Helper function to escape HTML and prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     loadHeroContent();
     loadAboutContent();
@@ -51,7 +58,7 @@ async function loadAboutContent() {
         
         // Update pro tip
         const proTip = document.querySelector('.pro-tip');
-        proTip.innerHTML = `<i class="fas fa-lightbulb"></i> <strong>Did you know?</strong> ${data.proTip}`;
+        proTip.innerHTML = `<i class="fas fa-lightbulb"></i> <strong>Did you know?</strong> ${escapeHtml(data.proTip)}`;
         
         // Update mission/vision cards
         const mvGrid = document.querySelector('.mission-vision-grid');
@@ -106,34 +113,60 @@ async function loadResourcesContent() {
             cardDiv.className = 'resource-card';
             cardDiv.setAttribute('data-category', course.category);
             
-            // Sanitize message to prevent XSS
-            const sanitizeMessage = (msg) => msg.replace(/'/g, "\\'").replace(/"/g, '\\"');
+            // Create card image
+            const cardImg = document.createElement('div');
+            cardImg.className = 'card-img';
+            cardImg.style.backgroundColor = course.color;
+            cardImg.innerHTML = `<i class="${escapeHtml(course.icon)}"></i>`;
             
-            const videoAction = course.videosLink 
-                ? `<a href="${course.videosLink}" target="_blank" class="action-btn"><i class="fab fa-youtube"></i> Videos</a>`
-                : course.videosMessage 
-                    ? `<span class="action-btn" data-message="${sanitizeMessage(course.videosMessage)}"><i class="fab fa-youtube"></i> Videos</span>`
-                    : `<span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>`;
-            
-            cardDiv.innerHTML = `
-                <div class="card-img" style="background-color: ${course.color};"><i class="${course.icon}"></i></div>
-                <div class="card-content">
-                    <div class="card-title">${course.title}</div>
-                    <p>${course.description}</p>
-                </div>
-                <div class="card-actions">
-                    <a href="${course.filesLink}" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
-                    ${videoAction}
-                </div>
+            // Create card content
+            const cardContent = document.createElement('div');
+            cardContent.className = 'card-content';
+            cardContent.innerHTML = `
+                <div class="card-title">${escapeHtml(course.title)}</div>
+                <p>${escapeHtml(course.description)}</p>
             `;
+            
+            // Create card actions
+            const cardActions = document.createElement('div');
+            cardActions.className = 'card-actions';
+            
+            // Files link
+            const filesLink = document.createElement('a');
+            filesLink.href = course.filesLink;
+            filesLink.target = '_blank';
+            filesLink.className = 'action-btn';
+            filesLink.innerHTML = '<i class="fab fa-google-drive"></i> Files';
+            cardActions.appendChild(filesLink);
+            
+            // Videos link/button
+            if (course.videosLink) {
+                const videosLink = document.createElement('a');
+                videosLink.href = course.videosLink;
+                videosLink.target = '_blank';
+                videosLink.className = 'action-btn';
+                videosLink.innerHTML = '<i class="fab fa-youtube"></i> Videos';
+                cardActions.appendChild(videosLink);
+            } else if (course.videosMessage) {
+                const videosBtn = document.createElement('span');
+                videosBtn.className = 'action-btn';
+                videosBtn.innerHTML = '<i class="fab fa-youtube"></i> Videos';
+                videosBtn.addEventListener('click', () => {
+                    alert(course.videosMessage);
+                });
+                cardActions.appendChild(videosBtn);
+            } else {
+                const videosBtn = document.createElement('span');
+                videosBtn.className = 'action-btn';
+                videosBtn.innerHTML = '<i class="fab fa-youtube"></i> Videos';
+                cardActions.appendChild(videosBtn);
+            }
+            
+            // Assemble card
+            cardDiv.appendChild(cardImg);
+            cardDiv.appendChild(cardContent);
+            cardDiv.appendChild(cardActions);
             resourceGrid.appendChild(cardDiv);
-        });
-        
-        // Add event listeners for video message buttons
-        document.querySelectorAll('.action-btn[data-message]').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert(this.getAttribute('data-message'));
-            });
         });
     } catch (error) {
         console.error('Error loading resources content:', error);
