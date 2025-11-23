@@ -22,7 +22,9 @@ async function loadHeroContent() {
         // Update buttons
         const heroSection = document.querySelector('.hero');
         const existingButtons = heroSection.querySelectorAll('.btn');
-        existingButtons.forEach(btn => btn.remove());
+        if (existingButtons.length > 0) {
+            existingButtons.forEach(btn => btn.remove());
+        }
         
         data.buttons.forEach(button => {
             const btn = document.createElement('a');
@@ -104,10 +106,13 @@ async function loadResourcesContent() {
             cardDiv.className = 'resource-card';
             cardDiv.setAttribute('data-category', course.category);
             
+            // Sanitize message to prevent XSS
+            const sanitizeMessage = (msg) => msg.replace(/'/g, "\\'").replace(/"/g, '\\"');
+            
             const videoAction = course.videosLink 
                 ? `<a href="${course.videosLink}" target="_blank" class="action-btn"><i class="fab fa-youtube"></i> Videos</a>`
                 : course.videosMessage 
-                    ? `<span class="action-btn" onclick="alert('${course.videosMessage}')"><i class="fab fa-youtube"></i> Videos</span>`
+                    ? `<span class="action-btn" data-message="${sanitizeMessage(course.videosMessage)}"><i class="fab fa-youtube"></i> Videos</span>`
                     : `<span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>`;
             
             cardDiv.innerHTML = `
@@ -122,6 +127,13 @@ async function loadResourcesContent() {
                 </div>
             `;
             resourceGrid.appendChild(cardDiv);
+        });
+        
+        // Add event listeners for video message buttons
+        document.querySelectorAll('.action-btn[data-message]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert(this.getAttribute('data-message'));
+            });
         });
     } catch (error) {
         console.error('Error loading resources content:', error);
@@ -213,8 +225,10 @@ async function loadFooterContent() {
         });
         
         // Update copyright
-        const copyrightDiv = footer.querySelector('div[style*="margin-top: 20px"]');
-        copyrightDiv.innerHTML = `&copy; ${data.copyright}`;
+        const copyrightDiv = footer.querySelector('.copyright');
+        if (copyrightDiv) {
+            copyrightDiv.innerHTML = `&copy; ${data.copyright}`;
+        }
     } catch (error) {
         console.error('Error loading footer content:', error);
     }
