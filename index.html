@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YSAG - Yemeni Student Academic Group</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            --primary: #B22222; /* Firebrick Red (YSAG Red) */
-            --secondary: #2c3e50; /* Dark Blue/Grey */
-            --accent: #ecf0f1; /* Light Grey */
+            --primary: #B22222;
+            /* Firebrick Red (YSAG Red) */
+            --secondary: #2c3e50;
+            /* Dark Blue/Grey */
+            --accent: #ecf0f1;
+            /* Light Grey */
             --text: #333;
             --white: #fff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); background-color: #f9f9f9; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
 
         /* --- HEADER & NAV --- */
         header {
@@ -58,15 +79,23 @@
             gap: 10px;
         }
 
-        .logo img { height: 50px; } /* Placeholder for logo */
+        .logo img {
+            height: 50px;
+        }
 
-        nav ul { display: flex; gap: 20px; }
-        nav a { 
-            font-weight: 500; 
+        /* Placeholder for logo */
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            font-weight: 500;
             position: relative;
             padding-bottom: 5px;
         }
-        
+
         nav a::after {
             content: '';
             position: absolute;
@@ -78,8 +107,10 @@
             transition: var(--transition);
         }
 
-        nav a:hover::after { width: 100%; }
-        
+        nav a:hover::after {
+            width: 100%;
+        }
+
         .lang-switch {
             cursor: pointer;
             border: 1px solid var(--secondary);
@@ -98,8 +129,17 @@
             text-align: center;
         }
 
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem auto; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
         .btn {
             display: inline-block;
             background: var(--primary);
@@ -110,13 +150,34 @@
             border: none;
             cursor: pointer;
         }
-        .btn:hover { background: #8b0000; transform: translateY(-2px); }
+
+        .btn:hover {
+            background: #8b0000;
+            transform: translateY(-2px);
+        }
 
         /* --- SECTIONS GENERIC --- */
-        section { padding: 60px 5%; }
-        .section-title { text-align: center; margin-bottom: 40px; }
-        .section-title h2 { font-size: 2.2rem; color: var(--secondary); margin-bottom: 10px; }
-        .section-title .line { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; }
+        section {
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .section-title .line {
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0 auto;
+        }
 
         /* --- PRO TIPS (Red Tips Feedback) --- */
         .pro-tip {
@@ -134,6 +195,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
+
         .mv-card {
             background: var(--white);
             padding: 30px;
@@ -141,21 +203,118 @@
             box-shadow: var(--shadow);
             text-align: center;
         }
-        .mv-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+
+        .mv-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* --- TEAM SCROLL SECTION --- */
+        .team-section-container {
+            position: relative;
+            max-width: 100%;
+            padding: 0 50px;
+            /* Space for buttons */
+        }
+
+        .team-scroll-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 30px 0;
+
+            /* HIDE SCROLLBAR (Best Design Principle) */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE 10+ */
+        }
+
+        /* Hide scrollbar for Chrome/Safari/Webkit */
+        .team-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            background: transparent;
+        }
 
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            display: inline-flex;
+            gap: 30px;
         }
-        .team-member { text-align: center; }
+
+        .team-member {
+            min-width: 200px;
+            width: 200px;
+            text-align: center;
+            user-select: none;
+        }
+
+        /* --- ZOOM EFFECT ON IMAGE --- */
         .team-img {
-            width: 150px; height: 150px;
-            background: #ddd;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            margin: 0 auto 15px auto;
             object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary);
+            background: white;
+
+            /* The Zoom Magic */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* When hovering the IMAGE, scale it up */
+        .team-member:hover .team-img {
+            transform: scale(1.15);
+            /* Enlarge by 15% */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- SCROLL BUTTONS --- */
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .scroll-btn.left {
+            left: 5px;
+        }
+
+        .scroll-btn.right {
+            right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .team-section-container {
+                padding: 0;
+            }
+
+            .scroll-btn {
+                display: none;
+            }
+
+            /* Hide buttons on mobile, swipe is better */
         }
 
         /* --- CMS / E-LIBRARY (Merged with YouTube) --- */
@@ -165,6 +324,7 @@
             margin-bottom: 30px;
             gap: 10px;
         }
+
         .search-bar {
             padding: 10px;
             width: 300px;
@@ -187,8 +347,10 @@
             display: flex;
             flex-direction: column;
         }
-        
-        .resource-card:hover { transform: translateY(-5px); }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
 
         .card-img {
             height: 150px;
@@ -199,32 +361,48 @@
             color: var(--white);
             font-size: 3rem;
         }
-        
-        .card-content { padding: 20px; flex-grow: 1; }
-        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
-        
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
         .card-actions {
             padding: 15px;
             background: #f1f1f1;
             display: flex;
             justify-content: space-around;
         }
-        
+
         .action-btn {
             font-size: 0.9rem;
             color: var(--secondary);
             cursor: pointer;
         }
-        .action-btn:hover { color: var(--primary); }
+
+        .action-btn:hover {
+            color: var(--primary);
+        }
 
         /* --- STUDENT REPORTS (Formerly Blog) --- */
-        .report-list { max-width: 800px; margin: 0 auto; }
+        .report-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .report-item {
             border-bottom: 1px solid #eee;
             padding: 20px 0;
             display: flex;
             gap: 20px;
         }
+
         .report-date {
             background: var(--secondary);
             color: var(--white);
@@ -243,9 +421,20 @@
             border-radius: 10px;
             box-shadow: var(--shadow);
         }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-        .form-group input, .form-group textarea, .form-group select {
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -258,18 +447,40 @@
             padding: 40px 5%;
             text-align: center;
         }
-        .social-links { margin-top: 20px; font-size: 1.5rem; }
-        .social-links a { margin: 0 10px; transition: var(--transition); }
-        .social-links a:hover { color: var(--primary); }
+
+        .social-links {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 15px; }
-            nav ul { flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 2rem; }
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -303,7 +514,8 @@
         <h1>Knowledge Shared is Knowledge Doubled</h1>
         <p>Developing, consolidating, and disseminating knowledge among all Yemeni students.</p>
         <a href="#resources" class="btn">Explore Resources</a>
-        <a href="#feedback" class="btn" style="background:transparent; border: 2px solid white; margin-left: 10px;">Join Us</a>
+        <a href="#feedback" class="btn" style="background:transparent; border: 2px solid white; margin-left: 10px;">Join
+            Us</a>
     </section>
 
     <section id="about">
@@ -311,53 +523,57 @@
             <h2>Who We Are</h2>
             <div class="line"></div>
         </div>
-        
+
         <div class="pro-tip">
-            <i class="fas fa-lightbulb"></i> <strong>Did you know?</strong> YSAG is a non-profit organization entirely run by students for students.
+            <i class="fas fa-lightbulb"></i> <strong>Did you know?</strong> YSAG is a non-profit organization entirely
+            run by students for students.
         </div>
 
         <div class="mission-vision-grid">
             <div class="mv-card">
                 <i class="fas fa-eye"></i>
                 <h3>Our Vision</h3>
-                <p>To establish a new generation of highly skilled students who are able to compete with future industry and life requirements.</p>
+                <p>To establish a new generation of highly skilled students who are able to compete with future industry
+                    and life requirements.</p>
             </div>
             <div class="mv-card">
                 <i class="fas fa-bullseye"></i>
                 <h3>Our Mission</h3>
-                <p>Prepare students for industry, provide huge information resources, and connect students to research fields.</p>
+                <p>Prepare students for industry, provide huge information resources, and connect students to research
+                    fields.</p>
             </div>
             <div class="mv-card">
                 <i class="fas fa-users"></i>
                 <h3>What is YSAG?</h3>
-                <p>We provide high-quality explained videos, remedial classes, and comprehensive E-learning libraries.</p>
+                <p>We provide high-quality explained videos, remedial classes, and comprehensive E-learning libraries.
+                </p>
             </div>
         </div>
 
         <div style="margin-top: 60px; text-align: center;">
             <h3>Meet the Team</h3>
             <p style="margin-bottom: 30px;">The dedicated students behind the screen.</p>
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Team Member" class="team-img">
-                    <h4>Ahmed Al-Yemeni</h4>
-                    <p>President</p>
+
+            <div class="team-section-container">
+                <button class="scroll-btn left" onclick="scrollTeam('left')" onmouseenter="pauseTeamScroll()"
+                    onmouseleave="resumeTeamScroll()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="team-scroll-wrapper" id="teamScrollContainer" onmouseenter="pauseTeamScroll()"
+                    onmouseleave="resumeTeamScroll()">
+
+                    <div class="team-grid">
+                        <div style="width: 100%; text-align: center;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading Team...
+                        </div>
+                    </div>
                 </div>
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Team Member" class="team-img">
-                    <h4>Sara Hassan</h4>
-                    <p>Academic Head</p>
-                </div>
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Team Member" class="team-img">
-                    <h4>Omar Ali</h4>
-                    <p>IT Lead</p>
-                </div>
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Team Member" class="team-img">
-                    <h4>Fatima Noor</h4>
-                    <p>Content Manager</p>
-                </div>
+
+                <button class="scroll-btn right" onclick="scrollTeam('right')" onmouseenter="pauseTeamScroll()"
+                    onmouseleave="resumeTeamScroll()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -370,11 +586,12 @@
         </div>
 
         <div class="library-controls">
-            <input type="text" id="searchInput" class="search-bar" placeholder="Search courses (e.g., Civil, CS)..." onkeyup="filterResources()">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search courses (e.g., Civil, CS)..."
+                onkeyup="filterResources()">
         </div>
 
         <div class="resource-grid" id="resourceGrid">
-            
+
             <div class="resource-card" data-category="foundation">
                 <div class="card-img" style="background-color: #3498db;"><i class="fas fa-shapes"></i></div>
                 <div class="card-content">
@@ -382,8 +599,10 @@
                     <p>General materials for first-year students.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/1kv8bCvHo_J0-eFpjl6YKSOTW0ff1-7Yl" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
-                    <span class="action-btn" onclick="alert('YouTube Playlist coming soon!')"><i class="fab fa-youtube"></i> Videos</span>
+                    <a href="https://drive.google.com/drive/folders/1kv8bCvHo_J0-eFpjl6YKSOTW0ff1-7Yl" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <span class="action-btn" onclick="alert('YouTube Playlist coming soon!')"><i
+                            class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
 
@@ -394,8 +613,10 @@
                     <p>Structures, Soil Mechanics, and Materials.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/1Z0km9lZoT84DTGiMEjwvuZRA4f0SaXxJ?usp=sharing" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
-                    <span class="action-btn" onclick="alert('Check Dr. Mahmoud Karamaney channel')"><i class="fab fa-youtube"></i> Videos</span>
+                    <a href="https://drive.google.com/drive/folders/1Z0km9lZoT84DTGiMEjwvuZRA4f0SaXxJ?usp=sharing"
+                        target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <span class="action-btn" onclick="alert('Check Dr. Mahmoud Karamaney channel')"><i
+                            class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
 
@@ -403,10 +624,11 @@
                 <div class="card-img" style="background-color: #9b59b6;"><i class="fas fa-laptop-code"></i></div>
                 <div class="card-content">
                     <div class="card-title">Computer Science</div>
-                    <p>Programming, Algorithms, and Data Structures. (Renamed from Comp Eng)</p>
+                    <p>Programming, Algorithms, and Data Structures.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/12RsF6SFoXfkuURC6xszaJUdJecWkWv1R" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <a href="https://drive.google.com/drive/folders/12RsF6SFoXfkuURC6xszaJUdJecWkWv1R" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
                     <span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
@@ -418,7 +640,8 @@
                     <p>Circuits, Systems, and Power.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/1EcPzK0iiME7xpzVKF7v2lTEDlnsvR2pb" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <a href="https://drive.google.com/drive/folders/1EcPzK0iiME7xpzVKF7v2lTEDlnsvR2pb" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
                     <span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
@@ -430,7 +653,8 @@
                     <p>Thermodynamics, Mechanics, and Design.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/11v9rVOlA9FFBGsq_4kSqKtcrn-N66c9T" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <a href="https://drive.google.com/drive/folders/11v9rVOlA9FFBGsq_4kSqKtcrn-N66c9T" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
                     <span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
@@ -442,19 +666,21 @@
                     <p>Drilling, Reservoir, and Production.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/1iu0_KgxelnLp_CCvkuINic4cvYrloUOU" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <a href="https://drive.google.com/drive/folders/1iu0_KgxelnLp_CCvkuINic4cvYrloUOU" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
                     <span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
 
-             <div class="resource-card" data-category="chemical engineering">
+            <div class="resource-card" data-category="chemical engineering">
                 <div class="card-img" style="background-color: #27ae60;"><i class="fas fa-flask"></i></div>
                 <div class="card-content">
                     <div class="card-title">Chemical Engineering</div>
                     <p>Processes, Materials, and Labs.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/12951KIo2WRGJuJvoMzBopk1cSuCfoNP3" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <a href="https://drive.google.com/drive/folders/12951KIo2WRGJuJvoMzBopk1cSuCfoNP3" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
                     <span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
@@ -466,7 +692,8 @@
                     <p>Medical instrumentation and biology.</p>
                 </div>
                 <div class="card-actions">
-                    <a href="https://drive.google.com/drive/folders/1o4-jPfZ7-VeE3PhEgH3Lcmfk4njYVtun" target="_blank" class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
+                    <a href="https://drive.google.com/drive/folders/1o4-jPfZ7-VeE3PhEgH3Lcmfk4njYVtun" target="_blank"
+                        class="action-btn"><i class="fab fa-google-drive"></i> Files</a>
                     <span class="action-btn"><i class="fab fa-youtube"></i> Videos</span>
                 </div>
             </div>
@@ -488,7 +715,8 @@
                 </div>
                 <div>
                     <h3>Summary of the Fall Semester Workshops</h3>
-                    <p>A look back at the Python and CAD workshops held last month. Attendance was at an all-time high.</p>
+                    <p>A look back at the Python and CAD workshops held last month. Attendance was at an all-time high.
+                    </p>
                     <a href="#" style="color: var(--primary); font-size: 0.9rem;">Read more &rarr;</a>
                 </div>
             </div>
@@ -499,7 +727,8 @@
                 </div>
                 <div>
                     <h3>Internship Opportunities in UTM</h3>
-                    <p>Several YSAG members secured internships this summer. Here is how they prepared their resumes.</p>
+                    <p>Several YSAG members secured internships this summer. Here is how they prepared their resumes.
+                    </p>
                     <a href="#" style="color: var(--primary); font-size: 0.9rem;">Read more &rarr;</a>
                 </div>
             </div>
@@ -513,8 +742,10 @@
             <p>This is not just a help page. It's a place to give back.</p>
         </div>
         <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-            <p style="margin-bottom: 20px;">Have old exams, summary notes, or recorded lectures? Don't let them gather dust. Upload them to help the next batch of students.</p>
-            <button class="btn">Upload Materials</button> <button class="btn" style="background: var(--secondary);">Request a Tutor</button>
+            <p style="margin-bottom: 20px;">Have old exams, summary notes, or recorded lectures? Don't let them gather
+                dust. Upload them to help the next batch of students.</p>
+            <button class="btn">Upload Materials</button> <button class="btn"
+                style="background: var(--secondary);">Volunteer as Tutor</button>
         </div>
     </section>
 
@@ -552,14 +783,14 @@
         <h3>YSAG</h3>
         <p>Yemeni Student Academic Group - UTM ISS</p>
         <p>Johor Bahru, Johor, Malaysia</p>
-        
+
         <div class="social-links">
             <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
             <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
             <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
         </div>
-        
+
         <div class="copyright" style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
             &copy; 2025 YSAG. Non-profit Educational Organization.
         </div>
@@ -567,14 +798,14 @@
 
     <!-- Load content from JSON files -->
     <script src="content-loader.js"></script>
-    
+
     <script>
         // 1. Sticky Navbar Active State Logic
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             let current = '';
             const sections = document.querySelectorAll('section');
             const indicator = document.getElementById('page-indicator');
-            
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 if (pageYOffset >= sectionTop - 150) {
@@ -582,7 +813,7 @@
                 }
             });
 
-            if(current) {
+            if (current) {
                 indicator.innerText = "Current Page: " + current.charAt(0).toUpperCase() + current.slice(1);
             }
         });
@@ -596,7 +827,7 @@
             for (let i = 0; i < cards.length; i++) {
                 let category = cards[i].getAttribute('data-category');
                 let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
-                
+
                 if (category.indexOf(filter) > -1 || title.indexOf(filter) > -1) {
                     cards[i].style.display = "";
                 } else {
@@ -608,7 +839,7 @@
         // 3. Language Toggle (Mockup)
         function toggleLanguage() {
             const body = document.body;
-            if(body.getAttribute('dir') === 'rtl') {
+            if (body.getAttribute('dir') === 'rtl') {
                 body.setAttribute('dir', 'ltr');
                 alert("Switched to English");
             } else {
@@ -618,4 +849,5 @@
         }
     </script>
 </body>
+
 </html>
