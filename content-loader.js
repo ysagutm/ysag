@@ -184,33 +184,6 @@ async function loadResourcesContent() {
     }
 }
 
-// Load Recommendations Section
-async function loadRecommendationsContent() {
-    try {
-        const response = await fetch('content/recommendations.json');
-        const data = await response.json();
-        
-        // Update section title
-        document.querySelector('#recommendations .section-title h2').textContent = data.title;
-        document.querySelector('#recommendations .section-title p').textContent = data.subtitle;
-        
-        // Update recommendation cards
-        const recGrid = document.querySelector('.rec-grid');
-        recGrid.innerHTML = '';
-        data.recommendations.forEach(rec => {
-            const cardDiv = document.createElement('div');
-            cardDiv.className = 'rec-card';
-            cardDiv.innerHTML = `
-                <p>"${escapeHtml(rec.text)}"</p>
-                <div style="margin-top:10px; font-weight:bold;">- ${escapeHtml(rec.author)}</div>
-            `;
-            recGrid.appendChild(cardDiv);
-        });
-    } catch (error) {
-        console.error('Error loading recommendations content:', error);
-    }
-}
-
 // Load Reports Section
 async function loadReportsContent() {
     try {
