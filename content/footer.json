@@ -6,22 +6,17 @@
     {
       "platform": "YouTube",
       "icon": "fab fa-youtube",
-      "url": "#"
+      "url": "https://www.youtube.com/@YSAG-my"
     },
     {
       "platform": "Instagram",
       "icon": "fab fa-instagram",
-      "url": "#"
+      "url": "https://www.instagram.com/issyemen/"
     },
     {
-      "platform": "Facebook",
-      "icon": "fab fa-facebook",
-      "url": "#"
-    },
-    {
-      "platform": "Telegram",
-      "icon": "fab fa-telegram",
-      "url": "#"
+      "platform": "WhatsApp",
+      "icon": "fab fa-whatsapp",
+      "url": "#" 
     }
   ],
   "copyright": "2025 YSAG. Non-profit Educational Organization."

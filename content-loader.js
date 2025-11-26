@@ -1,9 +1,7 @@
 // Content Loader for YSAG Website
-// Updated: fixes scrolling stop issues, slow speed, and enables manual buttons
 
 // --- HELPER FUNCTIONS ---
 
-// Prevent XSS attacks
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -11,7 +9,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Validate URL safety
 function isSafeUrl(url) {
     if (!url) return false;
     return url.startsWith('#') || 
@@ -26,26 +23,37 @@ document.addEventListener('DOMContentLoaded', function() {
     loadHeroContent();
     loadAboutContent();
     loadResourcesContent();
-    loadRecommendationsContent();
-    loadReportsContent();
+    // loadRecommendationsContent(); // REMOVED
+    // loadReportsContent(); // REMOVED
     loadFooterContent();
 });
 
 // --- SECTION LOADERS ---
 
-// 1. Hero Section
+// 1. Hero Section (With Background Slider)
+// 1. Hero Section (Updated with Button Wrapper)
 async function loadHeroContent() {
     try {
         const response = await fetch('content/hero.json');
         if (!response.ok) throw new Error('Hero file not found');
         const data = await response.json();
         
+        // 1. Set Text
         document.querySelector('.hero h1').textContent = data.title;
         document.querySelector('.hero p').textContent = data.description;
         
+        // 2. Handle Buttons (NEW: With Wrapper)
         const heroSection = document.querySelector('.hero');
+        
+        // Remove old buttons AND old button container if it exists
+        const oldContainer = document.querySelector('.hero-buttons');
+        if (oldContainer) oldContainer.remove();
         const existingButtons = heroSection.querySelectorAll('.btn');
         existingButtons.forEach(btn => btn.remove());
+        
+        // Create new wrapper
+        const btnContainer = document.createElement('div');
+        btnContainer.className = 'hero-buttons';
         
         data.buttons.forEach(button => {
             const btn = document.createElement('a');
@@ -53,25 +61,59 @@ async function loadHeroContent() {
             btn.className = 'btn';
             btn.textContent = button.text;
             if (!button.isPrimary) {
+                // Inline styles for the secondary button
                 btn.style.background = 'transparent';
                 btn.style.border = '2px solid white';
-                btn.style.marginLeft = '10px';
             }
-            heroSection.appendChild(btn);
+            btnContainer.appendChild(btn);
         });
+
+        // Append container to hero
+        heroSection.appendChild(btnContainer);
+
+        // 3. Handle Background Slider (Keep existing slider code below...)
+        if (data.backgroundImages && data.backgroundImages.length > 0) {
+            // ... (Same slider code as before) ...
+            // Create container if it doesn't exist
+            let sliderContainer = document.querySelector('.hero-bg-slider');
+            if (!sliderContainer) {
+                sliderContainer = document.createElement('div');
+                sliderContainer.className = 'hero-bg-slider';
+                heroSection.insertBefore(sliderContainer, heroSection.firstChild);
+            }
+            // ... rest of slider logic ...
+             sliderContainer.innerHTML = '';
+            data.backgroundImages.forEach((imgUrl, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'hero-slide';
+                if (index === 0) slide.classList.add('active');
+                slide.style.backgroundImage = `url('${imgUrl}')`;
+                sliderContainer.appendChild(slide);
+            });
+
+            if (data.backgroundImages.length > 1) {
+                let currentSlide = 0;
+                const slides = sliderContainer.querySelectorAll('.hero-slide');
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 5000);
+            }
+        }
+
     } catch (error) {
         console.error('Error loading hero content:', error);
     }
 }
 
-// 2. About Section (Includes Team Scroll Logic)
+// 2. About Section
 async function loadAboutContent() {
     try {
         const response = await fetch('content/about.json');
         if (!response.ok) throw new Error('About file not found');
         const data = await response.json();
 
-        // Pro Tip & Mission
         document.querySelector('.pro-tip').innerHTML = 
             `<i class="fas fa-lightbulb"></i> <strong>Did you know?</strong> ${escapeHtml(data.proTip)}`;
         
@@ -88,9 +130,8 @@ async function loadAboutContent() {
             mvGrid.appendChild(cardDiv);
         });
         
-        // Team Members
         const teamGrid = document.querySelector('.team-grid');
-        teamGrid.innerHTML = ''; // Clear "Loading..." text
+        teamGrid.innerHTML = ''; 
         
         const createMemberCard = (member) => {
             const memberDiv = document.createElement('div');
@@ -103,14 +144,9 @@ async function loadAboutContent() {
             return memberDiv;
         };
 
-        // Render TWICE for infinite loop illusion
         if (data.team && data.team.length > 0) {
-            // Set 1
             data.team.forEach(member => teamGrid.appendChild(createMemberCard(member)));
-            // Set 2 (Clone)
             data.team.forEach(member => teamGrid.appendChild(createMemberCard(member)));
-            
-            // Start the scrolling logic only after content is loaded
             initTeamScroll(); 
         }
 
@@ -119,7 +155,7 @@ async function loadAboutContent() {
     }
 }
 
-// 3. Resources Section
+// 3. Resources Section (Updated: WhatsApp in Middle)
 async function loadResourcesContent() {
     try {
         const response = await fetch('content/resources.json');
@@ -137,16 +173,26 @@ async function loadResourcesContent() {
             cardDiv.className = 'resource-card';
             cardDiv.setAttribute('data-category', course.category);
             
-            // Video Button Logic
+            // 1. Prepare Video Button
             let videoBtnHtml = '';
             if (course.videosLink && isSafeUrl(course.videosLink)) {
                 videoBtnHtml = `<a href="${course.videosLink}" target="_blank" class="action-btn"><i class="fab fa-youtube"></i> Videos</a>`;
             } else {
-                // Use a safe onclick handler setup
                 const msg = course.videosMessage || 'Videos coming soon!';
                 videoBtnHtml = `<span class="action-btn" onclick="alert('${escapeHtml(msg)}')"><i class="fab fa-youtube"></i> Videos</span>`;
             }
 
+            // 2. Prepare WhatsApp Button
+            let whatsappBtnHtml = '';
+            // CHECK: Button only appears if a link exists!
+            if (course.whatsappLink && isSafeUrl(course.whatsappLink)) {
+                whatsappBtnHtml = `
+                    <a href="${course.whatsappLink}" target="_blank" class="action-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> Group
+                    </a>`;
+            }
+
+            // 3. Render Card (Order: Files -> WhatsApp -> Videos)
             cardDiv.innerHTML = `
                 <div class="card-img" style="background-color: ${escapeHtml(course.color)}">
                     <i class="${escapeHtml(course.icon)}"></i>
@@ -159,6 +205,9 @@ async function loadResourcesContent() {
                     <a href="${isSafeUrl(course.filesLink) ? course.filesLink : '#'}" target="_blank" class="action-btn">
                         <i class="fab fa-google-drive"></i> Files
                     </a>
+                    
+                    ${whatsappBtnHtml}
+                    
                     ${videoBtnHtml}
                 </div>
             `;
@@ -168,7 +217,6 @@ async function loadResourcesContent() {
         console.error('Error loading resources content:', error);
     }
 }
-
 
 // 4. Footer Section
 async function loadFooterContent() {
@@ -205,40 +253,31 @@ async function loadFooterContent() {
 
 // --- TEAM SCROLLING LOGIC ---
 
-// We attach state to 'window' so HTML buttons can access the logic easily
 window.teamScrollState = {
-    currentPos: 0,    // Stores precise float value
-    isPaused: false,  // Controls pausing
-    animationId: null // Stores animation frame ID
+    currentPos: 0,
+    isPaused: false,
+    animationId: null
 };
 
 function initTeamScroll() {
     const container = document.getElementById('teamScrollContainer');
     if (!container) return;
 
-    // Reset state
     window.teamScrollState.currentPos = container.scrollLeft;
     window.teamScrollState.isPaused = false;
     
-    // Clean up old loops
     if (window.teamScrollState.animationId) {
         cancelAnimationFrame(window.teamScrollState.animationId);
     }
 
-    const speed = 0.5; // Very slow, smooth speed
+    const speed = 0.5;
 
     function step() {
         if (!window.teamScrollState.isPaused) {
-            // 1. Update Float
             window.teamScrollState.currentPos += speed;
-            
-            // 2. Apply to Container
             container.scrollLeft = window.teamScrollState.currentPos;
-
-            // 3. Check Infinite Loop
-            // If we scrolled past half the width (the first set of team members)
+            
             if (window.teamScrollState.currentPos >= (container.scrollWidth / 2)) {
-                // Snap back to start instantly
                 window.teamScrollState.currentPos = 0;
                 container.scrollLeft = 0;
             }
@@ -248,12 +287,10 @@ function initTeamScroll() {
 
     step();
     
-    // Touch support for mobile (Hold to pause)
     container.addEventListener('touchstart', () => window.teamScrollState.isPaused = true);
     container.addEventListener('touchend', () => window.teamScrollState.isPaused = false);
 }
 
-// EXPOSED FUNCTIONS (For HTML OnClick/OnHover)
 window.pauseTeamScroll = function() {
     window.teamScrollState.isPaused = true;
 };
@@ -264,7 +301,7 @@ window.resumeTeamScroll = function() {
 
 window.scrollTeam = function(direction) {
     const container = document.getElementById('teamScrollContainer');
-    const jumpAmount = 300; // Distance per click
+    const jumpAmount = 300; 
 
     if (direction === 'left') {
         window.teamScrollState.currentPos -= jumpAmount;
@@ -273,7 +310,6 @@ window.scrollTeam = function(direction) {
         window.teamScrollState.currentPos += jumpAmount;
     }
 
-    // Apply change immediately
     container.scrollTo({
         left: window.teamScrollState.currentPos,
         behavior: 'smooth' 
