@@ -169,67 +169,8 @@ async function loadResourcesContent() {
     }
 }
 
-// 4. Recommendations Section
-async function loadRecommendationsContent() {
-    try {
-        const response = await fetch('content/recommendations.json');
-        const data = await response.json();
-        
-        // Only run if the section exists in HTML
-        if(document.querySelector('#recommendations')) {
-             document.querySelector('#recommendations .section-title h2').textContent = data.title;
-             document.querySelector('#recommendations .section-title p').textContent = data.subtitle;
-             
-             const recGrid = document.querySelector('.rec-grid');
-             recGrid.innerHTML = '';
-             data.recommendations.forEach(rec => {
-                 const cardDiv = document.createElement('div');
-                 cardDiv.className = 'rec-card';
-                 cardDiv.innerHTML = `
-                     <p>"${escapeHtml(rec.text)}"</p>
-                     <div style="margin-top:10px; font-weight:bold;">- ${escapeHtml(rec.author)}</div>
-                 `;
-                 recGrid.appendChild(cardDiv);
-             });
-        }
-    } catch (error) {
-        // Silent fail if section doesn't exist or file missing
-    }
-}
 
-// 5. Reports Section
-async function loadReportsContent() {
-    try {
-        const response = await fetch('content/reports.json');
-        const data = await response.json();
-        
-        document.querySelector('#reports .section-title h2').textContent = data.title;
-        document.querySelector('#reports .section-title p').textContent = data.subtitle;
-        
-        const reportList = document.querySelector('.report-list');
-        reportList.innerHTML = '';
-        data.reports.forEach(report => {
-            const reportDiv = document.createElement('div');
-            reportDiv.className = 'report-item';
-            reportDiv.innerHTML = `
-                <div class="report-date">
-                    <div style="font-size: 1.5rem; font-weight: bold;">${escapeHtml(report.day)}</div>
-                    <div>${escapeHtml(report.month)}</div>
-                </div>
-                <div>
-                    <h3>${escapeHtml(report.title)}</h3>
-                    <p>${escapeHtml(report.description)}</p>
-                    <a href="${escapeHtml(report.link)}" style="color: var(--primary); font-size: 0.9rem;">Read more &rarr;</a>
-                </div>
-            `;
-            reportList.appendChild(reportDiv);
-        });
-    } catch (error) {
-        console.error('Error loading reports:', error);
-    }
-}
-
-// 6. Footer Section
+// 4. Footer Section
 async function loadFooterContent() {
     try {
         const response = await fetch('content/footer.json');
@@ -262,7 +203,7 @@ async function loadFooterContent() {
     }
 }
 
-// --- TEAM SCROLLING LOGIC (The Fix) ---
+// --- TEAM SCROLLING LOGIC ---
 
 // We attach state to 'window' so HTML buttons can access the logic easily
 window.teamScrollState = {
