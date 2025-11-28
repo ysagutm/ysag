@@ -1,0 +1,67 @@
+{
+  "proTip": "YSAG is a non-profit committee entirely run by students to students.",
+  "missionVision": [
+    {
+      "icon": "fas fa-eye",
+      "title": "Our Vision",
+      "description": "To be a leading organization in supporting students during their academic journey, empowering them to achieve top grades and reach the highest levels of academic distinction."
+    },
+    {
+      "icon": "fas fa-bullseye",
+      "title": "Our Mission",
+      "description": "We strive to support students throughout their university journey by providing an integrated support system that includes tutoring sessions, a comprehensive electronic library of study materials, and a YouTube channel rich with simplified explanations-along with additional initiatives and services that enhance academic performance and promote excellence."
+    },
+    {
+      "icon": "fas fa-users",
+      "title": "What is YSAG?",
+      "description": "YSAG is a student committee under ISS Yemen at UTM. It consists of a group of university students working together to serve their fellow students. The committee provides academic support through various initiatives, activities, and services that assist students throughout their university life and help them overcome the challenges they face on campus."
+    }
+  ],
+  "team": [
+    {
+      "name": "Zeyad Maresh",
+      "role": "Leader",
+      "image": "content/images/Zeyad-Maresh(Leader).jpg"
+    },
+    {
+      "name": "Sakhr AlQatabi",
+      "role": "Vice Leader",
+      "image": "content/images/Sakhr-AlQatabi(Vice).jpg"
+    },
+    {
+      "name": "Mohammed Adam",
+      "role": "Civil Head",
+      "image": "content/images/Mohammed-Adam(Ysag-Civil).jpg"
+    },
+    {
+      "name": "Nooh AlFaqih",
+      "role": "Electric Head",
+      "image": "content/images/Nooh-AlFaqih(Ysag-Electric).jpg"
+    },
+    {
+      "name": "Ammar Abdulrahman",
+      "role": "Computer Head",
+      "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).jpg"
+    },
+    {
+      "name": "Ibrahim AlJabali",
+      "role": "Mechanic Head",
+      "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).jpg"
+    },
+    {
+      "name": "Anwar Mansoor",
+      "role": "Chemical Head",
+      "image": "content/images/Anwar-Mansoor(Ysag-chemical).jpg"
+    },
+    {
+      "name": "Abdullah Ba-Hanan",
+      "role": "Biomedical Head",
+      "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).jpg"
+    },
+    {
+      "name": "Badr Anas",
+      "role": "Foundation Head",
+      "image": "content/images/Badr-Anas(Ysag-foundation).jpg"
+    }
+  ]
+}

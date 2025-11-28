@@ -1,0 +1,28 @@
+{
+  "title": "زكاة العلم نشره",
+  "description": "تطوير وترسيخ ونشر المعرفة بين جميع الطلاب.",
+  "backgroundImages": [
+    "content/images/Class-1.webp",
+    "content/images/Class-2.webp",
+    "content/images/Class-3.webp",
+    "content/images/Class-4.webp",
+    "content/images/Class-5.webp",
+    "content/images/Class-6.webp",
+    "content/images/Class-7.webp",
+    "content/images/Class-8.webp"
+    ],
+  "buttons": [
+    {
+      "text": "استكشف المصادر",
+      "link": "#resources",
+      "isPrimary": true,
+      "icon": "fas fa-book-open"
+    },
+    {
+      "text": "ساهم معنا",
+      "link": "#feedback",
+      "isPrimary": false,
+      "icon": "fas fa-users"
+    }
+  ]
+} 
