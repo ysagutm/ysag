@@ -1,0 +1,67 @@
+{
+  "proTip": "YSAG هي لجنة غير ربحية تدار بالكامل من قبل الطلاب إلى الطلاب.",
+  "missionVision": [
+    {
+      "title": "رؤيتنا",
+      "description": "نكون جهة رائدة في مساندة الطلاب خلال رحلتهم الجامعية، وتمكينهم من تحقيق أعلى الدرجات والوصول إلى أفضل مستويات التميز الأكاديمي.",
+      "icon": "fas fa-eye"
+    },
+    {
+      "title": "رسالتنا",
+      "description": "نسعى إلى مساندة الطلاب في رحلتهم الجامعية عبر توفير منظومة دعم متكاملة تشمل دروس التقوية، ومكتبة إلكترونية شاملة للمواد الدراسية، وقناة يوتيوب غنية بالشروحات المبسّطة، إضافة إلى مبادرات وخدمات أخرى تُسهِم في رفع مستوى التحصيل العلمي وتعزيز التفوق الأكاديمي.",
+      "icon": "fas fa-bullseye"
+    },
+    {
+      "title": "ما هي لجنة YSAG؟",
+      "description": "لجنة الـ YSAG هي لجنة طلابية تتبع للاتحاد اليمني في جامعة UTM، وتضم مجموعة من طلاب الجامعة الذين يعملون معًا لخدمة زملائهم الطلاب. تقوم اللجنة بدعم الطلاب أكاديميًا من خلال توفير مبادرات وأنشطة وخدمات تساعدهم في مسيرتهم الجامعية وتسهّل عليهم التحديات التي يواجهونها داخل الحرم الجامعي.",
+      "icon": "fas fa-users"
+    }
+  ],
+  "team": [
+    {
+      "name": "زياد مارش",
+      "role": "رئيس اللجنة",
+      "image": "content/images/Zeyad-Maresh(Leader).jpg"
+    },
+    {
+      "name": "صخر القتبي",
+      "role": "نائب الرئيس",
+      "image": "content/images/Sakhr-AlQatabi(Vice).jpg"
+    },
+    {
+      "name": "عمار عبدالرحمن",
+      "role": "رئيس قسم الحاسوب",
+      "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).jpg"
+    },
+    {
+      "name": "محمد آدم",
+      "role": "رئيس قسم المدني",
+      "image": "content/images/Mohammed-Adam(Ysag-Civil).jpg"
+    },
+    {
+      "name": "نوح الفقيه",
+      "role": "رئيس قسم الكهرباء",
+      "image": "content/images/Nooh-AlFaqih(Ysag-Electric).jpg"
+    },
+    {
+      "name": "إبراهيم الجبلي",
+      "role": "رئيس قسم الميكانيك",
+      "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).jpg"
+    },
+    {
+      "name": "أنور منصور",
+      "role": "رئيس قسم الكيمياء",
+      "image": "content/images/Anwar-Mansoor(Ysag-chemical).jpg"
+    },
+    {
+      "name": "عبدالله باحنان",
+      "role": "رئيس قسم هندسة الطب الحيوي",
+      "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).jpg"
+    },
+    {
+      "name": "بدر أنس",
+      "role": "رئيس قسم التحضيري",
+      "image": "content/images/Badr-Anas(Ysag-foundation).jpg"
+    }
+  ]
+}

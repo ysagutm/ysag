@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "currentPage": "Current Page",
+    "home": "Home",
+    "about": "About",
+    "team": "Team",
+    "resources": "E-Library & Courses",
+    "volunteer": "Volunteer",
+    "feedback": "Feedback"
+  },
+  "team": {
+    "subtitle": "The Dedicated Committee Members."
+  },
+  "volunteer": {
+    "title": "Volunteer & Contribute",
+    "hadith": "\"The Messenger of Allah (peace and blessings be upon him) said: Indeed, Allah, His angels, the inhabitants of the heavens and the earth - even the ant in its hole, and even the fish - send blessings upon the one who teaches people goodness.\"",
+    "cta": "Ready to make an impact?",
+    "desc": "We are always looking for students to <strong>hold remedial classes (online/F2F)</strong> or <strong>donate textbooks/past year tests</strong> to the library.",
+    "btnUpload": "Upload Materials",
+    "btnTutor": "Volunteer to Teach",
+    "btnDonate": "Donate Textbooks"
+  },
+  "contact": {
+    "title": "Feedback & Contact",
+    "subtitle": "We need your voice to improve YSAG.",
+    "infoTitle": "Get in Touch",
+    "infoDesc": "Whether you have a question about resources, want to volunteer, or want to collaborate, our inbox is open.",
+    "studentRun": "Student-run organization"
+  },
+  "form": {
+    "nameLabel": "Name (Optional)",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Your Email",
+    "emailPlaceholder": "name@example.com",
+    "emailHint": "We'll never share your email with anyone.",
+    "topicLabel": "Topic",
+    "topicOptions": {
+      "general": "General Inquiry",
+      "suggestion": "Website Suggestion",
+      "content": "Academic Content Issue",
+      "volunteer": "Volunteering / Tutor",
+      "bug": "Report Technical Issue",
+      "partner": "Collaboration Opportunity"
+    },
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us what we can do better...",
+    "btnSend": "Send Message"
+  }
+}

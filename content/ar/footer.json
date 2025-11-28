@@ -1,0 +1,23 @@
+{
+  "organizationName": "YSAG",
+  "fullName": "مجموعة الطلاب اليمنيين الأكاديمية - اتحاد الطلاب اليمنيين (UTM)",
+  "location": "جوهر بهرو، جوهر، ماليزيا",
+  "socialLinks": [
+    {
+      "platform": "YouTube",
+      "icon": "fab fa-youtube",
+      "url": "https://www.youtube.com/@YSAG-my"
+    },
+    {
+      "platform": "Instagram",
+      "icon": "fab fa-instagram",
+      "url": "https://www.instagram.com/issyemen/"
+    },
+    {
+      "platform": "WhatsApp",
+      "icon": "fab fa-whatsapp",
+      "url": "https://chat.whatsapp.com/I2OXElf95mLIkWdZVKNEd1" 
+    }
+  ],
+  "copyright": "2025 YSAG. منظمة تعليمية غير ربحية."
+}

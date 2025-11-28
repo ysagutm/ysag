@@ -1,7 +1,162 @@
 // Content Loader for YSAG Website
 
-// --- HELPER FUNCTIONS ---
+// --- GLOBAL NAMESPACE ---
+window.YSAG = {
+    currentLang: 'en', // Default
 
+    // Path Helper
+    getContentPath: function(filename) {
+        return `content/${this.currentLang}/${filename}`;
+    },
+
+    // UI Translation Logic
+    updateStaticUI: function(uiData) {
+        // 1. Text Content
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const keys = key.split('.');
+            let value = uiData;
+            keys.forEach(k => value = value ? value[k] : null);
+            
+            if (value) {
+                if (el.getAttribute('data-html') === 'true') {
+                    el.innerHTML = value;
+                } else {
+                    el.textContent = value;
+                }
+            }
+        });
+
+        // 2. Placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            const keys = key.split('.');
+            let value = uiData;
+            keys.forEach(k => value = value ? value[k] : null);
+            if (value) el.placeholder = value;
+        });
+
+        // 3. Form Options
+        const topicSelect = document.getElementById('topic');
+        if (topicSelect && uiData.form && uiData.form.topicOptions) {
+            topicSelect.innerHTML = `<option value="">${this.currentLang === 'ar' ? 'اختر موضوعاً...' : 'Select a topic...'}</option>`;
+            for (const [key, text] of Object.entries(uiData.form.topicOptions)) {
+                const option = document.createElement('option');
+                option.value = text;
+                option.textContent = text;
+                topicSelect.appendChild(option);
+            }
+        }
+    },
+
+    // Language Toggle
+    toggleLanguage: async function() {
+        this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
+        
+        const html = document.documentElement;
+        html.setAttribute('lang', this.currentLang);
+        html.setAttribute('dir', this.currentLang === 'ar' ? 'rtl' : 'ltr');
+        
+        // Wait for content to reload
+        await loadAllContent();
+        
+        // FIX: Force a scroll event to update the "Current Page" indicator immediately
+        window.dispatchEvent(new Event('scroll'));
+    },
+
+    // Resources Filter
+    filterResources: function() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const cards = document.getElementsByClassName('resource-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let category = cards[i].getAttribute('data-category');
+            let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
+            let desc = cards[i].querySelector('p').innerText.toLowerCase(); 
+
+            if (category.indexOf(filter) > -1 || title.indexOf(filter) > -1 || desc.indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    },
+
+    // Team Scroll State
+    // Team Scroll State
+    teamScroll: { 
+        state: { currentPos: 0, isPaused: false, animationId: null },
+        
+        pause: function() { this.state.isPaused = true; },
+        resume: function() { this.state.isPaused = false; },
+        
+        scroll: function(dir) { 
+            const container = document.getElementById('teamScrollContainer');
+            if(!container) return;
+            
+            this.state.isPaused = true;
+            const jump = 300;
+            // Universal logic: Subtracting moves Left, Adding moves Right
+            const target = dir === 'left' ? this.state.currentPos - jump : this.state.currentPos + jump;
+            
+            container.scrollTo({ left: target, behavior: 'smooth' });
+            
+            // Sync state after animation
+            setTimeout(() => { 
+                this.state.currentPos = container.scrollLeft; 
+                this.state.isPaused = false; 
+            }, 500);
+        },
+        
+        init: function() {
+            const container = document.getElementById('teamScrollContainer');
+            if (!container) return;
+
+            const self = this;
+            if (self.state.animationId) cancelAnimationFrame(self.state.animationId);
+            
+            // Reset position on init to avoid jumps when switching languages
+            container.scrollLeft = 0;
+            self.state.currentPos = 0;
+
+            function step() {
+                if (!self.state.isPaused) {
+                    const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+                    const speed = 0.5;
+
+                    if (isRTL) {
+                        // RTL Logic: Scroll LEFT (Negative) to see next items
+                        self.state.currentPos -= speed;
+                        
+                        // Infinite Loop Reset for RTL (Check absolute value)
+                        if (Math.abs(self.state.currentPos) >= (container.scrollWidth / 2)) {
+                            self.state.currentPos = 0;
+                        }
+                    } else {
+                        // LTR Logic: Scroll RIGHT (Positive)
+                        self.state.currentPos += speed;
+                        
+                        // Infinite Loop Reset for LTR
+                        if (self.state.currentPos >= (container.scrollWidth / 2)) {
+                            self.state.currentPos = 0;
+                        }
+                    }
+                    
+                    container.scrollLeft = self.state.currentPos;
+                }
+                self.state.animationId = requestAnimationFrame(step);
+            }
+
+            step();
+            
+            container.addEventListener('touchstart', () => self.pause());
+            container.addEventListener('touchend', () => self.resume());
+        }
+    }
+};
+
+// --- HELPER FUNCTIONS ---
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -11,307 +166,210 @@ function escapeHtml(text) {
 
 function isSafeUrl(url) {
     if (!url) return false;
-    return url.startsWith('#') || 
-           url.startsWith('/') || 
-           url.startsWith('https://') || 
-           url.startsWith('http://');
+    return url.startsWith('#') || url.startsWith('/') || url.startsWith('http');
 }
 
-// --- MAIN INITIALIZATION ---
+function showLoadingState(element, message = 'Loading...') {
+    element.innerHTML = `
+        <div style="width: 100%; text-align: center; padding: 60px;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #B22222;"></i>
+            <p style="margin-top: 20px; color: #666;">${escapeHtml(message)}</p>
+        </div>
+    `;
+}
 
-document.addEventListener('DOMContentLoaded', function() {
+function showErrorState(element, message = 'Content Unavailable') {
+    element.innerHTML = `
+        <div style="width: 100%; text-align: center; padding: 60px;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 20px;"></i>
+            <p style="color: #666;">${escapeHtml(message)}</p>
+        </div>
+    `;
+}
+
+// --- LOADER ---
+document.addEventListener('DOMContentLoaded', loadAllContent);
+
+// Updated to be Async to ensure order
+async function loadAllContent() {
+    // 1. UI must load first so Navbar has correct text
+    await loadUI(); 
+    
+    // 2. Load rest in parallel
     loadHeroContent();
     loadAboutContent();
     loadResourcesContent();
-    // loadRecommendationsContent(); // REMOVED
-    // loadReportsContent(); // REMOVED
     loadFooterContent();
-});
-
-// --- SECTION LOADERS ---
-
-// 1. Hero Section (With Background Slider)
-// 1. Hero Section (Updated with Button Wrapper)
-async function loadHeroContent() {
-    try {
-        const response = await fetch('content/hero.json');
-        if (!response.ok) throw new Error('Hero file not found');
-        const data = await response.json();
-        
-        // 1. Set Text
-        document.querySelector('.hero h1').textContent = data.title;
-        document.querySelector('.hero p').textContent = data.description;
-        
-        // 2. Handle Buttons (NEW: With Wrapper)
-        const heroSection = document.querySelector('.hero');
-        
-        // Remove old buttons AND old button container if it exists
-        const oldContainer = document.querySelector('.hero-buttons');
-        if (oldContainer) oldContainer.remove();
-        const existingButtons = heroSection.querySelectorAll('.btn');
-        existingButtons.forEach(btn => btn.remove());
-        
-        // Create new wrapper
-        const btnContainer = document.createElement('div');
-        btnContainer.className = 'hero-buttons';
-        
-        data.buttons.forEach(button => {
-            const btn = document.createElement('a');
-            btn.href = button.link;
-            btn.className = 'btn';
-            btn.textContent = button.text;
-            if (!button.isPrimary) {
-                // Inline styles for the secondary button
-                btn.style.background = 'transparent';
-                btn.style.border = '2px solid white';
-            }
-            btnContainer.appendChild(btn);
-        });
-
-        // Append container to hero
-        heroSection.appendChild(btnContainer);
-
-        // 3. Handle Background Slider (Keep existing slider code below...)
-        if (data.backgroundImages && data.backgroundImages.length > 0) {
-            // ... (Same slider code as before) ...
-            // Create container if it doesn't exist
-            let sliderContainer = document.querySelector('.hero-bg-slider');
-            if (!sliderContainer) {
-                sliderContainer = document.createElement('div');
-                sliderContainer.className = 'hero-bg-slider';
-                heroSection.insertBefore(sliderContainer, heroSection.firstChild);
-            }
-            // ... rest of slider logic ...
-             sliderContainer.innerHTML = '';
-            data.backgroundImages.forEach((imgUrl, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'hero-slide';
-                if (index === 0) slide.classList.add('active');
-                slide.style.backgroundImage = `url('${imgUrl}')`;
-                sliderContainer.appendChild(slide);
-            });
-
-            if (data.backgroundImages.length > 1) {
-                let currentSlide = 0;
-                const slides = sliderContainer.querySelectorAll('.hero-slide');
-                setInterval(() => {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }, 5000);
-            }
-        }
-
-    } catch (error) {
-        console.error('Error loading hero content:', error);
-    }
 }
 
-// 2. About Section
+async function loadUI() {
+    try {
+        const response = await fetch(YSAG.getContentPath('ui.json'));
+        const data = await response.json();
+        YSAG.updateStaticUI(data);
+    } catch(e) { console.error('UI Load Error:', e); }
+}
+
+async function loadHeroContent() {
+    try {
+        const response = await fetch(YSAG.getContentPath('hero.json'));
+        const data = await response.json();
+        const hero = document.querySelector('.hero');
+        hero.querySelector('h1').textContent = data.title;
+        hero.querySelector('p').textContent = data.description;
+        
+        const container = hero.querySelector('.hero-buttons');
+        if(container) {
+            container.innerHTML = '';
+            data.buttons.forEach(btn => {
+                const a = document.createElement('a');
+                a.className = 'btn';
+                a.href = btn.link;
+                a.innerHTML = `<i class="${btn.icon || ''}"></i> ${btn.text}`;
+                if (!btn.isPrimary) {
+                    a.style.background = 'transparent';
+                    a.style.border = '2px solid white';
+                }
+                container.appendChild(a);
+            });
+        }
+        
+        if (data.backgroundImages && data.backgroundImages.length > 0) {
+             let slider = hero.querySelector('.hero-bg-slider');
+             if(!slider) {
+                 slider = document.createElement('div');
+                 slider.className = 'hero-bg-slider';
+                 hero.insertBefore(slider, hero.firstChild);
+             }
+             slider.innerHTML = '';
+             data.backgroundImages.forEach((url, i) => {
+                 const d = document.createElement('div');
+                 d.className = `hero-slide ${i===0?'active':''}`;
+                 d.style.backgroundImage = `url('${url}')`;
+                 slider.appendChild(d);
+             });
+             
+             if (data.backgroundImages.length > 1) {
+                if(window.heroInterval) clearInterval(window.heroInterval);
+                let current = 0;
+                const slides = slider.querySelectorAll('.hero-slide');
+                window.heroInterval = setInterval(() => {
+                    slides[current].classList.remove('active');
+                    current = (current + 1) % slides.length;
+                    slides[current].classList.add('active');
+                }, 5000);
+             }
+        }
+    } catch(e) { console.error('Hero Load Error:', e); }
+}
+
 async function loadAboutContent() {
     try {
-        const response = await fetch('content/about.json');
-        if (!response.ok) throw new Error('About file not found');
+        const response = await fetch(YSAG.getContentPath('about.json'));
         const data = await response.json();
-
-        document.querySelector('.pro-tip').innerHTML = 
-            `<i class="fas fa-lightbulb"></i> <strong>Did you know?</strong> ${escapeHtml(data.proTip)}`;
+        
+        document.querySelector('.pro-tip').innerHTML = `<i class="fas fa-lightbulb"></i> <strong>${YSAG.currentLang === 'ar' ? 'هل تعلم؟' : 'Did you know?'}</strong> ${data.proTip}`;
         
         const mvGrid = document.querySelector('.mission-vision-grid');
         mvGrid.innerHTML = '';
-        data.missionVision.forEach(card => {
-            const cardDiv = document.createElement('div');
-            cardDiv.className = 'mv-card';
-            cardDiv.innerHTML = `
-                <i class="${escapeHtml(card.icon)}"></i>
-                <h3>${escapeHtml(card.title)}</h3>
-                <p>${escapeHtml(card.description)}</p>
-            `;
-            mvGrid.appendChild(cardDiv);
+        data.missionVision.forEach(c => {
+            mvGrid.innerHTML += `
+                <div class="mv-card">
+                    <i class="${c.icon}"></i>
+                    <h3>${c.title}</h3>
+                    <p>${c.description}</p>
+                </div>`;
         });
-        
+
         const teamGrid = document.querySelector('.team-grid');
-        teamGrid.innerHTML = ''; 
-        
-        const createMemberCard = (member) => {
-            const memberDiv = document.createElement('div');
-            memberDiv.className = 'team-member';
-            memberDiv.innerHTML = `
-                <img src="${escapeHtml(member.image)}" alt="${escapeHtml(member.name)}" class="team-img">
-                <h4>${escapeHtml(member.name)}</h4>
-                <p>${escapeHtml(member.role)}</p>
-            `;
-            return memberDiv;
-        };
-
-        if (data.team && data.team.length > 0) {
-            data.team.forEach(member => teamGrid.appendChild(createMemberCard(member)));
-            data.team.forEach(member => teamGrid.appendChild(createMemberCard(member)));
-            initTeamScroll(); 
+        if(teamGrid) {
+            teamGrid.innerHTML = '';
+            const createCard = (m) => `
+                <div class="team-member">
+                    <img src="${m.image}" class="team-img" alt="${m.name}"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Crect fill=%22%23ddd%22 width=%22140%22 height=%22140%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2220%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+                    <h4>${m.name}</h4>
+                    <p>${m.role}</p>
+                </div>`;
+            
+            if (data.team) {
+                data.team.forEach(m => teamGrid.innerHTML += createCard(m));
+                data.team.forEach(m => teamGrid.innerHTML += createCard(m));
+                YSAG.teamScroll.init();
+            }
         }
-
-    } catch (error) {
-        console.error('Error loading about content:', error);
-    }
+    } catch(e) { console.error('About Load Error:', e); }
 }
 
-// 3. Resources Section (Updated: WhatsApp in Middle)
 async function loadResourcesContent() {
+    const grid = document.getElementById('resourceGrid');
     try {
-        const response = await fetch('content/resources.json');
+        const response = await fetch(YSAG.getContentPath('resources.json'));
         const data = await response.json();
         
         document.querySelector('#resources .section-title h2').textContent = data.title;
         document.querySelector('#resources .section-title p').textContent = data.subtitle;
         document.getElementById('searchInput').placeholder = data.searchPlaceholder;
+
+        grid.innerHTML = '';
         
-        const resourceGrid = document.getElementById('resourceGrid');
-        resourceGrid.innerHTML = '';
-        
-        data.courses.forEach(course => {
-            const cardDiv = document.createElement('div');
-            cardDiv.className = 'resource-card';
-            cardDiv.setAttribute('data-category', course.category);
+        data.courses.forEach(c => {
+            let vid = c.videosLink ? 
+                `<a href="${c.videosLink}" target="_blank" class="action-btn youtube"><i class="fab fa-youtube"></i> ${YSAG.currentLang === 'ar' ? 'فيديو' : 'Videos'}</a>` : 
+                `<span class="action-btn youtube" onclick="alert('${c.videosMessage}')"><i class="fab fa-youtube"></i> ${YSAG.currentLang === 'ar' ? 'فيديو' : 'Videos'}</span>`;
             
-            // 1. Prepare Video Button
-            let videoBtnHtml = '';
-            if (course.videosLink && isSafeUrl(course.videosLink)) {
-                videoBtnHtml = `<a href="${course.videosLink}" target="_blank" class="action-btn"><i class="fab fa-youtube"></i> Videos</a>`;
-            } else {
-                const msg = course.videosMessage || 'Videos coming soon!';
-                videoBtnHtml = `<span class="action-btn" onclick="alert('${escapeHtml(msg)}')"><i class="fab fa-youtube"></i> Videos</span>`;
-            }
+            let wa = c.whatsappLink ? 
+                `<a href="${c.whatsappLink}" target="_blank" class="action-btn whatsapp"><i class="fab fa-whatsapp"></i> ${YSAG.currentLang === 'ar' ? 'مجموعة' : 'Group'}</a>` : '';
 
-            // 2. Prepare WhatsApp Button
-            let whatsappBtnHtml = '';
-            // CHECK: Button only appears if a link exists!
-            if (course.whatsappLink && isSafeUrl(course.whatsappLink)) {
-                whatsappBtnHtml = `
-                    <a href="${course.whatsappLink}" target="_blank" class="action-btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> Group
-                    </a>`;
-            }
-
-            // 3. Render Card (Order: Files -> WhatsApp -> Videos)
-            cardDiv.innerHTML = `
-                <div class="card-img" style="background-color: ${escapeHtml(course.color)}">
-                    <i class="${escapeHtml(course.icon)}"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-title">${escapeHtml(course.title)}</div>
-                    <p>${escapeHtml(course.description)}</p>
-                </div>
-                <div class="card-actions">
-                    <a href="${isSafeUrl(course.filesLink) ? course.filesLink : '#'}" target="_blank" class="action-btn">
-                        <i class="fab fa-google-drive"></i> Files
-                    </a>
-                    
-                    ${whatsappBtnHtml}
-                    
-                    ${videoBtnHtml}
-                </div>
-            `;
-            resourceGrid.appendChild(cardDiv);
+            grid.innerHTML += `
+                <div class="resource-card" data-category="${c.category}">
+                    <div class="card-img" style="background-color:${c.color}"><i class="${c.icon}"></i></div>
+                    <div class="card-content">
+                        <div class="card-title">${c.title}</div>
+                        <p>${c.description}</p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="${c.filesLink}" target="_blank" class="action-btn files"><i class="fab fa-google-drive"></i> ${YSAG.currentLang === 'ar' ? 'ملفات' : 'Files'}</a>
+                        ${wa}
+                        ${vid}
+                    </div>
+                </div>`;
         });
-    } catch (error) {
-        console.error('Error loading resources content:', error);
+        
+        addTooltipStyles();
+    } catch(e) { 
+        console.error('Resource Load Error:', e);
+        showErrorState(grid, 'Resources Unavailable');
     }
 }
 
-// 4. Footer Section
 async function loadFooterContent() {
     try {
-        const response = await fetch('content/footer.json');
+        const response = await fetch(YSAG.getContentPath('footer.json'));
         const data = await response.json();
         
-        const footer = document.querySelector('footer');
-        footer.querySelector('h3').textContent = data.organizationName;
-        const footerParagraphs = footer.querySelectorAll('p');
-        if(footerParagraphs.length >= 2) {
-            footerParagraphs[0].textContent = data.fullName;
-            footerParagraphs[1].textContent = data.location;
+        document.querySelector('footer h3').textContent = data.organizationName;
+        const ps = document.querySelectorAll('footer p');
+        if(ps.length > 1) {
+            ps[0].textContent = data.fullName;
+            ps[1].textContent = data.location;
         }
+        document.querySelector('.copyright').textContent = `© ${data.copyright}`;
         
-        const socialLinks = footer.querySelector('.social-links');
-        socialLinks.innerHTML = '';
-        data.socialLinks.forEach(link => {
-            const a = document.createElement('a');
-            a.href = isSafeUrl(link.url) ? link.url : '#';
-            a.title = escapeHtml(link.platform);
-            a.innerHTML = `<i class="${escapeHtml(link.icon)}"></i>`;
-            socialLinks.appendChild(a);
+        const links = document.querySelector('.social-links');
+        links.innerHTML = '';
+        data.socialLinks.forEach(l => {
+            links.innerHTML += `<a href="${l.url}" target="_blank" class="${l.platform.toLowerCase()}"><i class="${l.icon}"></i></a>`;
         });
-        
-        const copyrightDiv = footer.querySelector('.copyright');
-        if (copyrightDiv) {
-            copyrightDiv.innerHTML = `&copy; ${data.copyright}`;
-        }
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
+    } catch(e) { console.error(e); }
 }
 
-// --- TEAM SCROLLING LOGIC ---
-
-window.teamScrollState = {
-    currentPos: 0,
-    isPaused: false,
-    animationId: null
-};
-
-function initTeamScroll() {
-    const container = document.getElementById('teamScrollContainer');
-    if (!container) return;
-
-    window.teamScrollState.currentPos = container.scrollLeft;
-    window.teamScrollState.isPaused = false;
-    
-    if (window.teamScrollState.animationId) {
-        cancelAnimationFrame(window.teamScrollState.animationId);
-    }
-
-    const speed = 0.5;
-
-    function step() {
-        if (!window.teamScrollState.isPaused) {
-            window.teamScrollState.currentPos += speed;
-            container.scrollLeft = window.teamScrollState.currentPos;
-            
-            if (window.teamScrollState.currentPos >= (container.scrollWidth / 2)) {
-                window.teamScrollState.currentPos = 0;
-                container.scrollLeft = 0;
-            }
-        }
-        window.teamScrollState.animationId = requestAnimationFrame(step);
-    }
-
-    step();
-    
-    container.addEventListener('touchstart', () => window.teamScrollState.isPaused = true);
-    container.addEventListener('touchend', () => window.teamScrollState.isPaused = false);
+function addTooltipStyles() {
+    if (document.getElementById('tooltip-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'tooltip-styles';
+    style.textContent = `
+        .action-btn.disabled { opacity: 0.5; cursor: not-allowed; position: relative; }
+    `;
+    document.head.appendChild(style);
 }
-
-window.pauseTeamScroll = function() {
-    window.teamScrollState.isPaused = true;
-};
-
-window.resumeTeamScroll = function() {
-    window.teamScrollState.isPaused = false;
-};
-
-window.scrollTeam = function(direction) {
-    const container = document.getElementById('teamScrollContainer');
-    const jumpAmount = 300; 
-
-    if (direction === 'left') {
-        window.teamScrollState.currentPos -= jumpAmount;
-        if (window.teamScrollState.currentPos < 0) window.teamScrollState.currentPos = 0;
-    } else {
-        window.teamScrollState.currentPos += jumpAmount;
-    }
-
-    container.scrollTo({
-        left: window.teamScrollState.currentPos,
-        behavior: 'smooth' 
-    });
-};

@@ -8,308 +8,271 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- RESET & VARIABLES --- */
+        /* --- 1. RESET & VARIABLES --- */
         :root {
-            --primary: #B22222; /* Firebrick Red (YSAG Red) */
-            --secondary: #2c3e50; /* Dark Blue/Grey */
-            --accent: #ecf0f1; /* Light Grey */
+            --primary: #B22222;
+            --secondary: #1a1a1a;
+            --secondary-light: #333;
+            --accent: #ecf0f1;
             --text: #333;
             --white: #fff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        html { scroll-behavior: smooth; scroll-padding-top: 120px; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); background-color: #f9f9f9; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6; color: var(--text); background-color: #fcfcfc;
+        }
+
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* --- HEADER & NAV --- */
+        /* --- 2. BUTTONS --- */
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--primary); color: var(--white);
+            padding: 12px 28px; border-radius: 6px; transition: var(--transition);
+            border: none; cursor: pointer; font-weight: 600; font-size: 1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover { background: #8b0000; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3); }
+        
+        .btn.outline { background: transparent; border: 2px solid var(--secondary); color: var(--secondary); text-shadow: none; }
+        .btn.outline:hover { background: var(--secondary); color: var(--white); }
+        
+        .btn[style*="transparent"] {
+            border: 2px solid var(--white); backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.15) !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        .btn[style*="transparent"]:hover { background: var(--white) !important; color: var(--text); text-shadow: none; }
+        
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+        /* --- 3. HEADER & NAV --- */
         header {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 1000;
         }
-
         .top-bar {
-            background: var(--secondary);
-            color: var(--white);
-            padding: 0.5rem 5%;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: var(--secondary); color: var(--white);
+            padding: 0.5rem 5%; font-size: 0.85rem; display: flex;
+            justify-content: space-between; align-items: center; letter-spacing: 0.5px;
         }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-        }
-
-        /* --- LOGO SECTION (Parent & Child) --- */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* ISS Logo */
-        .iss-logo-link img {
-            height: 50px;
-            width: auto;
-            transition: transform 0.3s ease;
-            display: block;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
+        
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .iss-logo-link img { height: 50px; width: auto; transition: transform 0.3s ease; display: block; }
         .iss-logo-link:hover img { transform: scale(1.1); }
+        .logo-divider { height: 40px; width: 2px; background-color: #e0e0e0; border-radius: 2px; }
+        .ysag-brand { display: flex; align-items: center; gap: 12px; }
+        .ysag-logo-img { height: 55px; width: auto; }
+        .ysag-text { display: flex; align-items: center; }
+        .ysag-subtitle { font-size: 0.95rem; font-weight: 700; color: var(--secondary); line-height: 1.2; max-width: 150px; }
 
-        /* Divider */
-        .logo-divider {
-            height: 40px;
-            width: 2px;
-            background-color: #e0e0e0;
-            border-radius: 2px;
+        nav ul { display: flex; gap: 25px; }
+        nav a { font-weight: 500; position: relative; padding-bottom: 5px; color: var(--secondary); }
+        nav a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background-color: var(--primary); transition: var(--transition);
         }
+        nav a:hover { color: var(--primary); }
+        nav a:hover::after { width: 100%; }
 
-        /* YSAG Logo */
-        .ysag-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .lang-switch {
+            cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 10px; border-radius: 4px;
         }
-        .ysag-logo-img {
-            height: 55px;
-            width: auto;
-        }
-        .ysag-text {
-            display: flex;
-            align-items: center;
-        }
-        .ysag-subtitle {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: var(--secondary);
-            line-height: 1.2;
-            max-width: 150px;
-        }
+        .lang-switch:hover { background: rgba(255, 255, 255, 0.1); }
 
-        /* Responsive Logo */
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            position: relative; background-color: var(--secondary); color: var(--white);
+            padding: 120px 5%; text-align: center; overflow: hidden; min-height: 85vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 40, 50, 0.75); z-index: 1;
+        }
+        .hero>* { position: relative; z-index: 2; }
+        .hero-bg-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center; opacity: 0; transform: scale(1);
+            transition: opacity 2s ease-in-out, transform 6s linear;
+        }
+        .hero-slide.active { opacity: 1; transform: scale(1.05); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem auto; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); }
+        .hero-buttons { display: flex; gap: 15px; margin-top: 30px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 3; }
+        .hero .btn { border: 2px solid var(--primary); }
+
+        /* --- 5. SECTIONS --- */
+        section { padding: 80px 5%; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.2rem; color: var(--secondary); margin-bottom: 15px; }
+        .section-title .line { width: 80px; height: 4px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+
+        /* --- 6. ABOUT --- */
+        .pro-tip {
+            background-color: #fff0f0; border-left: 5px solid var(--primary);
+            padding: 20px; margin: 20px 0 40px 0; border-radius: 6px; font-style: italic; color: #555;
+        }
+        .mission-vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .mv-card {
+            background: var(--white); padding: 40px 30px; border-radius: 12px;
+            box-shadow: var(--shadow-soft); text-align: center; transition: transform 0.3s ease;
+        }
+        .mv-card:hover { transform: translateY(-5px); }
+        .mv-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+
+        /* Team */
+        .team-section-container { position: relative; max-width: 100%; padding: 0 60px; }
+        .team-scroll-wrapper { width: 100%; overflow-x: auto; white-space: nowrap; padding: 40px 0; scrollbar-width: none; -ms-overflow-style: none; }
+        .team-scroll-wrapper::-webkit-scrollbar { display: none; }
+        .team-grid { display: inline-flex; gap: 30px; }
+        .team-member { min-width: 220px; width: 220px; text-align: center; user-select: none; }
+        .team-img {
+            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+            margin-bottom: 15px; border: 4px solid var(--white); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .team-member:hover .team-img { transform: scale(1.1); border-color: var(--primary); }
+        .team-member h4 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 5px; }
+        .team-member p { font-size: 0.9rem; color: #777; }
+        
+        .scroll-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: var(--white); color: var(--primary); border: 1px solid #eee;
+            width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        .scroll-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .scroll-btn.left { left: 0; }
+        .scroll-btn.right { right: 0; }
+
+        /* --- 7. RESOURCES --- */
+        #resources { background-color: #f0f2f5; }
+        .library-controls { display: flex; justify-content: center; margin-bottom: 40px; }
+        .search-bar { padding: 15px 25px; width: 400px; border: 2px solid #eee; border-radius: 50px; font-size: 1rem; transition: border 0.3s; outline: none; }
+        .search-bar:focus { border-color: var(--primary); }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; justify-content: center; }
+        .resource-card {
+            background: var(--white); border-radius: 12px; overflow: hidden;
+            box-shadow: var(--shadow-soft); transition: var(--transition);
+            display: flex; flex-direction: column; max-width: 500px; width: 100%; margin: 0 auto;
+        }
+        .resource-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+        .card-img {
+            height: 160px; background-color: var(--secondary); display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 3.5rem; position: relative; overflow: hidden; transition: filter 0.3s ease;
+        }
+        .card-img i { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2; }
+        .resource-card:hover .card-img { filter: brightness(1.15) saturate(1.1); }
+        .resource-card:hover .card-img i { transform: scale(1.2) rotate(-5deg); }
+        .card-img::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg); transition: 0.5s; z-index: 1;
+        }
+        .resource-card:hover .card-img::after { left: 150%; transition: 0.7s ease-in-out; }
+        .card-content { padding: 25px; flex-grow: 1; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
+        .card-content p { font-size: 0.95rem; color: #666; }
+        .card-actions { padding: 15px 20px; background: #f8f9fa; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; gap: 10px; flex-wrap: wrap; }
+        .action-btn { font-size: 0.9rem; color: #777; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+        .action-btn.files:hover { color: #4285F4; }
+        .action-btn.whatsapp:hover { color: #25D366; }
+        .action-btn.youtube:hover { color: #FF0000; }
+
+        /* --- 8. VOLUNTEER --- */
+        .hadith-box {
+            background-color: var(--white); padding: 40px; border-left: 5px solid var(--primary);
+            border-radius: 8px; margin: 0 auto 40px auto; max-width: 800px; box-shadow: var(--shadow-soft); text-align: center;
+        }
+        .hadith-text { font-size: 1.25rem; font-style: italic; color: #444; margin: 0; font-family: 'Georgia', serif; }
+        .contribute-actions { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+
+        /* --- 9. CONTACT --- */
+        .contact-container {
+            display: flex; flex-wrap: wrap; gap: 0; max-width: 900px; margin: 0 auto;
+            background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-soft);
+        }
+        .contact-info { flex: 1; min-width: 300px; background: var(--primary); color: var(--white); padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+        .contact-info h3 { font-size: 2rem; margin-bottom: 25px; }
+        .info-item { display: flex; align-items: center; margin-bottom: 20px; font-size: 1.1rem; transition: transform 0.2s ease; }
+        .info-item:hover { transform: translateX(5px); }
+        .info-item i { margin-right: 15px; font-size: 1.3rem; width: 25px; text-align: center; background: rgba(255, 255, 255, 0.1); padding: 8px; border-radius: 6px; transition: background 0.3s ease; }
+        .info-item:hover i { background: rgba(255, 255, 255, 0.2); }
+        .info-item a { text-decoration: underline; opacity: 0.9; transition: opacity 0.2s ease; }
+        .info-item a:hover { opacity: 1; }
+        
+        .feedback-form { flex: 1.5; min-width: 300px; padding: 50px; background: var(--white); box-shadow: none; margin: 0; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--secondary); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem; transition: border 0.3s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); outline: none; }
+        .form-group input:valid:not(:placeholder-shown) { border-color: #28a745; }
+        .form-group input:invalid:not(:placeholder-shown) { border-color: #dc3545; }
+        .char-counter { font-size: 0.85rem; color: #777; text-align: right; margin-top: 5px; }
+        .char-counter.warning { color: #f39c12; font-weight: 600; }
+        .form-status { padding: 15px 20px; border-radius: 8px; margin-top: 20px; display: none; animation: slideDown 0.4s ease; font-size: 0.95rem; line-height: 1.6; }
+        .form-status.success { background-color: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .form-status.error { background-color: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .fa-spinner.fa-spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- 10. FOOTER --- */
+        footer { background: var(--secondary); color: var(--white); padding: 60px 5%; text-align: center; }
+        footer h3 { font-size: 2rem; margin-bottom: 10px; color: var(--white); }
+        .social-links { margin: 30px 0; font-size: 1.8rem; }
+        .social-links a { margin: 0 15px; transition: transform 0.3s, color 0.3s; display: inline-block; color: #ccc; }
+        .social-links a.youtube:hover { color: #FF0000; transform: translateY(-3px); }
+        .social-links a.instagram:hover { color: #E1306C; transform: translateY(-3px); }
+        .social-links a.whatsapp:hover { color: #25D366; transform: translateY(-3px); }
+        .social-links a.facebook:hover { color: #1877F2; transform: translateY(-3px); }
+        .social-links a.telegram:hover { color: #0088cc; transform: translateY(-3px); }
+
+        /* --- 11. RTL SUPPORT (Arabic) --- */
+        html[dir="rtl"] { font-family: 'Tahoma', 'Segoe UI', sans-serif; }
+        html[dir="rtl"] .logo { flex-direction: row; }
+        html[dir="rtl"] .btn { flex-direction: row-reverse; }
+        html[dir="rtl"] .info-item i { margin-right: 0; margin-left: 15px; }
+        html[dir="rtl"] .info-item:hover { transform: translateX(-5px); }
+        html[dir="rtl"] .pro-tip, html[dir="rtl"] .hadith-box { border-left: none; border-right: 5px solid var(--primary); }
+        html[dir="rtl"] .form-group select { background-position: left 12px center; padding-right: 12px; padding-left: 35px; }
+        html[dir="rtl"] .char-counter { text-align: left; }
+        html[dir="rtl"] .form-status { border-left: none; border-right: 4px solid; }
+
+        /* --- 12. RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 15px; padding: 1rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .hero h1 { font-size: 2.2rem; }
+            .team-section-container { padding: 0 10px; }
+            .scroll-btn { display: none; }
+            .contact-container { flex-direction: column; }
+            .contact-info { padding: 30px; }
+            .feedback-form { padding: 30px; }
+            html[dir="rtl"] .nav-container { align-items: center; }
+        }
         @media (max-width: 480px) {
             .logo { gap: 10px; }
             .iss-logo-link img { height: 35px; }
             .ysag-logo-img { height: 40px; }
             .ysag-subtitle { font-size: 0.75rem; }
-        }
-
-        nav ul { display: flex; gap: 20px; }
-        nav a { font-weight: 500; position: relative; padding-bottom: 5px; }
-        nav a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: var(--primary); transition: var(--transition);
-        }
-        nav a:hover::after { width: 100%; }
-
-        .lang-switch {
-            cursor: pointer; border: 1px solid var(--secondary); padding: 5px 10px;
-            border-radius: 4px; font-size: 0.8rem;
-        }
-
-        /* --- HERO SECTION (Slider) --- */
-        .hero {
-            position: relative;
-            background-color: var(--secondary);
-            color: var(--white);
-            padding: 100px 5%;
-            text-align: center;
-            overflow: hidden;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Dark Overlay */
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(44, 62, 80, 0.85); z-index: 1;
-        }
-
-        .hero > * { position: relative; z-index: 2; }
-
-        /* Background Slider */
-        .hero-bg-slider {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
-        }
-        .hero-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-            opacity: 0; transition: opacity 2s ease-in-out;
-        }
-        .hero-slide.active {
-            opacity: 1; transform: scale(1.05);
-            transition: opacity 2s ease-in-out, transform 6s linear;
-        }
-
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem auto; }
-
-        .hero-buttons {
-            display: flex; gap: 15px; margin-top: 30px; justify-content: center;
-            flex-wrap: wrap; position: relative; z-index: 3;
-        }
-
-        .btn {
-            display: inline-block; background: var(--primary); color: var(--white);
-            padding: 10px 25px; border-radius: 5px; transition: var(--transition);
-            border: none; cursor: pointer;
-        }
-        .btn:hover { background: #8b0000; transform: translateY(-2px); }
-        .btn[style*="transparent"] {
-            backdrop-filter: blur(4px); background: rgba(255, 255, 255, 0.1) !important;
-        }
-
-        /* --- SECTIONS GENERIC --- */
-        section { padding: 60px 5%; }
-        .section-title { text-align: center; margin-bottom: 40px; }
-        .section-title h2 { font-size: 2.2rem; color: var(--secondary); margin-bottom: 10px; }
-        .section-title .line { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; }
-
-        /* --- PRO TIPS --- */
-        .pro-tip {
-            background-color: #ffe6e6; border-left: 5px solid var(--primary);
-            padding: 15px; margin: 20px 0; border-radius: 4px; font-style: italic;
-        }
-
-        /* --- ABOUT & TEAM --- */
-        .mission-vision-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
-        .mv-card {
-            background: var(--white); padding: 30px; border-radius: 10px;
-            box-shadow: var(--shadow); text-align: center;
-        }
-        .mv-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
-
-        /* Team Scroll */
-        .team-section-container { position: relative; max-width: 100%; padding: 0 50px; }
-        .team-scroll-wrapper {
-            width: 100%; overflow-x: auto; white-space: nowrap; padding: 30px 0;
-            scrollbar-width: none; -ms-overflow-style: none;
-        }
-        .team-scroll-wrapper::-webkit-scrollbar { display: none; width: 0; background: transparent; }
-        .team-grid { display: inline-flex; gap: 30px; }
-        .team-member { min-width: 200px; width: 200px; text-align: center; user-select: none; }
-        
-        .team-img {
-            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-            margin-bottom: 15px; border: 3px solid var(--primary); background: white;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .team-member:hover .team-img {
-            transform: scale(1.15); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Scroll Buttons */
-        .scroll-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: var(--white); color: var(--primary); border: 2px solid var(--primary);
-            width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem;
-            cursor: pointer; z-index: 10; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .scroll-btn:hover { background: var(--primary); color: var(--white); }
-        .scroll-btn.left { left: 5px; }
-        .scroll-btn.right { right: 5px; }
-
-        /* --- RESOURCES --- */
-        .library-controls { display: flex; justify-content: center; margin-bottom: 30px; gap: 10px; }
-        .search-bar { padding: 10px; width: 300px; border: 1px solid #ddd; border-radius: 20px; }
-        
-        .resource-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; justify-content: center;
-        }
-        .resource-card {
-            background: var(--white); border-radius: 10px; overflow: hidden;
-            box-shadow: var(--shadow); transition: var(--transition);
-            display: flex; flex-direction: column;
-            max-width: 500px; width: 100%; margin: 0 auto;
-        }
-        .resource-card:hover { transform: translateY(-5px); }
-        .card-img {
-            height: 150px; background-color: var(--secondary); display: flex;
-            align-items: center; justify-content: center; color: var(--white); font-size: 3rem;
-        }
-        .card-content { padding: 20px; flex-grow: 1; }
-        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
-        
-        .card-actions {
-            padding: 15px; background: #f1f1f1; display: flex;
-            justify-content: space-around; align-items: center;
-            flex-wrap: wrap; gap: 10px;
-        }
-        .action-btn { font-size: 0.9rem; color: var(--secondary); cursor: pointer; }
-        .action-btn:hover { color: var(--primary); }
-        .action-btn.whatsapp:hover { color: #25D366; }
-
-        /* --- HADITH & CONTRIBUTE --- */
-        .hadith-box {
-            background-color: var(--white);
-            padding: 30px 40px; /* More padding for a clean look */
-            border-left: 5px solid var(--primary); /* Keeps the YSAG accent */
-            border-radius: 8px;
-            margin: 30px auto; 
-            max-width: 800px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        .hadith-text {
-            font-size: 1.2rem; /* Slightly larger for readability */
-            font-style: italic;
-            color: #444; /* Slightly darker text */
-            line-height: 1.8;
-            margin: 0; /* Reset margin since there is no source below it now */
-        }
-        .hadith-source {
-            font-weight: bold; color: var(--primary);
-            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .hadith-icon {
-            color: #eee; font-size: 3rem; position: absolute;
-            top: -10px; left: 10px; z-index: 0;
-        }
-
-        /* --- FEEDBACK --- */
-        .feedback-form {
-            max-width: 600px; margin: 0 auto; background: var(--white);
-            padding: 30px; border-radius: 10px; box-shadow: var(--shadow);
-        }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;
-        }
-
-        footer {
-            background: var(--secondary); color: var(--white);
-            padding: 40px 5%; text-align: center;
-        }
-        .social-links { margin-top: 20px; font-size: 1.5rem; }
-        .social-links a { margin: 0 10px; transition: var(--transition); }
-        .social-links a:hover { color: var(--primary); }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 15px; }
-            nav ul { flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 2rem; }
-            .team-section-container { padding: 0; }
-            .scroll-btn { display: none; }
+            .hero { padding: 80px 5%; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            .contact-info h3 { font-size: 1.5rem; }
+            .info-item { font-size: 1rem; }
         }
     </style>
 </head>
@@ -318,13 +281,16 @@
 
     <header>
         <div class="top-bar">
-            <span id="page-indicator">Current Page: Home</span>
-            <div class="lang-switch" onclick="toggleLanguage()">
+            <span id="page-indicator-wrapper">
+                <span data-i18n="nav.currentPage">Current Page</span>: 
+                <span id="current-section-name" style="font-weight: bold;">Home</span>
+            </span>
+            
+            <div class="lang-switch" onclick="YSAG.toggleLanguage()">
                 <i class="fas fa-globe"></i> English / العربية
             </div>
         </div>
         <div class="nav-container">
-            
             <div class="logo">
                 <a href="https://linktr.ee/issyemen" target="_blank" class="iss-logo-link" title="Visit ISS Yemen">
                     <img src="content/images/ISSYemenLogo.webp" alt="ISS Yemen">
@@ -333,17 +299,18 @@
                 <div class="ysag-brand">
                     <img src="content/images/YSAGLogo.jpeg" alt="YSAG Logo" class="ysag-logo-img">
                     <div class="ysag-text">
-                        <div class="ysag-subtitle">Yemeni Student Academic Group</div>
+                        <div class="ysag-subtitle" data-i18n="ysag_subtitle">Yemeni Student Academic Group</div>
                     </div>
                 </div>
             </div>
 
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#resources">E-Library & Courses</a></li>
-                    <li><a href="#contribute">Volunteer</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#resources" data-i18n="nav.resources">E-Library & Courses</a></li>
+                    <li><a href="#contribute" data-i18n="nav.volunteer">Volunteer</a></li>
+                    <li><a href="#feedback" data-i18n="nav.feedback">Feedback</a></li>
                 </ul>
             </nav>
         </div>
@@ -352,11 +319,13 @@
     <section id="home" class="hero">
         <h1>Knowledge Shared is Knowledge Doubled</h1>
         <p>Developing, consolidating, and disseminating knowledge among all Yemeni students.</p>
-        </section>
+
+        <div class="hero-buttons"></div>
+    </section>
 
     <section id="about">
         <div class="section-title">
-            <h2>Who We Are</h2>
+            <h2 data-i18n="nav.about">Who We Are</h2>
             <div class="line"></div>
         </div>
 
@@ -365,33 +334,18 @@
         </div>
 
         <div class="mission-vision-grid">
-            <div class="mv-card">
-                <i class="fas fa-eye"></i>
-                <h3>Our Vision</h3>
-                <p>To establish a new generation of highly skilled students who are able to compete with future industry and life requirements.</p>
             </div>
-            <div class="mv-card">
-                <i class="fas fa-bullseye"></i>
-                <h3>Our Mission</h3>
-                <p>Prepare students for industry, provide huge information resources, and connect students to research fields.</p>
-            </div>
-            <div class="mv-card">
-                <i class="fas fa-users"></i>
-                <h3>What is YSAG?</h3>
-                <p>We provide high-quality explained videos, remedial classes, and comprehensive E-learning libraries.</p>
-            </div>
-        </div>
 
-        <div style="margin-top: 60px; text-align: center;">
-            <h3>Meet the Team</h3>
-            <p style="margin-bottom: 30px;">The dedicated students behind the screen.</p>
+        <div id="team" style="margin-top: 80px; text-align: center; scroll-margin-top: 140px;">
+            <h3 data-i18n="nav.team">Meet the Team</h3>
+            <p style="margin-bottom: 30px;" data-i18n="team.subtitle">The dedicated students behind the screen.</p>
 
             <div class="team-section-container">
-                <button class="scroll-btn left" onclick="scrollTeam('left')" onmouseenter="pauseTeamScroll()" onmouseleave="resumeTeamScroll()">
+                <button class="scroll-btn left" onclick="YSAG.teamScroll.scroll('left')" onmouseenter="YSAG.teamScroll.pause()" onmouseleave="YSAG.teamScroll.resume()">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="team-scroll-wrapper" id="teamScrollContainer" onmouseenter="pauseTeamScroll()" onmouseleave="resumeTeamScroll()">
+                <div class="team-scroll-wrapper" id="teamScrollContainer" onmouseenter="YSAG.teamScroll.pause()" onmouseleave="YSAG.teamScroll.resume()">
                     <div class="team-grid">
                         <div style="width: 100%; text-align: center;">
                             <i class="fas fa-spinner fa-spin"></i> Loading Team...
@@ -399,80 +353,130 @@
                     </div>
                 </div>
 
-                <button class="scroll-btn right" onclick="scrollTeam('right')" onmouseenter="pauseTeamScroll()" onmouseleave="resumeTeamScroll()">
+                <button class="scroll-btn right" onclick="YSAG.teamScroll.scroll('right')" onmouseenter="YSAG.teamScroll.pause()" onmouseleave="YSAG.teamScroll.resume()">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
         </div>
     </section>
 
-    <section id="resources" style="background-color: #f0f2f5;">
+    <section id="resources">
         <div class="section-title">
-            <h2>Academic Resources</h2>
+            <h2 data-i18n="nav.resources">Academic Resources</h2>
             <div class="line"></div>
-            <p style="margin-top: 10px;">One stop for Files, Books, and Video Lectures.</p>
+            <p>One stop for Files, Books, and Video Lectures.</p>
         </div>
 
         <div class="library-controls">
-            <input type="text" id="searchInput" class="search-bar" placeholder="Search courses (e.g., Civil, CS)..." onkeyup="filterResources()">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search courses (e.g., Civil, CS)..." onkeyup="YSAG.filterResources()">
         </div>
 
         <div class="resource-grid" id="resourceGrid">
             </div>
     </section>
 
-    <section id="contribute" style="background-color: #f9f9f9;">
+    <section id="contribute">
         <div class="section-title">
-            <h2>Volunteer & Contribute</h2>
+            <h2 data-i18n="volunteer.title">Volunteer & Contribute</h2>
             <div class="line"></div>
         </div>
 
         <div class="hadith-box">
-            <p class="hadith-text">
-                "The Messenger of Allah (peace and blessings be upon him) said: Indeed, Allah, His angels, the inhabitants of the heavens and the earth - even the ant in its hole, and even the fish - send blessings upon the one who teaches people goodness."
+            <p class="hadith-text" data-i18n="volunteer.hadith">
+                ...
             </p>
         </div>
 
-        <div style="text-align: center; max-width: 700px; margin: 40px auto 0 auto;">
+        <div style="text-align: center; max-width: 750px; margin: 40px auto 0 auto;">
             <p style="margin-bottom: 10px; font-size: 1.1rem;">
-                <strong>Ready to make an impact?</strong>
+                <strong data-i18n="volunteer.cta">Ready to make an impact?</strong>
             </p>
-            <p style="margin-bottom: 30px; color: #666;">
+            <p style="margin-bottom: 30px; color: #666; padding: 0 10px;" data-i18n="volunteer.desc" data-html="true">
                 We are always looking for students to <strong>hold remedial classes (online/F2F)</strong> or <strong>donate textbooks/past year tests</strong> to the library.
             </p>
-            
-            <button class="btn" style="margin: 5px;">Upload Materials</button> 
-            <button class="btn" style="background: var(--secondary); margin: 5px;">Register as Tutor</button>
+
+            <div class="contribute-actions">
+                <a href="https://forms.google.com/YOUR_UPLOAD_FORM" target="_blank" class="btn">
+                    <i class="fas fa-cloud-upload-alt"></i> <span data-i18n="volunteer.btnUpload">Upload Materials</span>
+                </a>
+
+                <a href="https://forms.google.com/YOUR_TUTOR_FORM" target="_blank" class="btn" style="background: var(--secondary);">
+                    <i class="fas fa-chalkboard-teacher"></i> <span data-i18n="volunteer.btnTutor">Volunteer to Teach</span>
+                </a>
+
+                <a href="https://wa.me/60111111111" target="_blank" class="btn outline">
+                    <i class="fas fa-book"></i> <span data-i18n="volunteer.btnDonate">Donate Textbooks</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <section id="feedback">
         <div class="section-title">
-            <h2>Feedback & Contact</h2>
+            <h2 data-i18n="contact.title">Feedback & Contact</h2>
             <div class="line"></div>
-            <p>We need your voice to improve YSAG.</p>
+            <p data-i18n="contact.subtitle">We need your voice to improve YSAG.</p>
         </div>
 
-        <div class="feedback-form">
-            <form onsubmit="event.preventDefault(); alert('Thank you for your feedback!');">
-                <div class="form-group">
-                    <label>Name (Optional)</label>
-                    <input type="text" placeholder="Your name">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3 data-i18n="contact.infoTitle">Get in Touch</h3>
+                <p style="margin-bottom: 30px; opacity: 0.9;" data-i18n="contact.infoDesc">
+                    Whether you have a question about resources, want to volunteer, or want to collaborate, our inbox is open.
+                </p>
+
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:ysag.utm@gmail.com">ysag.utm@gmail.com</a>
                 </div>
-                <div class="form-group">
-                    <label>Topic</label>
-                    <select>
-                        <option>Website Suggestion</option>
-                        <option>Academic Content Issue</option>
-                        <option>General Inquiry</option>
-                    </select>
+
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>UTM, Johor Bahru, Malaysia</span>
                 </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea rows="5" placeholder="Tell us what we can do better..."></textarea>
+
+                <div class="info-item">
+                    <i class="fas fa-users"></i>
+                    <span data-i18n="contact.studentRun">Student-run organization</span>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Send Feedback</button>
-            </form>
+            </div>
+
+            <div class="feedback-form">
+                <form id="feedbackForm" novalidate>
+                    <div class="form-group">
+                        <label data-i18n="form.nameLabel">Name (Optional)</label>
+                        <input type="text" name="user_name" id="userName" data-i18n-placeholder="form.namePlaceholder" placeholder="Your full name" maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="form.emailLabel">Your Email <span style="color: #dc3545;">*</span></label>
+                        <input type="email" name="user_email" id="userEmail" data-i18n-placeholder="form.emailPlaceholder" placeholder="name@example.com" required
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <small style="color: #666; font-size: 0.85rem;" data-i18n="form.emailHint">We'll never share your email with anyone.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="form.topicLabel">Topic <span style="color: #dc3545;">*</span></label>
+                        <select name="topic" id="topic" required>
+                            <option value="">Select a topic...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="form.messageLabel">Message <span style="color: #dc3545;">*</span></label>
+                        <textarea name="message" id="message" rows="5" data-i18n-placeholder="form.messagePlaceholder" placeholder="Tell us what we can do better..." required minlength="10" maxlength="1000"></textarea>
+                        <div class="char-counter" id="charCounter">0 / 1000 characters</div>
+                    </div>
+
+                    <input type="hidden" name="timestamp" id="timestamp">
+
+                    <button type="submit" class="btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> <span data-i18n="form.btnSend">Send Message</span>
+                    </button>
+
+                    <div id="formStatus" class="form-status"></div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -480,27 +484,21 @@
         <h3>YSAG</h3>
         <p>Yemeni Student Academic Group - UTM ISS</p>
         <p>Johor Bahru, Johor, Malaysia</p>
-
-        <div class="social-links">
-            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
-        </div>
-
+        <div class="social-links"></div>
         <div class="copyright" style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
             &copy; 2025 YSAG. Non-profit Educational Organization.
         </div>
     </footer>
 
     <script src="content-loader.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script>
-        // 1. Sticky Navbar Active State Logic
+        // 1. Sticky Navbar Active State
         window.addEventListener('scroll', function () {
             let current = '';
             const sections = document.querySelectorAll('section');
-            const indicator = document.getElementById('page-indicator');
+            const nameSpan = document.getElementById('current-section-name');
 
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -510,43 +508,87 @@
             });
 
             if (current) {
-                // Capitalize first letter
-                const title = current.charAt(0).toUpperCase() + current.slice(1);
-                // Handle manual overrides for cleaner text
-                const displayTitle = (current === 'contribute') ? 'Volunteer' : title;
-                indicator.innerText = "Current Page: " + displayTitle;
+                // This ensures it matches the current language (e.g., "Home" vs "الرئيسية")
+                const activeLink = document.querySelector(`nav a[href="#${current}"]`);
+                if (activeLink) {
+                    nameSpan.innerText = activeLink.innerText;
+                }
             }
         });
 
-        // 2. Simple Search Filter
-        function filterResources() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const cards = document.getElementsByClassName('resource-card');
+        // 2. EmailJS Config
+        const EMAILJS_CONFIG = {
+            publicKey: 'lguXTr5laWP5p87_9',
+            serviceId: 'service_yye4od7',
+            templateId: 'template_58qf3pv'
+        };
 
-            for (let i = 0; i < cards.length; i++) {
-                let category = cards[i].getAttribute('data-category');
-                let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
+        (function () {
+            emailjs.init(EMAILJS_CONFIG.publicKey);
+        })();
 
-                if (category.indexOf(filter) > -1 || title.indexOf(filter) > -1) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
+        // 3. Form Logic
+        const messageField = document.getElementById('message');
+        const charCounter = document.getElementById('charCounter');
+
+        messageField.addEventListener('input', function () {
+            const count = this.value.length;
+            charCounter.textContent = `${count} / 1000 characters`;
+            if (count > 900) charCounter.classList.add('warning');
+            else charCounter.classList.remove('warning');
+        });
+
+        document.getElementById('feedbackForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const formStatus = document.getElementById('formStatus');
+            const form = this;
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
             }
-        }
 
-        // 3. Language Toggle (Mockup)
-        function toggleLanguage() {
-            const body = document.body;
-            if (body.getAttribute('dir') === 'rtl') {
-                body.setAttribute('dir', 'ltr');
-                alert("Switched to English");
-            } else {
-                body.setAttribute('dir', 'rtl');
-                alert("Switched to Arabic (Mockup functionality)");
-            }
-        }
+            document.getElementById('timestamp').value = new Date().toLocaleString();
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            formStatus.style.display = 'none';
+
+            emailjs.sendForm(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, form)
+                .then(function (response) {
+                    formStatus.className = 'form-status success';
+                    formStatus.innerHTML = `<i class="fas fa-check-circle"></i> <strong>Message sent successfully!</strong><br>Thank you for your feedback.`;
+                    formStatus.style.display = 'block';
+                    form.reset();
+                    charCounter.textContent = '0 / 1000 characters';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    setTimeout(() => { formStatus.style.display = 'none'; }, 8000);
+                }, function (error) {
+                    console.error('FAILED...', error);
+                    let errorMessage = 'Please try again or email us directly.';
+                    if (error.text && error.text.includes('quota')) errorMessage = 'Monthly limit reached. Please email us directly.';
+                    
+                    formStatus.className = 'form-status error';
+                    formStatus.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <strong>Oops!</strong><br>${errorMessage}<br><a href="mailto:ysag.utm@gmail.com">Email us: ysag.utm@gmail.com</a>`;
+                    formStatus.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                });
+        });
+
+        // 4. Input Visual Feedback
+        const inputs = document.querySelectorAll('#feedbackForm input, #feedbackForm textarea, #feedbackForm select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function () {
+                if (this.validity.valid) this.style.borderColor = '#28a745';
+                else if (this.value) this.style.borderColor = '#dc3545';
+            });
+            input.addEventListener('input', function () {
+                if (this.validity.valid) this.style.borderColor = '#28a745';
+                else this.style.borderColor = '#ddd';
+            });
+        });
     </script>
 </body>
 </html>
