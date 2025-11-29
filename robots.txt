@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ysag.github.io/ysag-website/sitemap.xml

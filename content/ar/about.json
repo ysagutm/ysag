@@ -21,47 +21,47 @@
     {
       "name": "زياد مارش",
       "role": "رئيس اللجنة",
-      "image": "content/images/Zeyad-Maresh(Leader).jpg"
+      "image": "content/images/Zeyad-Maresh(Leader).webp"
     },
     {
       "name": "صخر القتبي",
       "role": "نائب الرئيس",
-      "image": "content/images/Sakhr-AlQatabi(Vice).jpg"
+      "image": "content/images/Sakhr-AlQatabi(Vice).webp"
     },
     {
       "name": "عمار عبدالرحمن",
       "role": "رئيس قسم الحاسوب",
-      "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).jpg"
+      "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).webp"
     },
     {
       "name": "محمد آدم",
       "role": "رئيس قسم المدني",
-      "image": "content/images/Mohammed-Adam(Ysag-Civil).jpg"
+      "image": "content/images/Mohammed-Adam(Ysag-Civil).webp"
     },
     {
       "name": "نوح الفقيه",
       "role": "رئيس قسم الكهرباء",
-      "image": "content/images/Nooh-AlFaqih(Ysag-Electric).jpg"
+      "image": "content/images/Nooh-AlFaqih(Ysag-Electric).webp"
     },
     {
       "name": "إبراهيم الجبلي",
       "role": "رئيس قسم الميكانيك",
-      "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).jpg"
+      "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).webp"
     },
     {
       "name": "أنور منصور",
       "role": "رئيس قسم الكيمياء",
-      "image": "content/images/Anwar-Mansoor(Ysag-chemical).jpg"
+      "image": "content/images/Anwar-Mansoor(Ysag-chemical).webp"
     },
     {
       "name": "عبدالله باحنان",
       "role": "رئيس قسم هندسة الطب الحيوي",
-      "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).jpg"
+      "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).webp"
     },
     {
       "name": "بدر أنس",
       "role": "رئيس قسم التحضيري",
-      "image": "content/images/Badr-Anas(Ysag-foundation).jpg"
+      "image": "content/images/Badr-Anas(Ysag-foundation).webp"
     }
   ]
 }
