@@ -21,47 +21,47 @@
     {
       "name": "Zeyad Maresh",
       "role": "Leader",
-      "image": "content/images/Zeyad-Maresh(Leader).jpg"
+      "image": "content/images/Zeyad-Maresh(Leader).webp"
     },
     {
       "name": "Sakhr AlQatabi",
       "role": "Vice Leader",
-      "image": "content/images/Sakhr-AlQatabi(Vice).jpg"
+      "image": "content/images/Sakhr-AlQatabi(Vice).webp"
     },
     {
       "name": "Mohammed Adam",
       "role": "Civil Head",
-      "image": "content/images/Mohammed-Adam(Ysag-Civil).jpg"
+      "image": "content/images/Mohammed-Adam(Ysag-Civil).webp"
     },
     {
       "name": "Nooh AlFaqih",
       "role": "Electric Head",
-      "image": "content/images/Nooh-AlFaqih(Ysag-Electric).jpg"
+      "image": "content/images/Nooh-AlFaqih(Ysag-Electric).webp"
     },
     {
       "name": "Ammar Abdulrahman",
       "role": "Computer Head",
-      "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).jpg"
+      "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).webp"
     },
     {
       "name": "Ibrahim AlJabali",
       "role": "Mechanic Head",
-      "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).jpg"
+      "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).webp"
     },
     {
       "name": "Anwar Mansoor",
       "role": "Chemical Head",
-      "image": "content/images/Anwar-Mansoor(Ysag-chemical).jpg"
+      "image": "content/images/Anwar-Mansoor(Ysag-chemical).webp"
     },
     {
       "name": "Abdullah Ba-Hanan",
       "role": "Biomedical Head",
-      "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).jpg"
+      "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).webp"
     },
     {
       "name": "Badr Anas",
       "role": "Foundation Head",
-      "image": "content/images/Badr-Anas(Ysag-foundation).jpg"
+      "image": "content/images/Badr-Anas(Ysag-foundation).webp"
     }
   ]
 }

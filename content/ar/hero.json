@@ -2,15 +2,27 @@
   "title": "زكاة العلم نشره",
   "description": "تطوير وترسيخ ونشر المعرفة بين جميع الطلاب.",
   "backgroundImages": [
-    "content/images/Class-1.webp",
-    "content/images/Class-2.webp",
-    "content/images/Class-3.webp",
-    "content/images/Class-4.webp",
-    "content/images/Class-5.webp",
-    "content/images/Class-6.webp",
-    "content/images/Class-7.webp",
-    "content/images/Class-8.webp"
-    ],
+    {
+      "desktop": "content/images/Class-1.webp",
+      "mobile": "content/images/Class-1-potrait.webp"
+    },
+    {
+      "desktop": "content/images/Class-2.webp",
+      "mobile": "content/images/Class-2-potrait.webp"
+    },
+    {
+      "desktop": "content/images/Class-3.webp",
+      "mobile": "content/images/Class-3-potrait.webp"
+    },
+    {
+      "desktop": "content/images/Class-4.webp",
+      "mobile": "content/images/Class-4-potrait.webp"
+    },
+    {
+      "desktop": "content/images/Class-5.webp",
+      "mobile": "content/images/Class-5-potrait.webp"
+    }
+  ],
   "buttons": [
     {
       "text": "استكشف المصادر",

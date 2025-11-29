@@ -4,78 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YSAG - Yemeni Student Academic Group</title>
+    
+    <title>YSAG - Yemeni Student Academic Group | UTM Malaysia</title>
+    <meta name="description" content="YSAG provides academic resources, e-library, past papers, and study materials for Yemeni students at UTM Malaysia. Free courses for Engineering students.">
+    <meta name="keywords" content="YSAG, Yemeni Students, UTM, Academic Resources, E-Library, Engineering Notes, Study Materials, Malaysia">
+    <meta name="author" content="YSAG - Yemeni Student Academic Group">
+    
+    <meta property="og:title" content="YSAG - Yemeni Student Academic Group">
+    <meta property="og:description" content="Free academic resources and study materials for Yemeni students at UTM Malaysia">
+    <meta property="og:image" content="https://ysag.github.io/ysag-website/content/images/YSAGLogo.jpeg">
+    <meta property="og:url" content="https://ysag.github.io/ysag-website/">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YSAG - Yemeni Student Academic Group">
+    <meta name="twitter:description" content="Free academic resources for Yemeni students at UTM">
+    <meta name="twitter:image" content="https://ysag.github.io/ysag-website/content/images/YSAGLogo.jpeg">
+    
+    <link rel="canonical" href="https://ysag.github.io/ysag-website/">
+    
+    <link rel="icon" type="image/jpeg" href="content/images/YSAGLogo.jpeg">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. RESET & VARIABLES --- */
+        /* =========================================
+           1. RESET & VARIABLES
+           ========================================= */
         :root {
-            --primary: #B22222;
-            --secondary: #1a1a1a;
-            --secondary-light: #333;
-            --accent: #ecf0f1;
-            --text: #333;
-            --white: #fff;
+            --primary: #B22222;       /* YSAG Red */
+            --secondary: #1a1a1a;     /* Logo Black/Dark Grey */
+            --secondary-light: #333;  /* For hover states */
+            --accent: #ecf0f1;        /* Light Grey */
+            --text: #333;             /* Body Text */
+            --white: #ffffff;
             --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 120px; /* Buffer for sticky header */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6; color: var(--text); background-color: #fcfcfc;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #fcfcfc;
         }
 
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* --- 2. BUTTONS --- */
+        /* =========================================
+           2. GLOBAL BUTTONS
+           ========================================= */
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
             background: var(--primary); color: var(--white);
-            padding: 12px 28px; border-radius: 6px; transition: var(--transition);
-            border: none; cursor: pointer; font-weight: 600; font-size: 1rem;
+            padding: 12px 28px; border-radius: 6px;
+            transition: var(--transition); border: none; cursor: pointer;
+            font-weight: 600; font-size: 1rem;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .btn:hover { background: #8b0000; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3); }
+
+        .btn:hover {
+            background: #8b0000; transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important;
+        }
+
+        .btn.outline {
+            background: transparent; border: 2px solid var(--secondary);
+            color: var(--secondary); text-shadow: none;
+        }
+        .btn.outline:hover {
+            background: var(--secondary); color: var(--white);
+        }
         
-        .btn.outline { background: transparent; border: 2px solid var(--secondary); color: var(--secondary); text-shadow: none; }
-        .btn.outline:hover { background: var(--secondary); color: var(--white); }
-        
+        /* Glass Effect for Hero Buttons */
         .btn[style*="transparent"] {
             border: 2px solid var(--white); backdrop-filter: blur(5px);
             background: rgba(255, 255, 255, 0.15) !important;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         }
-        .btn[style*="transparent"]:hover { background: var(--white) !important; color: var(--text); text-shadow: none; }
-        
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-
-        /* --- 3. HEADER & NAV --- */
-        header {
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 1000;
+        .btn[style*="transparent"]:hover {
+            background: var(--white) !important; color: var(--text); text-shadow: none;
         }
+
+        /* =========================================
+           3. HEADER & NAVIGATION
+           ========================================= */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
         .top-bar {
             background: var(--secondary); color: var(--white);
-            padding: 0.5rem 5%; font-size: 0.85rem; display: flex;
-            justify-content: space-between; align-items: center; letter-spacing: 0.5px;
+            padding: 0.5rem 5%; font-size: 0.85rem;
+            display: flex; justify-content: space-between; align-items: center;
+            letter-spacing: 0.5px;
         }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
-        
-        .logo { display: flex; align-items: center; gap: 15px; }
-        .iss-logo-link img { height: 50px; width: auto; transition: transform 0.3s ease; display: block; }
-        .iss-logo-link:hover img { transform: scale(1.1); }
-        .logo-divider { height: 40px; width: 2px; background-color: #e0e0e0; border-radius: 2px; }
-        .ysag-brand { display: flex; align-items: center; gap: 12px; }
-        .ysag-logo-img { height: 55px; width: auto; }
-        .ysag-text { display: flex; align-items: center; }
-        .ysag-subtitle { font-size: 0.95rem; font-weight: 700; color: var(--secondary); line-height: 1.2; max-width: 150px; }
 
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%;
+        }
+
+        /* Logo Area */
+        .logo { display: flex; align-items: center; gap: 15px; }
+
+        /* THE NEW LOGO CONTAINER (The White Sticker) */
+        .logo-wrapper {
+            width: 54px; height: 54px; /* Global Desktop Size */
+            background: var(--white);
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            overflow: hidden; /* Cuts off corners */
+        }
+
+        /* THE IMAGE INSIDE (Global Default) */
+        .logo-wrapper img {
+            /* 65% is very safe for desktop sizes */
+            width: 75%; 
+            height: 75%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .iss-logo-link:hover .logo-wrapper { transform: scale(1.1); }
+
+        .logo-divider {
+            height: 40px; width: 2px; background-color: #e0e0e0; border-radius: 2px;
+        }
+
+        .ysag-brand { display: flex; align-items: center; gap: 12px; }
+        .ysag-text { display: flex; align-items: center; }
+        
+        .ysag-subtitle {
+            font-size: 0.95rem; font-weight: 700; color: var(--secondary);
+            line-height: 1.2; max-width: 150px;
+        }
+
+        /* Navigation Links */
         nav ul { display: flex; gap: 25px; }
-        nav a { font-weight: 500; position: relative; padding-bottom: 5px; color: var(--secondary); }
+        nav a {
+            font-weight: 500; position: relative; padding-bottom: 5px; color: var(--secondary);
+        }
         nav a::after {
             content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
             background-color: var(--primary); transition: var(--transition);
@@ -89,41 +176,73 @@
         }
         .lang-switch:hover { background: rgba(255, 255, 255, 0.1); }
 
-        /* --- 4. HERO SECTION --- */
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
         .hero {
             position: relative; background-color: var(--secondary); color: var(--white);
-            padding: 120px 5%; text-align: center; overflow: hidden; min-height: 85vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 120px 5%; text-align: center; overflow: hidden;
+            min-height: 85vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
         }
+
+        /* Dark Overlay */
         .hero::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(30, 40, 50, 0.75); z-index: 1;
         }
-        .hero>* { position: relative; z-index: 2; }
+        .hero > * { position: relative; z-index: 2; }
+
+        /* Background Slider */
         .hero-bg-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .hero-slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center; opacity: 0; transform: scale(1);
+            background-size: cover; background-position: center;
+            opacity: 0; transform: scale(1);
             transition: opacity 2s ease-in-out, transform 6s linear;
         }
         .hero-slide.active { opacity: 1; transform: scale(1.05); }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
-        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem auto; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); }
-        .hero-buttons { display: flex; gap: 15px; margin-top: 30px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 3; }
+
+        /* Typography */
+        .hero h1 {
+            font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .hero p {
+            font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem auto;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Hero Buttons */
+        .hero-buttons {
+            display: flex; gap: 15px; margin-top: 30px;
+            justify-content: center; flex-wrap: wrap; position: relative; z-index: 3;
+        }
         .hero .btn { border: 2px solid var(--primary); }
 
-        /* --- 5. SECTIONS --- */
+        /* =========================================
+           5. SECTIONS (Generic)
+           ========================================= */
         section { padding: 80px 5%; }
         .section-title { text-align: center; margin-bottom: 50px; }
         .section-title h2 { font-size: 2.2rem; color: var(--secondary); margin-bottom: 15px; }
-        .section-title .line { width: 80px; height: 4px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+        .section-title .line {
+            width: 80px; height: 4px; background: var(--primary);
+            margin: 0 auto; border-radius: 2px;
+        }
 
-        /* --- 6. ABOUT --- */
+        /* =========================================
+           6. ABOUT & TEAM
+           ========================================= */
         .pro-tip {
             background-color: #fff0f0; border-left: 5px solid var(--primary);
-            padding: 20px; margin: 20px 0 40px 0; border-radius: 6px; font-style: italic; color: #555;
+            padding: 20px; margin: 20px 0 40px 0; border-radius: 6px;
+            font-style: italic; color: #555;
         }
-        .mission-vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+        .mission-vision-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
         .mv-card {
             background: var(--white); padding: 40px 30px; border-radius: 12px;
             box-shadow: var(--shadow-soft); text-align: center; transition: transform 0.3s ease;
@@ -131,150 +250,569 @@
         .mv-card:hover { transform: translateY(-5px); }
         .mv-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
 
-        /* Team */
-        .team-section-container { position: relative; max-width: 100%; padding: 0 60px; }
-        .team-scroll-wrapper { width: 100%; overflow-x: auto; white-space: nowrap; padding: 40px 0; scrollbar-width: none; -ms-overflow-style: none; }
-        .team-scroll-wrapper::-webkit-scrollbar { display: none; }
-        .team-grid { display: inline-flex; gap: 30px; }
-        .team-member { min-width: 220px; width: 220px; text-align: center; user-select: none; }
-        .team-img {
-            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
-            margin-bottom: 15px; border: 4px solid var(--white); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Team Carousel */
+        .team-section-container { 
+            position: relative; 
+            max-width: 100%; 
+            padding: 0 60px; 
         }
-        .team-member:hover .team-img { transform: scale(1.1); border-color: var(--primary); }
-        .team-member h4 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 5px; }
-        .team-member p { font-size: 0.9rem; color: #777; }
-        
-        .scroll-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: var(--white); color: var(--primary); border: 1px solid #eee;
-            width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;
-            display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-        .scroll-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
-        .scroll-btn.left { left: 0; }
-        .scroll-btn.right { right: 0; }
 
-        /* --- 7. RESOURCES --- */
-        #resources { background-color: #f0f2f5; }
+        .team-scroll-wrapper {
+            width: 100%; 
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+            cursor: grab;
+            touch-action: none;
+        }
+        .team-scroll-wrapper:active {
+            cursor: grabbing;
+        }
+        .team-scroll-wrapper::-webkit-scrollbar { display: none; }
+        
+        .team-grid {
+            display: inline-flex;
+            gap: 30px;
+            flex-wrap: nowrap;
+            
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+            
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+       .team-member { 
+            min-width: 220px; 
+            width: 220px; 
+            text-align: center; 
+            user-select: none;
+            
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .team-scroll-wrapper, 
+        .team-grid {
+            direction: ltr !important; 
+        }
+                
+        .team-img {
+            width: 140px; 
+            height: 140px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            margin: 0 auto 15px auto; /* Center the image */
+            display: block; /* Prevent inline spacing issues */
+            border: 4px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            
+            image-rendering: -webkit-optimize-contrast; /* Chrome/Safari */
+            image-rendering: crisp-edges; /* Firefox fallback */
+            
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        border-color 0.3s ease;
+        }
+/* Hover effect - Now won't cause blur */
+.team-member:hover .team-img { 
+    transform: scale(1.1) translateZ(0); /* Keep translateZ during scale */
+    border-color: var(--primary); 
+}
+
+.team-member h4 { 
+    font-size: 1.1rem; 
+    color: var(--secondary); 
+    margin-bottom: 5px; 
+    
+    /* FIX #8: Stabilize text rendering */
+    transform: translateZ(0);
+}
+
+.team-member p { 
+    font-size: 0.9rem; 
+    color: #777; 
+    
+    /* FIX #9: Stabilize text rendering */
+    transform: translateZ(0);
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%);
+    background: var(--white); 
+    color: var(--primary); 
+    border: 1px solid #eee;
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    font-size: 1.2rem;
+    cursor: pointer; 
+    z-index: 10; 
+    transition: var(--transition);
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-btn:hover { 
+    background: var(--primary); 
+    color: var(--white); 
+    border-color: var(--primary); 
+}
+
+.scroll-btn.left { left: 0; }
+.scroll-btn.right { right: 0; }
+
+        /* =========================================
+           7. RESOURCES (Cards)
+           ========================================= */
+        #resources { background-color: #f0f2f5; } /* Distinct BG Color */
+        
         .library-controls { display: flex; justify-content: center; margin-bottom: 40px; }
-        .search-bar { padding: 15px 25px; width: 400px; border: 2px solid #eee; border-radius: 50px; font-size: 1rem; transition: border 0.3s; outline: none; }
+        .search-bar {
+            padding: 15px 25px; width: 400px; border: 2px solid #eee;
+            border-radius: 50px; font-size: 1rem; transition: border 0.3s; outline: none;
+        }
         .search-bar:focus { border-color: var(--primary); }
-        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; justify-content: center; }
+
+        .resource-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; justify-content: center;
+        }
         .resource-card {
             background: var(--white); border-radius: 12px; overflow: hidden;
             box-shadow: var(--shadow-soft); transition: var(--transition);
             display: flex; flex-direction: column; max-width: 500px; width: 100%; margin: 0 auto;
         }
         .resource-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+
+        /* Interactive Card Image */
         .card-img {
-            height: 160px; background-color: var(--secondary); display: flex; align-items: center; justify-content: center;
-            color: var(--white); font-size: 3.5rem; position: relative; overflow: hidden; transition: filter 0.3s ease;
+            height: 160px; background-color: var(--secondary); display: flex;
+            align-items: center; justify-content: center; color: var(--white);
+            font-size: 3.5rem; position: relative; overflow: hidden; transition: filter 0.3s ease;
         }
         .card-img i { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2; }
         .resource-card:hover .card-img { filter: brightness(1.15) saturate(1.1); }
         .resource-card:hover .card-img i { transform: scale(1.2) rotate(-5deg); }
+        
+        /* Shine Effect */
         .card-img::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
             transform: skewX(-25deg); transition: 0.5s; z-index: 1;
         }
         .resource-card:hover .card-img::after { left: 150%; transition: 0.7s ease-in-out; }
+
         .card-content { padding: 25px; flex-grow: 1; }
         .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
         .card-content p { font-size: 0.95rem; color: #666; }
-        .card-actions { padding: 15px 20px; background: #f8f9fa; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; gap: 10px; flex-wrap: wrap; }
-        .action-btn { font-size: 0.9rem; color: #777; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
-        .action-btn.files:hover { color: #4285F4; }
-        .action-btn.whatsapp:hover { color: #25D366; }
-        .action-btn.youtube:hover { color: #FF0000; }
 
-        /* --- 8. VOLUNTEER --- */
+        /* Card Actions */
+        .card-actions {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            
+            /* CHANGE THIS LINE: */
+            justify-content: center; 
+            
+            align-items: center;
+            border-top: 1px solid #eee;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            font-size: 0.9rem; color: #777; cursor: pointer; font-weight: 600;
+            display: flex; align-items: center; gap: 5px; transition: color 0.2s;
+        }
+        
+        /* Reset button styles for Video button */
+        button.action-btn { background: none; border: none; padding: 0; font-family: inherit; font-size: inherit; }
+        
+        /* Brand Colors */
+        .action-btn.files:hover { color: #4285F4; } /* Blue */
+        .action-btn.whatsapp:hover { color: #25D366; } /* Green */
+        .action-btn.youtube:hover { color: #FF0000; } /* Red */
+
+        /* =========================================
+           8. VOLUNTEER & CONTRIBUTE
+           ========================================= */
         .hadith-box {
             background-color: var(--white); padding: 40px; border-left: 5px solid var(--primary);
-            border-radius: 8px; margin: 0 auto 40px auto; max-width: 800px; box-shadow: var(--shadow-soft); text-align: center;
+            border-radius: 8px; margin: 0 auto 40px auto; max-width: 800px;
+            box-shadow: var(--shadow-soft); text-align: center;
         }
-        .hadith-text { font-size: 1.25rem; font-style: italic; color: #444; margin: 0; font-family: 'Georgia', serif; }
-        .contribute-actions { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .hadith-text {
+            font-size: 1.25rem; font-style: italic; color: #444; margin: 0; font-family: 'Georgia', serif;
+        }
+        .contribute-actions {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;
+        }
 
-        /* --- 9. CONTACT --- */
+        /* =========================================
+           9. CONTACT (Split Form)
+           ========================================= */
         .contact-container {
             display: flex; flex-wrap: wrap; gap: 0; max-width: 900px; margin: 0 auto;
-            background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-soft);
+            background: var(--white); border-radius: 12px; overflow: hidden;
+            box-shadow: var(--shadow-soft);
         }
-        .contact-info { flex: 1; min-width: 300px; background: var(--primary); color: var(--white); padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+        .contact-info {
+            flex: 1; min-width: 300px; background: var(--primary); color: var(--white);
+            padding: 50px; display: flex; flex-direction: column; justify-content: center;
+        }
         .contact-info h3 { font-size: 2rem; margin-bottom: 25px; }
-        .info-item { display: flex; align-items: center; margin-bottom: 20px; font-size: 1.1rem; transition: transform 0.2s ease; }
-        .info-item:hover { transform: translateX(5px); }
-        .info-item i { margin-right: 15px; font-size: 1.3rem; width: 25px; text-align: center; background: rgba(255, 255, 255, 0.1); padding: 8px; border-radius: 6px; transition: background 0.3s ease; }
-        .info-item:hover i { background: rgba(255, 255, 255, 0.2); }
-        .info-item a { text-decoration: underline; opacity: 0.9; transition: opacity 0.2s ease; }
-        .info-item a:hover { opacity: 1; }
         
-        .feedback-form { flex: 1.5; min-width: 300px; padding: 50px; background: var(--white); box-shadow: none; margin: 0; }
+        .info-item {
+            display: flex; align-items: center; margin-bottom: 20px; font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+        .info-item:hover { transform: translateX(5px); }
+        .info-item i {
+            margin-right: 15px; font-size: 1.3rem; width: 25px; text-align: center;
+            background: rgba(255, 255, 255, 0.1); padding: 8px; border-radius: 6px;
+        }
+        .info-item a { text-decoration: underline; opacity: 0.9; }
+        .info-item a:hover { opacity: 1; }
+
+        .feedback-form {
+            flex: 1.5; min-width: 300px; padding: 50px; background: var(--white); margin: 0;
+        }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--secondary); }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem; transition: border 0.3s; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); outline: none; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px;
+            font-family: inherit; font-size: 1rem; transition: border 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary); outline: none;
+        }
         .form-group input:valid:not(:placeholder-shown) { border-color: #28a745; }
         .form-group input:invalid:not(:placeholder-shown) { border-color: #dc3545; }
+
         .char-counter { font-size: 0.85rem; color: #777; text-align: right; margin-top: 5px; }
         .char-counter.warning { color: #f39c12; font-weight: 600; }
-        .form-status { padding: 15px 20px; border-radius: 8px; margin-top: 20px; display: none; animation: slideDown 0.4s ease; font-size: 0.95rem; line-height: 1.6; }
+
+        .form-status {
+            padding: 15px 20px; border-radius: 8px; margin-top: 20px; display: none;
+            animation: slideDown 0.4s ease; font-size: 0.95rem; line-height: 1.6;
+        }
         .form-status.success { background-color: #d4edda; border-left: 4px solid #28a745; color: #155724; }
         .form-status.error { background-color: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .fa-spinner.fa-spin { animation: spin 1s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 10. FOOTER --- */
+        /* =========================================
+           10. FOOTER
+           ========================================= */
         footer { background: var(--secondary); color: var(--white); padding: 60px 5%; text-align: center; }
         footer h3 { font-size: 2rem; margin-bottom: 10px; color: var(--white); }
         .social-links { margin: 30px 0; font-size: 1.8rem; }
         .social-links a { margin: 0 15px; transition: transform 0.3s, color 0.3s; display: inline-block; color: #ccc; }
+        
         .social-links a.youtube:hover { color: #FF0000; transform: translateY(-3px); }
         .social-links a.instagram:hover { color: #E1306C; transform: translateY(-3px); }
         .social-links a.whatsapp:hover { color: #25D366; transform: translateY(-3px); }
         .social-links a.facebook:hover { color: #1877F2; transform: translateY(-3px); }
         .social-links a.telegram:hover { color: #0088cc; transform: translateY(-3px); }
 
-        /* --- 11. RTL SUPPORT (Arabic) --- */
+        /* =========================================
+           11. MODAL STYLES (Playlist)
+           ========================================= */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); z-index: 2000;
+            display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(5px);
+        }
+        .modal-overlay.open { display: flex; opacity: 1; }
+        
+        .modal-content {
+            background: var(--white); width: 90%; max-width: 500px;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-overlay.open .modal-content { transform: scale(1); }
+        
+        .modal-header {
+            background: var(--primary); color: white; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 { margin: 0; font-size: 1.2rem; }
+        .close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0; }
+        .modal-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
+        
+        .playlist-link {
+            display: flex; align-items: center; padding: 12px;
+            border-bottom: 1px solid #eee; color: var(--text);
+            transition: background 0.2s, padding-left 0.2s; text-decoration: none; font-weight: 500;
+        }
+        .playlist-link:last-child { border-bottom: none; }
+        .playlist-link:hover { background: #f9f9f9; padding-left: 20px; color: var(--primary); }
+        .playlist-link i { margin-right: 12px; color: #FF0000; }
+
+        /* =========================================
+           12. RTL SUPPORT (Arabic)
+           ========================================= */
         html[dir="rtl"] { font-family: 'Tahoma', 'Segoe UI', sans-serif; }
-        html[dir="rtl"] .logo { flex-direction: row; }
-        html[dir="rtl"] .btn { flex-direction: row-reverse; }
+        html[dir="rtl"] .logo { flex-direction: row; } /* Reset logo direction */
+        
+        /* Flip specific margins */
         html[dir="rtl"] .info-item i { margin-right: 0; margin-left: 15px; }
         html[dir="rtl"] .info-item:hover { transform: translateX(-5px); }
         html[dir="rtl"] .pro-tip, html[dir="rtl"] .hadith-box { border-left: none; border-right: 5px solid var(--primary); }
         html[dir="rtl"] .form-group select { background-position: left 12px center; padding-right: 12px; padding-left: 35px; }
         html[dir="rtl"] .char-counter { text-align: left; }
         html[dir="rtl"] .form-status { border-left: none; border-right: 4px solid; }
+        
+        /* Flip Playlist Modal Items */
+        html[dir="rtl"] .playlist-link:hover { padding-left: 12px; padding-right: 20px; }
+        html[dir="rtl"] .playlist-link i { margin-right: 0; margin-left: 12px; }
+        
+        /* RTL Mobile */
+        html[dir="rtl"] .mobile-nav { right: auto; left: -100%; box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2); }
+        html[dir="rtl"] .mobile-nav.active { left: 0; right: auto; }
+        html[dir="rtl"] .mobile-nav-link:hover { padding-left: 25px; padding-right: 30px; }
 
-        /* --- 12. RESPONSIVE --- */
+        html[dir="rtl"] .team-member {
+            direction: ltr;
+        }
+
+        /* =========================================
+           13. MOBILE MENU (Hamburger)
+           ========================================= */
+        /* Hamburger Button */
+        .hamburger {
+            display: none; /* Hidden on desktop */
+            flex-direction: column; justify-content: space-around;
+            width: 30px; height: 25px;
+            background: transparent; border: none;
+            cursor: pointer; padding: 0; z-index: 2000;
+        }
+        .hamburger-line {
+            width: 30px; height: 3px; background-color: var(--secondary);
+            border-radius: 10px; transition: var(--transition);
+        }
+        .hamburger.active .hamburger-line:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+        .hamburger.active .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+        .hamburger.active .hamburger-line:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+        /* Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);
+            z-index: 1998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .mobile-menu-overlay.active { opacity: 1; pointer-events: all; }
+
+        /* The Drawer */
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%;
+            width: 280px; max-width: 85%; height: 100%;
+            background: var(--white); box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+            z-index: 1999; overflow-y: auto;
+            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 0 0 30px 0; display: flex; flex-direction: column;
+        }
+        .mobile-nav.active { right: 0; }
+
+        /* =========================================
+           DRAWER HEADER (Fixed Logos)
+           ========================================= */
+        .mobile-menu-header {
+            background: var(--primary); color: var(--white); 
+            padding: 25px 20px; 
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); margin-bottom: 10px;
+        }
+        
+        /* 1. Wrapper Size Override */
+        /* We use !important to guarantee this overrides any global setting */
+        .mobile-menu-header .logo-wrapper {
+            width: 60px !important; 
+            height: 60px !important;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+            overflow: hidden; /* Ensure clipping happens */
+        }
+
+        /* 2. Image Size Override */
+        /* 60% gives plenty of breathing room inside the 60px circle */
+        .mobile-menu-header .logo-wrapper img {
+            width: 60% !important; 
+            height: 60% !important;
+            object-fit: contain;
+            display: block;
+            border-radius: 0; /* Image itself doesn't need radius, container has it */
+            padding: 0; /* Reset padding, use width % to control size */
+        }
+        
+        .brand-name { font-weight: 700; font-size: 1.1rem; line-height: 1.2; }
+
+        /* Drawer Links */
+        .mobile-nav ul { padding: 0; margin: 0; display: block; }
+        .mobile-nav li { border-bottom: 1px solid #f0f0f0; display: block; }
+        .mobile-nav-link {
+            display: flex; align-items: center; padding: 18px 25px;
+            color: var(--secondary); text-decoration: none; font-weight: 600;
+            font-size: 1rem; transition: var(--transition); gap: 15px;
+        }
+        .mobile-nav-link i { width: 25px; text-align: center; color: var(--primary); font-size: 1.2rem; }
+        .mobile-nav-link:hover, .mobile-nav-link:active {
+            background: rgba(178, 34, 34, 0.05); padding-left: 30px; color: var(--primary);
+        }
+
+        /* Mobile Lang Switch - UPDATED for Smaller Size */
+        .mobile-lang-switch { 
+            padding: 15px 20px; /* Reduced padding */
+            border-top: 2px solid #f0f0f0; margin-top: auto; 
+        }
+        .mobile-lang-switch button {
+            width: 100%; 
+            padding: 10px; /* Reduced padding */
+            background: var(--primary); color: var(--white);
+            border: none; border-radius: 6px; font-weight: 600; 
+            font-size: 0.95rem; /* Slightly smaller font */
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        /* =========================================
+           14. RESPONSIVE QUERIES
+           ========================================= */
         @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 15px; padding: 1rem; }
-            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .hero h1 { font-size: 2.2rem; }
-            .team-section-container { padding: 0 10px; }
+            /* 1. Hide Desktop Navigation */
+            nav { display: none; }
+            .top-bar .lang-switch { display: none; }
             .scroll-btn { display: none; }
+
+            /* 2. Show Mobile Components */
+            .hamburger { display: flex; }
+            
+            /* 3. Compact Header Layout */
+            .nav-container { 
+                flex-direction: row; gap: 5px; padding: 0.5rem 1rem; 
+                justify-content: space-between; align-items: center;
+            }
+            .top-bar { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+            
+            /* 4. Mobile Top Bar Logos (Sticky Header) */
+            .logo { flex: 1; justify-content: flex-start; gap: 8px; }
+            .logo-divider, .ysag-subtitle { display: none; }
+            
+            /* Force the wrapper to be small on the sticky header */
+            .logo .logo-wrapper {
+                 width: 40px !important; 
+                 height: 40px !important;
+            }
+            /* Fill the small circle more (85%) so it doesn't look empty */
+            .logo .logo-wrapper img {
+                 width: 85% !important; 
+                 height: 85% !important; 
+                 padding: 0; /* Remove extra padding here */
+            }
+
+            /* 5. Mobile Drawer Logos (Updated: Smaller & Cleaner) */
+            
+            /* Reduce the header padding to make it sleek */
+            .mobile-menu-header {
+                padding: 15px 20px !important; 
+                gap: 10px !important;
+            }
+
+            /* Make the stickers smaller (Was 60px, now 48px) */
+            .mobile-menu-header .logo-wrapper.mobile {
+                width: 48px !important; 
+                height: 48px !important;
+            }
+            
+            /* Keep image safe from corners (65% size inside the circle) */
+            .mobile-menu-header .logo-wrapper.mobile img {
+                width: 65% !important; 
+                height: 65% !important;
+            }
+
+            /* Add swipe hint */
+            .team-scroll-wrapper::after {
+                content: '← Swipe →';
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 0.75rem;
+                color: #999;
+                pointer-events: none;
+                opacity: 0.7;
+            }
+            
+            /* Polish the Text */
+            .brand-name {
+                font-size: 0.95rem !important; /* Smaller text */
+                line-height: 1.3 !important;   /* Better spacing */
+                font-weight: 600 !important;   /* Slightly lighter weight */
+            }p
+
+            /* 6. Section Adjustments */
+            .hero { min-height: 70vh; padding: 80px 5% 60px 5%; }
+            .hero h1 { font-size: 1.8rem; line-height: 1.2; margin-bottom: 0.5rem; }
+            .hero p { font-size: 1rem; padding: 0 10px; }
+            
+            .hero-buttons { 
+                flex-direction: column; width: 100%; gap: 10px; 
+                margin: 0 auto; max-width: 320px; 
+            }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+
+            .team-section-container { padding: 0 5px; }
+            
             .contact-container { flex-direction: column; }
-            .contact-info { padding: 30px; }
-            .feedback-form { padding: 30px; }
+            .contact-info, .feedback-form { padding: 30px 20px; }
+            
             html[dir="rtl"] .nav-container { align-items: center; }
         }
-        @media (max-width: 480px) {
-            .logo { gap: 10px; }
-            .iss-logo-link img { height: 35px; }
-            .ysag-logo-img { height: 40px; }
-            .ysag-subtitle { font-size: 0.75rem; }
-            .hero { padding: 80px 5%; }
-            .hero-buttons { flex-direction: column; width: 100%; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            .contact-info h3 { font-size: 1.5rem; }
-            .info-item { font-size: 1rem; }
+        
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 1.6rem; }
+            /* Further shrink logos for very small screens */
+            .logo .logo-wrapper { width: 35px !important; height: 35px !important; }
+            .contact-info h3 { font-size: 1.4rem; }
         }
     </style>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "YSAG - Yemeni Student Academic Group",
+            "description": "Free academic resources and study materials for students at UTM Malaysia",
+            "url": "https://ysag.github.io/ysag-website/",
+            "logo": "https://ysag.github.io/ysag-website/content/images/YSAGLogo.jpeg",
+            "sameAs": [
+                "https://youtube.com/@YSAG-my",
+                "https://instagram.com/issyemen",
+                "https://chat.whatsapp.com/I2OXElf95mLIkWdZVKNEd1"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Johor Bahru",
+                "addressRegion": "Johor",
+                "addressCountry": "MY"
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -293,11 +831,15 @@
         <div class="nav-container">
             <div class="logo">
                 <a href="https://linktr.ee/issyemen" target="_blank" class="iss-logo-link" title="Visit ISS Yemen">
-                    <img src="content/images/ISSYemenLogo.webp" alt="ISS Yemen">
+                    <div class="logo-wrapper">
+                        <img src="content/images/ISSYemenLogo.webp" alt="ISS Yemen">
+                    </div>
                 </a>
                 <div class="logo-divider"></div>
                 <div class="ysag-brand">
-                    <img src="content/images/YSAGLogo.jpeg" alt="YSAG Logo" class="ysag-logo-img">
+                    <div class="logo-wrapper">
+                        <img src="content/images/YSAGLogo.jpeg" alt="YSAG Logo" class="ysag-logo-img">
+                    </div>
                     <div class="ysag-text">
                         <div class="ysag-subtitle" data-i18n="ysag_subtitle">Yemeni Student Academic Group</div>
                     </div>
@@ -313,13 +855,45 @@
                     <li><a href="#feedback" data-i18n="nav.feedback">Feedback</a></li>
                 </ul>
             </nav>
+
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
     </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-menu-header">
+            <div class="logo-wrapper mobile">
+                <img src="content/images/ISSYemenLogo.webp" alt="ISS Yemen">
+            </div>
+            <div class="logo-wrapper mobile">
+                <img src="content/images/YSAGLogo.jpeg" alt="YSAG">
+            </div>
+            <span class="brand-name">Yemeni Student<br>Academic Group</span>
+        </div>
+
+        <ul>
+            <li><a href="#home" class="mobile-nav-link"><i class="fas fa-home"></i> <span data-i18n="nav.home">Home</span></a></li>
+            <li><a href="#about" class="mobile-nav-link"><i class="fas fa-info-circle"></i> <span data-i18n="nav.about">About</span></a></li>
+            <li><a href="#resources" class="mobile-nav-link"><i class="fas fa-book"></i> <span data-i18n="nav.resources">E-Library</span></a></li>
+            <li><a href="#contribute" class="mobile-nav-link"><i class="fas fa-hands-helping"></i> <span data-i18n="nav.volunteer">Volunteer</span></a></li>
+            <li><a href="#feedback" class="mobile-nav-link"><i class="fas fa-comment-dots"></i> <span data-i18n="nav.feedback">Feedback</span></a></li>
+        </ul>
+
+        <div class="mobile-lang-switch">
+            <button onclick="YSAG.toggleLanguage()">
+                <i class="fas fa-globe"></i> <span>Switch Language / تبديل اللغة</span>
+            </button>
+        </div>
+    </nav>
 
     <section id="home" class="hero">
         <h1>Knowledge Shared is Knowledge Doubled</h1>
         <p>Developing, consolidating, and disseminating knowledge among all Yemeni students.</p>
-
         <div class="hero-buttons"></div>
     </section>
 
@@ -340,12 +914,15 @@
             <h3 data-i18n="nav.team">Meet the Team</h3>
             <p style="margin-bottom: 30px;" data-i18n="team.subtitle">The dedicated students behind the screen.</p>
 
-            <div class="team-section-container">
-                <button class="scroll-btn left" onclick="YSAG.teamScroll.scroll('left')" onmouseenter="YSAG.teamScroll.pause()" onmouseleave="YSAG.teamScroll.resume()">
+            <div class="team-section-container" 
+                onmouseenter="YSAG.teamScroll.state.isHovering = true; YSAG.teamScroll.state.isPaused = true;" 
+                onmouseleave="YSAG.teamScroll.state.isHovering = false; YSAG.teamScroll.state.isPaused = false;">
+
+                <button class="scroll-btn left" onclick="YSAG.teamScroll.scroll('left')">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="team-scroll-wrapper" id="teamScrollContainer" onmouseenter="YSAG.teamScroll.pause()" onmouseleave="YSAG.teamScroll.resume()">
+                <div class="team-scroll-wrapper" id="teamScrollContainer">
                     <div class="team-grid">
                         <div style="width: 100%; text-align: center;">
                             <i class="fas fa-spinner fa-spin"></i> Loading Team...
@@ -353,7 +930,7 @@
                     </div>
                 </div>
 
-                <button class="scroll-btn right" onclick="YSAG.teamScroll.scroll('right')" onmouseenter="YSAG.teamScroll.pause()" onmouseleave="YSAG.teamScroll.resume()">
+                <button class="scroll-btn right" onclick="YSAG.teamScroll.scroll('right')">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -382,9 +959,7 @@
         </div>
 
         <div class="hadith-box">
-            <p class="hadith-text" data-i18n="volunteer.hadith">
-                ...
-            </p>
+            <p class="hadith-text" data-i18n="volunteer.hadith"></p>
         </div>
 
         <div style="text-align: center; max-width: 750px; margin: 40px auto 0 auto;">
@@ -394,17 +969,17 @@
             <p style="margin-bottom: 30px; color: #666; padding: 0 10px;" data-i18n="volunteer.desc" data-html="true">
                 We are always looking for students to <strong>hold remedial classes (online/F2F)</strong> or <strong>donate textbooks/past year tests</strong> to the library.
             </p>
-
+            
             <div class="contribute-actions">
                 <a href="https://forms.google.com/YOUR_UPLOAD_FORM" target="_blank" class="btn">
                     <i class="fas fa-cloud-upload-alt"></i> <span data-i18n="volunteer.btnUpload">Upload Materials</span>
-                </a>
-
+                </a> 
+                
                 <a href="https://forms.google.com/YOUR_TUTOR_FORM" target="_blank" class="btn" style="background: var(--secondary);">
                     <i class="fas fa-chalkboard-teacher"></i> <span data-i18n="volunteer.btnTutor">Volunteer to Teach</span>
                 </a>
 
-                <a href="https://wa.me/60111111111" target="_blank" class="btn outline">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxf1klxImfqKfgwbdYZigRVub0sV1YB7dMmspvmXKk1a_4eA/viewform?usp=sf_link" target="_blank" class="btn outline">
                     <i class="fas fa-book"></i> <span data-i18n="volunteer.btnDonate">Donate Textbooks</span>
                 </a>
             </div>
@@ -422,14 +997,14 @@
             <div class="contact-info">
                 <h3 data-i18n="contact.infoTitle">Get in Touch</h3>
                 <p style="margin-bottom: 30px; opacity: 0.9;" data-i18n="contact.infoDesc">
-                    Whether you have a question about resources, want to volunteer, or want to collaborate, our inbox is open.
+                    Whether you have a question about resources, want to volunteer, or just want to say hi, our inbox is open.
                 </p>
-
+                
                 <div class="info-item">
                     <i class="fas fa-envelope"></i>
                     <a href="mailto:ysag.utm@gmail.com">ysag.utm@gmail.com</a>
                 </div>
-
+                
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>UTM, Johor Bahru, Malaysia</span>
@@ -444,26 +1019,26 @@
             <div class="feedback-form">
                 <form id="feedbackForm" novalidate>
                     <div class="form-group">
-                        <label data-i18n="form.nameLabel">Name (Optional)</label>
-                        <input type="text" name="user_name" id="userName" data-i18n-placeholder="form.namePlaceholder" placeholder="Your full name" maxlength="100">
+                        <label for="userName" data-i18n="form.nameLabel">Name (Optional)</label>
+                        <input type="text" name="user_name" id="userName" autocomplete="name" data-i18n-placeholder="form.namePlaceholder" placeholder="Your full name" maxlength="100">
                     </div>
 
                     <div class="form-group">
-                        <label data-i18n="form.emailLabel">Your Email <span style="color: #dc3545;">*</span></label>
-                        <input type="email" name="user_email" id="userEmail" data-i18n-placeholder="form.emailPlaceholder" placeholder="name@example.com" required
+                        <label for="userEmail" data-i18n="form.emailLabel">Your Email <span style="color: #dc3545;">*</span></label>
+                        <input type="email" name="user_email" id="userEmail" autocomplete="email" data-i18n-placeholder="form.emailPlaceholder" placeholder="name@example.com" required
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                         <small style="color: #666; font-size: 0.85rem;" data-i18n="form.emailHint">We'll never share your email with anyone.</small>
                     </div>
 
                     <div class="form-group">
-                        <label data-i18n="form.topicLabel">Topic <span style="color: #dc3545;">*</span></label>
+                        <label for="topic" data-i18n="form.topicLabel">Topic <span style="color: #dc3545;">*</span></label>
                         <select name="topic" id="topic" required>
                             <option value="">Select a topic...</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label data-i18n="form.messageLabel">Message <span style="color: #dc3545;">*</span></label>
+                        <label for="message" data-i18n="form.messageLabel">Message <span style="color: #dc3545;">*</span></label>
                         <textarea name="message" id="message" rows="5" data-i18n-placeholder="form.messagePlaceholder" placeholder="Tell us what we can do better..." required minlength="10" maxlength="1000"></textarea>
                         <div class="char-counter" id="charCounter">0 / 1000 characters</div>
                     </div>
@@ -490,6 +1065,16 @@
         </div>
     </footer>
 
+    <div id="playlistModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="modalTitle">Course Playlists</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalList"></div>
+        </div>
+    </div>
+
     <script src="content-loader.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
@@ -508,7 +1093,6 @@
             });
 
             if (current) {
-                // This ensures it matches the current language (e.g., "Home" vs "الرئيسية")
                 const activeLink = document.querySelector(`nav a[href="#${current}"]`);
                 if (activeLink) {
                     nameSpan.innerText = activeLink.innerText;
