@@ -12,10 +12,10 @@
       "filesLink": "https://drive.google.com/drive/folders/1kv8bCvHo_J0-eFpjl6YKSOTW0ff1-7Yl",
       "whatsappLink": "https://chat.whatsapp.com/HyU0wt2Np772evX1tgVfNK?mode=hqrt2",
       "playlists": [
-        { "name": "رياضيات 1 (Math 1)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruUQfcyj3FsATgxZz-VqVS9&si=WA3PL8jqMa98ngah" },
-        { "name": "كيمياء (Chemistry)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtUpuIYgCUOcDcSjEetBef2&si=Ut0p5BuGbN_Etkwf" },
-        { "name": "أحياء (Biology)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvoc7RgpIoFfkqZ-GE-ImRR&si=VKYW1xqZ-8kApPT3" },
-        { "name": "فيزياء (Physics)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvfn_pEZNMIHq3H4ZY9wJTb&si=tp25m315KTyhzxbO" }
+        { "name": "Foundation Math 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruUQfcyj3FsATgxZz-VqVS9&si=WA3PL8jqMa98ngah" },
+        { "name": "Foundation Chemistry", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtUpuIYgCUOcDcSjEetBef2&si=Ut0p5BuGbN_Etkwf" },
+        { "name": "Biology Bridging", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvoc7RgpIoFfkqZ-GE-ImRR&si=VKYW1xqZ-8kApPT3" },
+        { "name": "Physics Bridging", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvfn_pEZNMIHq3H4ZY9wJTb&si=tp25m315KTyhzxbO" }
       ]
     },
     {
@@ -27,9 +27,9 @@
       "filesLink": "https://drive.google.com/drive/folders/1Z0km9lZoT84DTGiMEjwvuZRA4f0SaXxJ?usp=sharing",
       "whatsappLink": "https://chat.whatsapp.com/JMbXwLAOyhYHuKLTiaVBxq?mode=hqrt2",
       "playlists": [
-        { "name": "ميكانيكا التربة (Soil Mechanics)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsawk2IEzvrf30STEO26UMn&si=_nrIip9JmTeS90Kr" },
-        { "name": "الجيوتكنيك (Geotechnics)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQru_QG-xJCAOckdSI8u_J8BS&si=zZkVo1NE58Ude_m0" },
-        { "name": "المساحة الهندسية (Surveying)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtwgeKQ8CS1ww21IJGNAzb4&si=mrAgLNnBkl1JnQ8_" }
+        { "name": "Soil Mechanics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsawk2IEzvrf30STEO26UMn&si=_nrIip9JmTeS90Kr" },
+        { "name": "Geotechnics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQru_QG-xJCAOckdSI8u_J8BS&si=zZkVo1NE58Ude_m0" },
+        { "name": "Engineering Surveying", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtwgeKQ8CS1ww21IJGNAzb4&si=mrAgLNnBkl1JnQ8_" }
       ]
     },
     {
@@ -41,12 +41,12 @@
       "filesLink": "https://drive.google.com/drive/folders/12RsF6SFoXfkuURC6xszaJUdJecWkWv1R",
       "whatsappLink": "https://chat.whatsapp.com/KT21kvXWDQ2IIFJZJZ8AOI",
       "playlists": [
-        { "name": "الرياضيات الحاسوبية 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtRqzvcXxOYc0Trn1xQyDFg&si=GrVT3kWLAgKKYvPm" },
-        { "name": "الرياضيات الحاسوبية 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruzBazQ5wi-GQniYzKcvKZG&si=jPs7z2WW8k_4wNbO" },
-        { "name": "نظرية علوم الحاسوب (TOC)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsDIyq8IEL4ib7OTOgnPvGL&si=0nqdv6O2LS38JxcK" },
-        { "name": "تراسل البيانات والشبكات", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsFaKYWXs0eOp0x8gwjaTyp&si=OdmXf2hjrNb1xz36" },
-        { "name": "الاحتمالات وتحليل البيانات 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrshkpeTrX3sL-JPgPPUUnj4&si=A9o67f3tLP23Tnnv" },
-        { "name": "الاحتمالات وتحليل البيانات 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvwhYJPT2OHznVLNrrUzY-K&si=R60oizoFp_8Lgu3S" }
+                { "name": "Computational Mathematics 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtRqzvcXxOYc0Trn1xQyDFg&si=GrVT3kWLAgKKYvPm" },
+        { "name": "Computational Mathematics 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruzBazQ5wi-GQniYzKcvKZG&si=jPs7z2WW8k_4wNbO" },
+        { "name": "Theory of Computer Science", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsDIyq8IEL4ib7OTOgnPvGL&si=0nqdv6O2LS38JxcK" },
+        { "name": "Network Communication", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsFaKYWXs0eOp0x8gwjaTyp&si=OdmXf2hjrNb1xz36" },
+        { "name": "Prob & Stat Data Analysis 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrshkpeTrX3sL-JPgPPUUnj4&si=A9o67f3tLP23Tnnv" },
+        { "name": "Prob & Stat Data Analysis 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvwhYJPT2OHznVLNrrUzY-K&si=R60oizoFp_8Lgu3S" }
       ]
     },
     {
@@ -58,12 +58,12 @@
       "filesLink": "https://drive.google.com/drive/folders/1EcPzK0iiME7xpzVKF7v2lTEDlnsvR2pb",
       "whatsappLink": "https://chat.whatsapp.com/E88Ur3EtXziHwpGPjzS08d?mode=hqrt2",
       "playlists": [
-        { "name": "الدوائر الكهربائية", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtg-hf94HkIr2mDre0qrMqR&si=DnP15YAmPfb0ccXU" },
-        { "name": "الأجهزة الإلكترونية", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrs7FqZndQjs9nZXSkRq69gC&si=RlxO9w6Ia_urcF6w" },
-        { "name": "الإلكترونيات الرقمية", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruyefxo4TXwn1lNxnqo3gUW&si=tAHLb5gwJhwvo8Ty" },
-        { "name": "الإلكترونيات الرقمية (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvKStomeDJw2rN1u6aUyL7S&si=ijdDi5jWhZAQbID0" },
-        { "name": "الأجهزة الإلكترونية (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruI3jeqduW_kWkMMNmIs-Si&si=bmMCvu512961T_m8" },
-        { "name": "شرح معمل Quartus", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtzGbwm9g3j3Kj_A1FsJMzc&si=xnm_C7Cwv95G89Ys" }
+        { "name": "Circuits", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtg-hf94HkIr2mDre0qrMqR&si=DnP15YAmPfb0ccXU" },
+        { "name": "Electronic Devices & Circuits", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrs7FqZndQjs9nZXSkRq69gC&si=RlxO9w6Ia_urcF6w" },
+        { "name": "Digital Electronics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruyefxo4TXwn1lNxnqo3gUW&si=tAHLb5gwJhwvo8Ty" },
+        { "name": "Digital Electronics (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvKStomeDJw2rN1u6aUyL7S&si=ijdDi5jWhZAQbID0" },
+        { "name": "Electronic Devices (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruI3jeqduW_kWkMMNmIs-Si&si=bmMCvu512961T_m8" },
+        { "name": "Quartus Digital Lab Guide", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtzGbwm9g3j3Kj_A1FsJMzc&si=xnm_C7Cwv95G89Ys" }
       ]
     },
     {
@@ -75,15 +75,15 @@
       "filesLink": "https://drive.google.com/drive/folders/11v9rVOlA9FFBGsq_4kSqKtcrn-N66c9T",
       "whatsappLink": "https://chat.whatsapp.com/KgXgrWHGFOdDYwdtypGThQ?mode=hqrt2",
       "playlists": [
-        { "name": "ميكانيكا المواد الصلبة 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvA0Q1OJwAp_Z68bU7T_U6Q&si=GBdv108PAVo2NLHh" },
-        { "name": "ميكانيكا المواد الصلبة 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruEr8qLFZXm3vhDkzc1Tiu3&si=xeBlWCwk2hNzRSGj" },
-        { "name": "الآلات والاهتزازات", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtI1_gHgHyCgH33TkBxwdKq&si=mdIEUTzUg5d4zrP3" },
-        { "name": "ديناميكا", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruqZXQATGB-YprEnoJfxS2X&si=BffdWwkThm5LoywM" },
-        { "name": "استاتيكا", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtPicf85PJDoPGrUGzoWvrJ&si=St5h8LAAxmqy2FKl" },
-        { "name": "استاتيكا (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsTZSAHOUxJ3w4LEkJsdKSH&si=8e1CC43nVkwNzLvM" },
-        { "name": "ميكانيكا الموائع 1 (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvppOIc1_DjwOKdTv3HhaeJ&si=jDHU2O3zdPoNjTbl" },
-        { "name": "ميكانيكا الموائع 2 (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruRpwqLOBxbjAItEIJ4t_3y&si=YbPJKeQAnBz8ROom" },
-        { "name": "الرسم الهندسي", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsGfxkNIrhFTGO-Ng6MWcQe&si=JkXRSv8VgqjlgQ7V" }
+        { "name": "Mechanics of Solid", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvA0Q1OJwAp_Z68bU7T_U6Q&si=GBdv108PAVo2NLHh" },
+        { "name": "Mechanics of Solid 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruEr8qLFZXm3vhDkzc1Tiu3&si=xeBlWCwk2hNzRSGj" },
+        { "name": "Machine & Vibration", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtI1_gHgHyCgH33TkBxwdKq&si=mdIEUTzUg5d4zrP3" },
+        { "name": "Dynamics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruqZXQATGB-YprEnoJfxS2X&si=BffdWwkThm5LoywM" },
+        { "name": "Statics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtPicf85PJDoPGrUGzoWvrJ&si=St5h8LAAxmqy2FKl" },
+        { "name": "Statics (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsTZSAHOUxJ3w4LEkJsdKSH&si=8e1CC43nVkwNzLvM" },
+        { "name": "Mechanics of Fluid 1 (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvppOIc1_DjwOKdTv3HhaeJ&si=jDHU2O3zdPoNjTbl" },
+        { "name": "Mechanics of Fluid 2 (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruRpwqLOBxbjAItEIJ4t_3y&si=YbPJKeQAnBz8ROom" },
+        { "name": "Engineering Drawing", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsGfxkNIrhFTGO-Ng6MWcQe&si=JkXRSv8VgqjlgQ7V" }
       ]
     },
     {
@@ -105,8 +105,8 @@
       "filesLink": "https://drive.google.com/drive/folders/12951KIo2WRGJuJvoMzBopk1cSuCfoNP3",
       "whatsappLink": "https://chat.whatsapp.com/L8v7Jx7hK4N3DpnEY6GGFv?mode=hqrt2",
       "playlists": [
-        { "name": "الكيمياء العضوية", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsQzX-vLh99HHvQzXxL0g01&si=Ade5_qgSzDQq5EZY" },
-        { "name": "موازنة الكتل (Mass Balance)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvHeT1rfc3TU5KBUV0glIS2&si=3g0VD3okLc3E31vn" }
+        { "name": "Organic Chemistry", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsQzX-vLh99HHvQzXxL0g01&si=Ade5_qgSzDQq5EZY" },
+        { "name": "Mass Balance", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvHeT1rfc3TU5KBUV0glIS2&si=3g0VD3okLc3E31vn" }
       ]
     },
     {
@@ -128,12 +128,12 @@
       "filesLink": "",
       "whatsappLink": "",
       "playlists": [
-        { "name": "رياضيات هندسية 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtDdkTi7IX7P3OiVWfkwF8P&si=x_bFT6tKXWiqPyXH" },
-        { "name": "رياضيات هندسية 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrspYoCXKE4iIIfDeXbP3fey&si=XcNKgIbrLCTrwO9u" },
-        { "name": "رياضيات هندسية 2 (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrs23vKeRBemeFm_u1xD-sYo&si=yyIwubyrN3suF43R" },
-        { "name": "معادلات تفاضلية", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvs9KQBLWm3uGT-6zupHzFX&si=yLR9MV8XSuDHup0L" },
-        { "name": "معادلات تفاضلية (إنجليزي)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruML7ZEk32XYZq8pnl5R3rV&si=-EWM5lxlEKYVlnAI" },
-        { "name": "الإحصاء", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvQY51KZiQIdJWY67HsANdW&si=Vw4dQKAXF6yRAHer" }
+        { "name": "Engineering Math 1", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtDdkTi7IX7P3OiVWfkwF8P&si=x_bFT6tKXWiqPyXH" },
+        { "name": "Engineering Math 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrspYoCXKE4iIIfDeXbP3fey&si=XcNKgIbrLCTrwO9u" },
+        { "name": "Engineering Math 2 (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrs23vKeRBemeFm_u1xD-sYo&si=yyIwubyrN3suF43R" },
+        { "name": "Differential Equations", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvs9KQBLWm3uGT-6zupHzFX&si=yLR9MV8XSuDHup0L" },
+        { "name": "Differential Equations (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruML7ZEk32XYZq8pnl5R3rV&si=-EWM5lxlEKYVlnAI" },
+        { "name": "Statistics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvQY51KZiQIdJWY67HsANdW&si=Vw4dQKAXF6yRAHer" }
       ]
     }
   ]

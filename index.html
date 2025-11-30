@@ -12,18 +12,18 @@
     
     <meta property="og:title" content="YSAG - Yemeni Student Academic Group">
     <meta property="og:description" content="Free academic resources and study materials for Yemeni students at UTM Malaysia">
-    <meta property="og:image" content="https://ysag.github.io/ysag-website/content/images/YSAGLogo.jpeg">
-    <meta property="og:url" content="https://ysag.github.io/ysag-website/">
+    <meta property="og:image" content="https://ysagutm.github.io/ysag/content/images/YSAGLogo.png">
+    <meta property="og:url" content="https://ysagutm.github.io/ysag/">
     <meta property="og:type" content="website">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="YSAG - Yemeni Student Academic Group">
     <meta name="twitter:description" content="Free academic resources for Yemeni students at UTM">
-    <meta name="twitter:image" content="https://ysag.github.io/ysag-website/content/images/YSAGLogo.jpeg">
+    <meta name="twitter:image" content="https://ysagutm.github.io/ysag/content/images/YSAGLogo.png">
     
-    <link rel="canonical" href="https://ysag.github.io/ysag-website/">
+    <link rel="canonical" href="https://ysagutm.github.io/ysag/">
     
-    <link rel="icon" type="image/jpeg" href="content/images/YSAGLogo.jpeg">
+    <link rel="icon" type="image/png" href="content/images/YSAGLogo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -58,6 +58,71 @@
 
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
+
+        /* --- PRELOADER STYLES --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 9999; /* Top of everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader-content {
+            text-align: center;
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        #preloader img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            /* Optional: A subtle pulse animation */
+            animation: pulseLogo 1.5s infinite ease-in-out;
+        }
+
+        /* Simple Loading Bar */
+        .loading-bar {
+            width: 150px;
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .loading-bar::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 100%;
+            background: var(--primary);
+            animation: loadBar 1.5s ease-in-out forwards;
+        }
+
+        /* Animations */
+        @keyframes pulseLogo {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes loadBar {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Helper to hide it */
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
         /* =========================================
            2. GLOBAL BUTTONS
@@ -418,17 +483,20 @@
 
         /* Card Actions */
         .card-actions {
-            padding: 15px 20px;
-            background: #f8f9fa;
+            padding: 15px 25px; 
+            background: #f8f9fa; 
             display: flex;
             
-            /* CHANGE THIS LINE: */
-            justify-content: center; 
+            justify-content: space-between; 
             
             align-items: center;
-            border-top: 1px solid #eee;
-            gap: 15px;
+            border-top: 1px solid #eee; 
+            gap: 10px; 
             flex-wrap: wrap;
+        }
+
+        .card-actions:has(> :only-child) {
+            justify-content: center;
         }
         .action-btn {
             font-size: 0.9rem; color: #777; cursor: pointer; font-weight: 600;
@@ -763,7 +831,7 @@
                 font-size: 0.95rem !important; /* Smaller text */
                 line-height: 1.3 !important;   /* Better spacing */
                 font-weight: 600 !important;   /* Slightly lighter weight */
-            }p
+            }
 
             /* 6. Section Adjustments */
             .hero { min-height: 70vh; padding: 80px 5% 60px 5%; }
@@ -798,8 +866,8 @@
             "@type": "EducationalOrganization",
             "name": "YSAG - Yemeni Student Academic Group",
             "description": "Free academic resources and study materials for students at UTM Malaysia",
-            "url": "https://ysag.github.io/ysag-website/",
-            "logo": "https://ysag.github.io/ysag-website/content/images/YSAGLogo.jpeg",
+            "url": "https://ysagutm.github.io/ysag/",
+            "logo": "https://ysagutm.github.io/ysag/content/images/YSAGLogo.png",
             "sameAs": [
                 "https://youtube.com/@YSAG-my",
                 "https://instagram.com/issyemen",
@@ -816,6 +884,12 @@
 </head>
 
 <body>
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="content/images/YSAGLogo.png" alt="YSAG Loading">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
 
     <header>
         <div class="top-bar">
@@ -832,13 +906,13 @@
             <div class="logo">
                 <a href="https://linktr.ee/issyemen" target="_blank" class="iss-logo-link" title="Visit ISS Yemen">
                     <div class="logo-wrapper">
-                        <img src="content/images/ISSYemenLogo.webp" alt="ISS Yemen">
+                        <img src="content/images/ISSYemenLogo.png" alt="ISS Yemen">
                     </div>
                 </a>
                 <div class="logo-divider"></div>
                 <div class="ysag-brand">
                     <div class="logo-wrapper">
-                        <img src="content/images/YSAGLogo.jpeg" alt="YSAG Logo" class="ysag-logo-img">
+                        <img src="content/images/YSAGLogo.png" alt="YSAG Logo" class="ysag-logo-img">
                     </div>
                     <div class="ysag-text">
                         <div class="ysag-subtitle" data-i18n="ysag_subtitle">Yemeni Student Academic Group</div>
@@ -868,10 +942,10 @@
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-menu-header">
             <div class="logo-wrapper mobile">
-                <img src="content/images/ISSYemenLogo.webp" alt="ISS Yemen">
+                <img src="content/images/ISSYemenLogo.png" alt="ISS Yemen">
             </div>
             <div class="logo-wrapper mobile">
-                <img src="content/images/YSAGLogo.jpeg" alt="YSAG">
+                <img src="content/images/YSAGLogo.png" alt="YSAG">
             </div>
             <span class="brand-name">Yemeni Student<br>Academic Group</span>
         </div>
@@ -1077,6 +1151,28 @@
 
     <script src="content-loader.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        // SPLASH SCREEN LOGIC
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            
+            // Check if user has visited this session
+            const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+
+            if (hasSeenIntro) {
+                // If seen, hide immediately (no animation)
+                preloader.style.display = 'none';
+            } else {
+                // If first time, play animation then hide
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    // Save flag so it doesn't show again until tab is closed
+                    sessionStorage.setItem('hasSeenIntro', 'true');
+                }, 1800); // 1.8 seconds (allows bar to fill)
+            }
+        });
+    </script>
 
     <script>
         // 1. Sticky Navbar Active State
