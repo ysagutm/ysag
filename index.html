@@ -23,9 +23,34 @@
     
     <link rel="canonical" href="https://ysagutm.github.io/ysag/">
     
-    <link rel="icon" type="image/png" href="content/images/YSAGLogo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="content/images/YSAGLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="content/images/YSAGLogo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="content/images/YSAGLogo.png">
+    <link rel="shortcut icon" href="content/images/YSAGLogo.png">
+    
+    <!-- Structured Data for Google Search -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "YSAG - Yemeni Student Academic Group",
+        "alternateName": "YSAG",
+        "url": "https://ysagutm.github.io/ysag/",
+        "logo": "https://ysagutm.github.io/ysag/content/images/YSAGLogo.png",
+        "description": "YSAG provides academic resources, e-library, past papers, and study materials for Yemeni students at UTM Malaysia.",
+        "sameAs": [
+            "https://github.com/ysagutm"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Academic Support",
+            "availableLanguage": ["English", "Arabic"]
+        }
+    }
+    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 
     <style>
         /* =========================================
@@ -1158,7 +1183,7 @@
             const preloader = document.getElementById('preloader');
             
             // Check if user has visited this session
-            const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+            const hasSeenIntro = sessionStorage.getItem('ysag_hasSeenIntro');
 
             if (hasSeenIntro) {
                 // If seen, hide immediately (no animation)
@@ -1168,7 +1193,7 @@
                 setTimeout(() => {
                     preloader.classList.add('hidden');
                     // Save flag so it doesn't show again until tab is closed
-                    sessionStorage.setItem('hasSeenIntro', 'true');
+                    sessionStorage.setItem('ysag_hasSeenIntro', 'true');
                 }, 1800); // 1.8 seconds (allows bar to fill)
             }
         });
@@ -1245,7 +1270,9 @@
                     submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
                     setTimeout(() => { formStatus.style.display = 'none'; }, 8000);
                 }, function (error) {
-                    console.error('FAILED...', error);
+                    if (typeof console !== 'undefined' && console.error) {
+                        console.error('EmailJS error:', error);
+                    }
                     let errorMessage = 'Please try again or email us directly.';
                     if (error.text && error.text.includes('quota')) errorMessage = 'Monthly limit reached. Please email us directly.';
                     
