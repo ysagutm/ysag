@@ -30,37 +30,37 @@
     },
     {
       "name": "Mohammed Adam",
-      "role": "Civil Department Head",
+      "role": "Civil Faculty Head",
       "image": "content/images/Mohammed-Adam(Ysag-Civil).webp"
     },
     {
       "name": "Nooh AlFaqih",
-      "role": "Electrical Department Head",
+      "role": "Electrical Faculty Head",
       "image": "content/images/Nooh-AlFaqih(Ysag-Electric).webp"
     },
     {
       "name": "Ammar Abdulrahman",
-      "role": "Computer Department Head",
+      "role": "Computer Faculty Head",
       "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).webp"
     },
     {
       "name": "Ibrahim AlJabali",
-      "role": "Mechanical Department Head",
+      "role": "Mechanical Faculty Head",
       "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).webp"
     },
     {
       "name": "Anwar Mansoor",
-      "role": "Chemical Department Head",
+      "role": "Chemical Faculty Head",
       "image": "content/images/Anwar-Mansoor(Ysag-chemical).webp"
     },
     {
       "name": "Abdullah Ba-Hanan",
-      "role": "Biomedical Department Head",
+      "role": "Biomedical Faculty Head",
       "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).webp"
     },
     {
       "name": "Badr Anas",
-      "role": "Foundation Department Head",
+      "role": "Foundation Faculty Head",
       "image": "content/images/Badr-Anas(Ysag-foundation).webp"
     }
   ]

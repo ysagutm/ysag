@@ -30,37 +30,37 @@
     },
     {
       "name": "عمار عبدالرحمن",
-      "role": "رئيس قسم الحاسوب",
+      "role": "رئيس كلية الحاسوب",
       "image": "content/images/Ammar-Abdulrahman(Ysag-Computer).webp"
     },
     {
       "name": "محمد آدم",
-      "role": "رئيس قسم المدني",
+      "role": "رئيس كلية المدني",
       "image": "content/images/Mohammed-Adam(Ysag-Civil).webp"
     },
     {
       "name": "نوح الفقيه",
-      "role": "رئيس قسم الكهرباء",
+      "role": "رئيس كلية الكهرباء",
       "image": "content/images/Nooh-AlFaqih(Ysag-Electric).webp"
     },
     {
       "name": "إبراهيم الجبلي",
-      "role": "رئيس قسم الميكانيك",
+      "role": "رئيس كلية الميكانيك",
       "image": "content/images/Ibrahim-AlJabali(Ysag-Mechanic).webp"
     },
     {
       "name": "أنور منصور",
-      "role": "رئيس قسم الكيمياء",
+      "role": "رئيس كلية الكيمياء",
       "image": "content/images/Anwar-Mansoor(Ysag-chemical).webp"
     },
     {
       "name": "عبدالله باحنان",
-      "role": "رئيس قسم هندسة الطب الحيوي",
+      "role": "رئيس كلية هندسة الطب الحيوي",
       "image": "content/images/Abdullah_Ba-Hanan(Ysag-Biomedical).webp"
     },
     {
       "name": "بدر أنس",
-      "role": "رئيس قسم التحضيري",
+      "role": "رئيس كلية التحضيري",
       "image": "content/images/Badr-Anas(Ysag-foundation).webp"
     }
   ]

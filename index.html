@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>YSAG - Yemeni Student Academic Group | UTM Malaysia</title>
-    <meta name="description" content="YSAG provides academic resources, e-library, past papers, and study materials for Yemeni students at UTM Malaysia. Free courses for Engineering students.">
+    <title>YSAG</title>
+    <meta name="description" content="YSAG provides academic resources, e-library, past papers, and study materials for students at UTM Malaysia.">
     <meta name="keywords" content="YSAG, Yemeni Students, UTM, Academic Resources, E-Library, Engineering Notes, Study Materials, Malaysia">
     <meta name="author" content="YSAG - Yemeni Student Academic Group">
     
     <meta property="og:title" content="YSAG - Yemeni Student Academic Group">
-    <meta property="og:description" content="Free academic resources and study materials for Yemeni students at UTM Malaysia">
+    <meta property="og:description" content="Free academic resources and study materials for students at UTM Malaysia">
     <meta property="og:image" content="https://ysagutm.github.io/ysag/content/images/YSAGLogo.png">
     <meta property="og:url" content="https://ysagutm.github.io/ysag/">
     <meta property="og:type" content="website">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="YSAG - Yemeni Student Academic Group">
-    <meta name="twitter:description" content="Free academic resources for Yemeni students at UTM">
+    <meta name="twitter:description" content="Free academic resources for students at UTM">
     <meta name="twitter:image" content="https://ysagutm.github.io/ysag/content/images/YSAGLogo.png">
     
     <link rel="canonical" href="https://ysagutm.github.io/ysag/">
@@ -128,7 +128,7 @@
             width: 0;
             height: 100%;
             background: var(--primary);
-            animation: loadBar 1.5s ease-in-out forwards;
+            animation: loadBar 1.15s ease-in-out forwards;
         }
 
         /* Animations */
@@ -836,6 +836,7 @@
             .mobile-menu-header .logo-wrapper.mobile img {
                 width: 65% !important; 
                 height: 65% !important;
+                pointer-events: none;
             }
 
             /* Add swipe hint */
@@ -1182,19 +1183,16 @@
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             
-            // Check if user has visited this session
             const hasSeenIntro = sessionStorage.getItem('ysag_hasSeenIntro');
 
             if (hasSeenIntro) {
-                // If seen, hide immediately (no animation)
                 preloader.style.display = 'none';
             } else {
                 // If first time, play animation then hide
                 setTimeout(() => {
                     preloader.classList.add('hidden');
-                    // Save flag so it doesn't show again until tab is closed
                     sessionStorage.setItem('ysag_hasSeenIntro', 'true');
-                }, 1800); // 1.8 seconds (allows bar to fill)
+                }, 1300); // 1.3 seconds (allows bar to fill)
             }
         });
     </script>
