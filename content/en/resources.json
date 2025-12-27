@@ -16,7 +16,7 @@
         { "name": "Foundation Chemistry", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtUpuIYgCUOcDcSjEetBef2&si=Ut0p5BuGbN_Etkwf" },
         { "name": "Biology Bridging", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvoc7RgpIoFfkqZ-GE-ImRR&si=VKYW1xqZ-8kApPT3" },
         { "name": "Physics Bridging", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvfn_pEZNMIHq3H4ZY9wJTb&si=tp25m315KTyhzxbO" },
-        { "name": "Fundamentals of Programming", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQruRY_kX4tGhlPP2RiFtc8RC" }
+        { "name": "Fundamentals of Programming (FoP)", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQruRY_kX4tGhlPP2RiFtc8RC" }
       ]
     },
     {
@@ -30,9 +30,9 @@
       "playlists": [
         { "name": "Soil Mechanics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsawk2IEzvrf30STEO26UMn&si=_nrIip9JmTeS90Kr" },
         { "name": "Geotechnics 2", "url": "https://youtube.com/playlist?list=PL2LRRctxxQru_QG-xJCAOckdSI8u_J8BS&si=zZkVo1NE58Ude_m0" },
-        { "name": "theory of structure", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrvr16dZQNUDa4ZTAYYmT115" },
-        { "name": "civil engineering materials", "url": "https://www.youtube.com/watch?v=1E9VVh_Ce_U&list=PL2LRRctxxQrs7yakfiK7mu8WF6WZ11d_k&index=1" },
-        { "name": "wastewater engineering", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrvXC6NEYHWUYpQxJkdFMXQe" },
+        { "name": "Theory of Structure", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrvr16dZQNUDa4ZTAYYmT115" },
+        { "name": "Civil Engineering Materials", "url": "https://www.youtube.com/watch?v=1E9VVh_Ce_U&list=PL2LRRctxxQrs7yakfiK7mu8WF6WZ11d_k&index=1" },
+        { "name": "Wastewater Engineering", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrvXC6NEYHWUYpQxJkdFMXQe" },
         { "name": "Engineering Surveying", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtwgeKQ8CS1ww21IJGNAzb4&si=mrAgLNnBkl1JnQ8_" }
       ]
     },
@@ -50,7 +50,7 @@
         { "name": "Programming Technique 1", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrvizkjKKuVDkbDJxZIOFtIS" },
         { "name": "Object Oriented Programming", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrt6cvOSPNiRnZnQksS6NyAj" },
         { "name": "Learn Java", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrsguLXR7QoRjmPE-y36chZ8" },
-        { "name": "Mobile Application ", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrutRABlkqZIbM4yTHDiaMLR" },
+        { "name": "Mobile Application", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrutRABlkqZIbM4yTHDiaMLR" },
         { "name": "Theory of Computer Science", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsDIyq8IEL4ib7OTOgnPvGL&si=0nqdv6O2LS38JxcK" },
         { "name": "Network Communication", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsFaKYWXs0eOp0x8gwjaTyp&si=OdmXf2hjrNb1xz36" },
         { "name": "Computational Mathematics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtRqzvcXxOYc0Trn1xQyDFg&si=GrVT3kWLAgKKYvPm" },
@@ -72,9 +72,9 @@
         { "name": "Digital Electronics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruyefxo4TXwn1lNxnqo3gUW&si=tAHLb5gwJhwvo8Ty" },
         { "name": "Mechanics of Materials", "url": "https://www.youtube.com/watch?v=xEhuWb_dVNE" },
         { "name": "Scientific Programming", "url": "https://www.youtube.com/watch?v=tj2qnWuTkPk&list=PL2LRRctxxQrs7yakfiK7mu8WF6WZ11d_k&index=6" },
-        { "name": "digital system series", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrt9q7B4nRZTGHMZpq0kEE0D" },
-        { "name": "electrical power", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrtIE7tv3Frx5rwUzeBPAsKq" },
-        { "name": "electromagnetic field (EMT)", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrua9JvPPe6AOe2CLat4C5qd" },
+        { "name": "Digital System Series", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrt9q7B4nRZTGHMZpq0kEE0D" },
+        { "name": "Electrical Power", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrtIE7tv3Frx5rwUzeBPAsKq" },
+        { "name": "Electromagnetic Field (EMT) (English)", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrua9JvPPe6AOe2CLat4C5qd" },
         { "name": "Digital Electronics (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvKStomeDJw2rN1u6aUyL7S&si=ijdDi5jWhZAQbID0" },
         { "name": "Electronic Devices (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruI3jeqduW_kWkMMNmIs-Si&si=bmMCvu512961T_m8" },
         { "name": "Quartus Digital Lab Guide", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrtzGbwm9g3j3Kj_A1FsJMzc&si=xnm_C7Cwv95G89Ys" }
@@ -121,7 +121,7 @@
       "playlists": [
         { "name": "Organic Chemistry", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrsQzX-vLh99HHvQzXxL0g01&si=Ade5_qgSzDQq5EZY" },
         { "name": "Mass Balance", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvHeT1rfc3TU5KBUV0glIS2&si=3g0VD3okLc3E31vn" },
-        { "name": "statics", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQruUuAJ-_rcCfRN3-ds6bldC" }
+        { "name": "Statics", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQruUuAJ-_rcCfRN3-ds6bldC" }
       ]
     },
     {
@@ -151,7 +151,7 @@
         { "name": "Differential Equations", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvs9KQBLWm3uGT-6zupHzFX&si=yLR9MV8XSuDHup0L" },
         { "name": "Differential Equations (English)", "url": "https://youtube.com/playlist?list=PL2LRRctxxQruML7ZEk32XYZq8pnl5R3rV&si=-EWM5lxlEKYVlnAI" },
         { "name": "Statistics", "url": "https://youtube.com/playlist?list=PL2LRRctxxQrvQY51KZiQIdJWY67HsANdW&si=Vw4dQKAXF6yRAHer" },
-        { "name": "numerical methods", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrsB3O1co2J_1WxMH_AJlnU2" }
+        { "name": "Numerical Methods", "url": "https://www.youtube.com/playlist?list=PL2LRRctxxQrsB3O1co2J_1WxMH_AJlnU2" }
       ]
     }
   ]
