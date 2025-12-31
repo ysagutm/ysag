@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ysagutm.github.io/ysag/sitemap.xml
+Sitemap: https://ysagutm.github.io/ysag/sitemap_v2.xml
