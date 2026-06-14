@@ -89,6 +89,10 @@ window.YSAG = {
         state: {
             isPaused: false,
             isHovering: false,
+            singleSetWidth: 0,
+            reduceMotion: false,
+            touchBound: false,
+            resizeBound: false,
             animationId: null,
             currentX: 0,
             speed: 1, 
@@ -106,30 +110,47 @@ window.YSAG = {
             const self = this;
             const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
 
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            self.state.reduceMotion = reduceMotion;
+            self.state.isPaused = reduceMotion;
+
             this.setupTouch(container);
 
-            // 1. INITIALIZATION
-            setTimeout(() => {
-                const totalWidth = track.scrollWidth;
-                const singleSetWidth = totalWidth / 3;
+            // 1. INITIALIZATION — measure once, then re-measure when remote images
+            //    finish loading or the viewport resizes (both change scrollWidth).
+            const recenter = () => {
+                self.measure();
+                if (self.state.singleSetWidth > 0) {
+                    self.state.currentX = -self.state.singleSetWidth;
+                    track.style.transform = `translate3d(${self.state.currentX}px, 0, 0)`;
+                }
+            };
 
-                // Start in middle
-                self.state.currentX = -singleSetWidth;
-                track.style.transform = `translate3d(${self.state.currentX}px, 0, 0)`;
-            }, 100);
+            requestAnimationFrame(recenter);
 
-            // 2. THE RENDER LOOP - FIXED for smooth animation
+            if (!self.state.resizeBound) {
+                window.addEventListener('resize', () => self.measure());
+                self.state.resizeBound = true;
+            }
+
+            track.querySelectorAll('img').forEach((img) => {
+                if (!img.complete) img.addEventListener('load', recenter, { once: true });
+            });
+
+            // 2. THE RENDER LOOP
             const step = (currentTime) => {
-                const totalWidth = track.scrollWidth;
-                const singleSetWidth = totalWidth / 3;
+                const singleSetWidth = self.state.singleSetWidth;
 
                 if (singleSetWidth <= 0) {
+                    self.measure();
+                    self.state.lastTime = currentTime;
                     self.state.animationId = requestAnimationFrame(step);
                     return;
                 }
 
-                // FIX #1: Delta time calculation for frame-rate independent movement
-                const deltaTime = currentTime - self.state.lastTime;
+                // Frame-rate independent movement, clamped so a backgrounded tab
+                // doesn't lurch when it regains focus and deltaTime is huge.
+                const deltaTime = Math.min(currentTime - self.state.lastTime, 50);
                 self.state.lastTime = currentTime;
                 
                 // Normalize to 60fps (16.67ms per frame)
@@ -144,10 +165,11 @@ window.YSAG = {
                     }
                 }
 
-                // B. INFINITE RESET (Seamless teleport)
-                if (self.state.currentX <= -(singleSetWidth * 2)) {
+                // B. INFINITE RESET — while() handles any size jump safely.
+                while (self.state.currentX <= -(singleSetWidth * 2)) {
                     self.state.currentX += singleSetWidth;
-                } else if (self.state.currentX >= 0) {
+                }
+                while (self.state.currentX >= 0) {
                     self.state.currentX -= singleSetWidth;
                 }
 
@@ -162,8 +184,16 @@ window.YSAG = {
             step(self.state.lastTime);
         },
 
+        // Cache one set's width so the render loop never touches scrollWidth (no per-frame reflow).
+        measure: function () {
+            const track = document.querySelector('.team-grid');
+            if (track) this.state.singleSetWidth = track.scrollWidth / 3;
+        },
+
         setupTouch: function (container) {
             const self = this;
+            if (self.state.touchBound) return;
+            self.state.touchBound = true;
 
             container.addEventListener('pointerdown', (e) => {
                 self.state.isDragging = true;
@@ -173,10 +203,10 @@ window.YSAG = {
                 container.setPointerCapture(e.pointerId);
             });
 
-            window.addEventListener('pointerup', (e) => {
+            window.addEventListener('pointerup', () => {
                 if (self.state.isDragging) {
                     self.state.isDragging = false;
-                    self.state.isPaused = false; // FIX #3: Resume auto-scroll after drag
+                    self.state.isPaused = self.state.reduceMotion; // resume unless reduced-motion
                     container.style.cursor = 'grab';
                 }
             });
@@ -191,7 +221,7 @@ window.YSAG = {
             container.addEventListener('pointerleave', () => {
                 if (self.state.isDragging) {
                     self.state.isDragging = false;
-                    self.state.isPaused = false;
+                    self.state.isPaused = self.state.reduceMotion;
                     container.style.cursor = 'grab';
                 }
             });
@@ -201,9 +231,11 @@ window.YSAG = {
         scroll: function (dir) {
             const self = this;
             self.state.isPaused = true;
+            self.measure();
+            const singleSetWidth = self.state.singleSetWidth;
 
             const jump = 300;
-            let  startX = self.state.currentX;
+            let startX = self.state.currentX;
             let endX;
 
             if (dir === 'left') {
@@ -226,17 +258,16 @@ window.YSAG = {
 
                 self.state.currentX = startX + ((endX - startX) * ease);
 
-                // Seamless reset during manual scroll
-                const track = document.querySelector('.team-grid');
-                const totalWidth = track.scrollWidth;
-                const singleSetWidth = totalWidth / 3;
-
-                if (self.state.currentX <= -(singleSetWidth * 2)) {
-                    self.state.currentX += singleSetWidth;
-                    startX += singleSetWidth; // Adjust start position too
-                } else if (self.state.currentX >= 0) {
-                    self.state.currentX -= singleSetWidth;
-                    startX -= singleSetWidth;
+                // Seamless reset during manual scroll (uses cached width — no reflow)
+                if (singleSetWidth > 0) {
+                    while (self.state.currentX <= -(singleSetWidth * 2)) {
+                        self.state.currentX += singleSetWidth;
+                        startX += singleSetWidth;
+                    }
+                    while (self.state.currentX >= 0) {
+                        self.state.currentX -= singleSetWidth;
+                        startX -= singleSetWidth;
+                    }
                 }
 
                 if (progress < 1) {
@@ -244,8 +275,8 @@ window.YSAG = {
                 } else {
                     // Resume auto-scroll after manual scroll completes
                     setTimeout(() => {
-                        self.state.isPaused = false;
-                    }, 500); // 500ms pause before resuming
+                        self.state.isPaused = self.state.reduceMotion;
+                    }, 500);
                 }
             }
             requestAnimationFrame(animate);
