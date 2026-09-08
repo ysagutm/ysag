@@ -890,6 +890,62 @@
         }
 
         /* =========================================
+           8b. GRADUATES CHAPTER
+           ========================================= */
+        #alumni {
+            background-color: #F7EAE1;
+        }
+
+        .alumni-block {
+            display: flex;
+            align-items: center;
+            gap: 56px;
+            max-width: 940px;
+            margin: 0 auto;
+            text-align: start;
+        }
+
+        .alumni-mark {
+            flex: 0 0 auto;
+            width: clamp(180px, 22vw, 240px);
+            height: auto;
+            margin: 0;
+        }
+
+        .alumni-text {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        #alumni .section-title {
+            margin-bottom: 22px;
+            text-align: start;
+        }
+
+        #alumni .section-title .line {
+            margin-inline-start: 0;
+        }
+
+        #alumni .section-title h2 {
+            color: #4A1414;
+            text-wrap: balance;
+        }
+
+        .alumni-lead {
+            max-width: 34em;
+            margin: 0 0 30px 0;
+            font-size: 1.15rem;
+            line-height: 1.75;
+            color: #5C463F;
+            text-wrap: pretty;
+        }
+
+        .alumni-cta:focus-visible {
+            outline: 3px solid #4A1414;
+            outline-offset: 3px;
+        }
+
+        /* =========================================
            9. CONTACT (Split Form)
            ========================================= */
         .contact-container {
@@ -1479,6 +1535,35 @@
            ========================================= */
         @media (max-width: 768px) {
 
+
+            /* Graduates Chapter: mark on top, centred stack */
+            .alumni-block {
+                flex-direction: column;
+                gap: 0;
+                text-align: center;
+            }
+
+            .alumni-mark {
+                flex: 0 0 auto;
+                width: clamp(150px, 40vw, 200px);
+                margin: 0 auto 36px auto;
+            }
+
+            #alumni .section-title {
+                margin-bottom: 26px;
+                text-align: center;
+            }
+
+            #alumni .section-title .line {
+                margin-inline-start: auto;
+            }
+
+            .alumni-lead {
+                max-width: 30em;
+                margin-inline: auto;
+                font-size: 1.05rem;
+            }
+
             /* 1. Hide Desktop Navigation */
             nav {
                 display: none;
@@ -1690,6 +1775,7 @@
                     <li><a href="#about" data-i18n="nav.about">About</a></li>
                     <li><a href="#resources" data-i18n="nav.resources">E-Library & Courses</a></li>
                     <li><a href="#contribute" data-i18n="nav.volunteer">Volunteer</a></li>
+                    <li><a href="#alumni" data-i18n="nav.alumni">Graduates</a></li>
                     <li><a href="#feedback" data-i18n="nav.feedback">Feedback</a></li>
                 </ul>
             </nav>
@@ -1723,6 +1809,8 @@
                         data-i18n="nav.resources">E-Library</span></a></li>
             <li><a href="#contribute" class="mobile-nav-link"><i class="fas fa-hands-helping"></i> <span
                         data-i18n="nav.volunteer">Volunteer</span></a></li>
+            <li><a href="#alumni" class="mobile-nav-link"><i class="fas fa-user-graduate"></i> <span
+                        data-i18n="nav.alumni">Graduates</span></a></li>
             <li><a href="#feedback" class="mobile-nav-link"><i class="fas fa-comment-dots"></i> <span
                         data-i18n="nav.feedback">Feedback</span></a></li>
         </ul>
@@ -1797,6 +1885,7 @@
         </div>
     </section>
 
+
     <section id="contribute">
         <div class="section-title">
             <h2 data-i18n="volunteer.title">Volunteer & Contribute</h2>
@@ -1831,6 +1920,26 @@
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxf1klxImfqKfgwbdYZigRVub0sV1YB7dMmspvmXKk1a_4eA/viewform?usp=sf_link"
                     target="_blank" class="btn outline">
                     <i class="fas fa-book"></i> <span data-i18n="volunteer.btnDonate">Donate Textbooks</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section id="alumni">
+        <div class="alumni-block">
+            <img class="alumni-mark" src="content/images/alumni-emblem.webp" alt="" width="760" height="614"
+                loading="lazy" decoding="async">
+
+            <div class="alumni-text">
+                <div class="section-title">
+                    <h2>Yemeni Graduates Community</h2>
+                    <div class="line"></div>
+                </div>
+
+                <p class="alumni-lead">A community connecting Yemeni graduates from UTM to network, share experiences
+                    and opportunities, and build a supportive professional network beyond graduation.</p>
+
+                <a class="btn alumni-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSc77ep_OlNZTjUD-GOJr0IlF8zAieomMknbfCXnUvA9BYo6iQ/viewform" target="_blank" rel="noopener">
+                    <i class="fas fa-user-graduate"></i> <span>Join the Graduates Community</span>
                 </a>
             </div>
         </div>

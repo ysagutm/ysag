@@ -416,6 +416,7 @@ async function loadAllContent() {
     loadHeroContent();
     loadAboutContent();
     loadResourcesContent();
+    loadAlumniContent();
     loadFooterContent();
 }
 
@@ -631,6 +632,32 @@ async function loadResourcesContent() {
         console.error('Resource Load Error:', e);
         showErrorState(grid, 'Resources Unavailable');
     }
+}
+
+// 4. Graduates Chapter
+async function loadAlumniContent() {
+    const section = document.getElementById('alumni');
+    if (!section) return;
+
+    try {
+        const response = await fetch(YSAG.getContentPath('alumni.json'));
+        const data = await response.json();
+
+        const setText = (selector, value) => {
+            const el = section.querySelector(selector);
+            if (el && value) el.textContent = value;
+        };
+
+        setText('.section-title h2', data.title);
+        setText('.alumni-lead', data.description);
+        setText('.alumni-cta span', data.cta);
+
+        const mark = section.querySelector('.alumni-mark');
+        if (mark && data.image) mark.src = data.image;
+
+        const cta = section.querySelector('.alumni-cta');
+        if (cta && isSafeUrl(data.formUrl)) cta.href = data.formUrl;
+    } catch (e) { console.error('Alumni Load Error:', e); }
 }
 
 async function loadFooterContent() {
